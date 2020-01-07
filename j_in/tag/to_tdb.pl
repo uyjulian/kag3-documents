@@ -1,16 +1,16 @@
-# tags.database.tml ‚ğ tag database Œ`®‚É•ÏŠ·‚µAo—Í‚·‚é
-# perl ƒXƒNƒŠƒvƒg
+# tags.database.tml ã‚’ tag database å½¢å¼ã«å¤‰æ›ã—ã€å‡ºåŠ›ã™ã‚‹
+# perl ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
 
-# ‰ğß‚ª‚¢‚¢‰ÁŒ¸‚È‚Ì‚Å’ˆÓ
+# è§£é‡ˆãŒã„ã„åŠ æ¸›ãªã®ã§æ³¨æ„
 
-# ‚Ü‚¸‚Íƒtƒ@ƒCƒ‹ˆêŒÂ‚æ‚İ‚±‚ñ‚À‚Ü‚¦
+# ã¾ãšã¯ãƒ•ã‚¡ã‚¤ãƒ«ä¸€å€‹ã‚ˆã¿ã“ã‚“ã¢ã¾ãˆ
 
 open FH,"tags.database.tml";
 @all=<FH>;
 $all=join('',@all);
 
 
-# s“ª‚Æs––‚Ì‹ó”’•¶š‚ğíœ‚µAs‚ğ˜AŒ‹
+# è¡Œé ­ã¨è¡Œæœ«ã®ç©ºç™½æ–‡å­—ã‚’å‰Šé™¤ã—ã€è¡Œã‚’é€£çµ
 sub cliptext
 {
 	$kdata=$_[0];
@@ -20,9 +20,9 @@ sub cliptext
 	return $kdata;
 }
 
-# ƒ^ƒO•ª‰ğ
-# tml ‚Å‚Í“¯‚¶–¼‘O‚Ìƒ^ƒO‚ª“ü‚êq‚É‚È‚é‚±‚Æ‚Í‚È‚¢‚Ì‚Å
-# ‚»‚¤‚¢‚¤‰ğÍ‚Í‚µ‚È‚¢
+# ã‚¿ã‚°åˆ†è§£
+# tml ã§ã¯åŒã˜åå‰ã®ã‚¿ã‚°ãŒå…¥ã‚Œå­ã«ãªã‚‹ã“ã¨ã¯ãªã„ã®ã§
+# ãã†ã„ã†è§£æã¯ã—ãªã„
 
 sub taganalysis
 {
@@ -47,24 +47,24 @@ sub taganalysis
 
 foreach $tagcontent (@tags)
 {
-	# tag ‚ğ‚Ü‚½‰ğÍ
+	# tag ã‚’ã¾ãŸè§£æ
 	$tagcontent=~ /\<tag name\=[\'\"]([^\'\"]+)[\'\"]\>/i;
 
 	$tagname=$1;
 	$tagcontent=$';
 
-	# shortinfo ‚Ìæ“¾
+	# shortinfo ã®å–å¾—
 	$temp=$tagcontent;
 	$temp=~ /\<shortinfo\>/i;
 	$temp=$';
 	$temp=~ /\<\/shortinfo\>/i;
 	$shortinfo=$`;
 
-	# shortinfo ‚ÌŠi”[
+	# shortinfo ã®æ ¼ç´
 	$tagdata{$tagname}{"shortinfo"}=&cliptext($shortinfo);
 
 
-	# remarks ‚Ìæ“¾
+	# remarks ã®å–å¾—
 	$temp=$tagcontent;
 	$temp=~ /\<remarks\>/i;
 	$temp=$';
@@ -72,10 +72,10 @@ foreach $tagcontent (@tags)
 	$remarks=$`;
 
 
-	# remarks ‚ÌŠi”[
+	# remarks ã®æ ¼ç´
 	$tagdata{$tagname}{"remarks"}=&cliptext($remarks);
 
-	# example ‚Ìæ“¾
+	# example ã®å–å¾—
 	$temp=$tagcontent;
 	if($temp=~ /\<example\>/i)
 	{
@@ -83,12 +83,12 @@ foreach $tagcontent (@tags)
 		$temp=~ /\<\/example\>/i;
 		$example=$`;
 
-		# example ‚ÌŠi”[
+		# example ã®æ ¼ç´
 		$tagdata{$tagname}{"example"}=&cliptext($example);
 	}
 
 
-	# attribs ‚Ìæ“¾
+	# attribs ã®å–å¾—
 	$temp=$tagcontent;
 	if($temp=~ /\<attribs\>/i)
 	{
@@ -96,17 +96,17 @@ foreach $tagcontent (@tags)
 		$temp=~ /\<\/attribs\>/i;
 		$attribscontent=$`;
 
-		# attrib ‚Ì•ª‰ğ
+		# attrib ã®åˆ†è§£
 		$no=0;
 		@attribs=&taganalysis($attribscontent,"attrib");
 		foreach $attribscontent (@attribs)
 		{
-			# attrib –¼‘O‚Ìæ“¾
+			# attrib åå‰ã®å–å¾—
 			$attribscontent=~ /\<attrib name\=[\'\"]([^\'\"]+)[\'\"]/i;
 			@attribnames=split(/\,/,$1);
 
 
-			# shortinfo ‚Ìæ“¾
+			# shortinfo ã®å–å¾—
 			$attribshortinfo="";
 			$temp=$attribscontent;
 			$temp=~ /\<shortinfo\>/i;
@@ -114,7 +114,7 @@ foreach $tagcontent (@tags)
 			$temp=~ /\<\/shortinfo\>/i;
 			$attribshortinfo=$`;
 
-			# required ‚Ìæ“¾
+			# required ã®å–å¾—
 			$attribrequired="";
 			$temp=$attribscontent;
 			$temp=~ /\<required\>/i;
@@ -122,7 +122,7 @@ foreach $tagcontent (@tags)
 			$temp=~ /\<\/required\>/i;
 			$attribrequired=$`;
 
-			# format ‚Ìæ“¾
+			# format ã®å–å¾—
 			$attribformat="";
 			$temp=$attribscontent;
 			$temp=~ /\<format\>/i;
@@ -130,7 +130,7 @@ foreach $tagcontent (@tags)
 			$temp=~ /\<\/format\>/i;
 			$attribformat=$`;
 
-			# info ‚Ìæ“¾
+			# info ã®å–å¾—
 			$attribinfo="";
 			$temp=$attribscontent;
 			$temp=~ /\<info\>/i;
@@ -142,7 +142,7 @@ foreach $tagcontent (@tags)
 	#		print "required:",$attribrequired,"\n";
 	#		print "info:",$attribinfo,"\n";
 
-			# ƒf[ƒ^‚ÌŠi”[
+			# ãƒ‡ãƒ¼ã‚¿ã®æ ¼ç´
 			foreach $attribname(@attribnames)
 			{
 
@@ -170,7 +170,7 @@ foreach $tagcontent (@tags)
 
 
 
-# ƒf[ƒ^‚Ì“f‚«o‚µ
+# ãƒ‡ãƒ¼ã‚¿ã®åãå‡ºã—
 
 
 sub conv_tdb
@@ -201,10 +201,10 @@ for($i=0;$i<=$#h_tagdata;$i+=2)
 	$od.=" ".$h_tagdata[$i+1]{"shortinfo"}."\n";
 
 	$od.=".remarks\n";
-	$od.=" \{\\b ".$h_tagdata[$i]."ƒ^ƒO\} ( ".&conv_tdb($h_tagdata[$i+1]{"shortinfo"})." )\\par \\par ".&conv_tdb($h_tagdata[$i+1]{"remarks"});
+	$od.=" \{\\b ".$h_tagdata[$i]."ã‚¿ã‚°\} ( ".&conv_tdb($h_tagdata[$i+1]{"shortinfo"})." )\\par \\par ".&conv_tdb($h_tagdata[$i+1]{"remarks"});
 	if($h_tagdata[$i+1]{"example"} ne "")
 	{
-		$od.="\\par —á:\\par \{\\f3 ".&conv_tdb($h_tagdata[$i+1]{"example"})."\}\n";
+		$od.="\\par ä¾‹:\\par \{\\f3 ".&conv_tdb($h_tagdata[$i+1]{"example"})."\}\n";
 	}
 	else
 	{
@@ -232,9 +232,9 @@ for($i=0;$i<=$#h_tagdata;$i+=2)
 			$od.="+format\n";
 			$od.=" ".$data{"format"}."\n";
 			$od.="+info\n";
-			$od.=" \{\\b ".$data{"nam__e"}."‘®«\} ( ".&conv_tdb($data{"shortinfo"})." )\\par ";
-			$od.=&conv_tdb("•K{?")." : \{\\b ".&conv_tdb($data{"required"})."\} \\par ";
-			$od.="’l : \{\\b ".&conv_tdb($data{"format"})."\} \\par \\par";
+			$od.=" \{\\b ".$data{"nam__e"}."å±æ€§\} ( ".&conv_tdb($data{"shortinfo"})." )\\par ";
+			$od.=&conv_tdb("å¿…é ˆ?")." : \{\\b ".&conv_tdb($data{"required"})."\} \\par ";
+			$od.="å€¤ : \{\\b ".&conv_tdb($data{"format"})."\} \\par \\par";
 			$od.=&conv_tdb($data{"info"})."\n";
 			
 			$no++;

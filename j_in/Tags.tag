@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
-<title>タグリファレンス</title>
+<title>繧ｿ繧ｰ繝ｪ繝輔ぃ繝ｬ繝ｳ繧ｹ</title>
 </doc>

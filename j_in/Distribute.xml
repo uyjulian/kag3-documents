@@ -1,116 +1,116 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
 
-<title>�z�z���悤</title>
+<title>配布しよう</title>
 
 <para>
-<ptitle>�v���W�F�N�g�t�H���_�̎������s</ptitle>
-�@�g���g���͋N�����ɂ́A�v���W�F�N�g�t�H���_��I�������ʂ��ł܂��B������o�����Ƀv���W�F�N�g�t�H���_���g���g���̋N���Ɠ����Ɏ��s����ɂ͈ȉ��̕��@������܂��B<r/>
+<ptitle>プロジェクトフォルダの自動実行</ptitle>
+　吉里吉里は起動時には、プロジェクトフォルダを選択する画面がでます。これを出さずにプロジェクトフォルダを吉里吉里の起動と同時に実行するには以下の方法があります。<r/>
 <r/>
 <dl>
-<dt>�v���W�F�N�g�t�H���_�� data �ɉ�������</dt>
+<dt>プロジェクトフォルダを data に改名する</dt>
 <dd>
-�@�v���W�F�N�g�t�H���_�̖��O�� "<kw>data</kw>" �ɂ��āA�g���g�����s�\�t�@�C�� ( krkr.eXe ) �Ɠ����t�H���_�ɂ����ƁA�g���g���N�����Ɏ����I�ɂ��̃v���W�F�N�g�t�H���_�����s����悤�ɂȂ�܂��B
+　プロジェクトフォルダの名前を "<kw>data</kw>" にして、吉里吉里実行可能ファイル ( krkr.eXe ) と同じフォルダにおくと、吉里吉里起動時に自動的にそのプロジェクトフォルダを実行するようになります。
 </dd>
-<dt>Releaser �� data.xp3 �Ƃ����t�@�C�������</dt>
+<dt>Releaser で data.xp3 というファイルを作る</dt>
 <dd>
-�@��q�� Releaser �� <kw>data.xp3</kw> �Ƃ������O�� xp3 �A�[�J�C�u�t�@�C�������A�g���g�����s�\�t�@�C���Ɠ����t�H���_�ɂ����ƁA�g���g���N�����Ɏ����I�ɂ��̃A�[�J�C�u�����s����悤�ɂȂ�܂��B
+　後述の Releaser で <kw>data.xp3</kw> という名前で xp3 アーカイブファイルを作り、吉里吉里実行可能ファイルと同じフォルダにおくと、吉里吉里起動時に自動的にそのアーカイブを実行するようになります。
 </dd>
-<dt>Releaser �Ŏ��s�\�t�@�C�����쐬����</dt>
+<dt>Releaser で実行可能ファイルを作成する</dt>
 <dd>
-�@Releaser �Ŏ��s�\�t�@�C���𒼐ڍ쐬���邱�Ƃ��ł��܂��B<r/>
-�@���������̏ꍇ�͌�q�̃p�b�`��z�z����Ƃ��ɏ��X�ʓ|��������A�ꕔ�̃E�B���X�΍�\�t�g�E�F�A�Ƃ̑����������̂ŁA�P��̎��s�\�t�@�C�����쐬���邱�Ƃ�����قǋ����v���łȂ���΁A��L�� data.xp3 ���쐬������@�������߂��܂��B
+　Releaser で実行可能ファイルを直接作成することができます。<r/>
+　しかしこの場合は後述のパッチを配布するときに少々面倒だったり、一部のウィルス対策ソフトウェアとの相性が悪いので、単一の実行可能ファイルを作成することがそれほど強い要求でなければ、上記の data.xp3 を作成する方法をお勧めします。
 </dd>
 </dl>
 <r/>
-�@Releaser �̎g������ �g���g�� SDK �w���v���Q�Ƃ��Ă��������B<r/>
+　Releaser の使い方は 吉里吉里 SDK ヘルプを参照してください。<r/>
 </para>
 
 <para>
-<ptitle>�z�z�t�@�C��</ptitle>
-�@���ۂɔz�z��ŃQ�[���𓮍삳����ꍇ�Ɋ܂߂Ȃ��Ă͂Ȃ�Ȃ��t�@�C����t�H���_������������܂��B<r/>
+<ptitle>配布ファイル</ptitle>
+　実際に配布先でゲームを動作させる場合に含めなくてはならないファイルやフォルダがいくつかあります。<r/>
 <r/>
 <dl>
-<dt>�g���g�����s�\�t�@�C��</dt>
+<dt>吉里吉里実行可能ファイル</dt>
 <dd>
-�@Relesaer �Ŏ��s�\�t�@�C�����o�͂��Ȃ������ꍇ�A���s�\�t�@�C�������ɔz�z����K�v������܂��B���s�\�t�@�C�� ( krkr.eXe ) �͖��O��ύX���Ă����܂��܂���B�܂��A�g���g���ݒ� ( krkrconf.exe ) �ŃA�C�R����ύX���邱�Ƃ��ł��܂��B
+　Relesaer で実行可能ファイルを出力しなかった場合、実行可能ファイルを共に配布する必要があります。実行可能ファイル ( krkr.eXe ) は名前を変更してもかまいません。また、吉里吉里設定 ( krkrconf.exe ) でアイコンを変更することもできます。
 </dd>
-<dt>�g���q�� cf �̃t�@�C��</dt>
+<dt>拡張子が cf のファイル</dt>
 <dd>
-�@�g���g���ݒ� (krkrconf.exe) �Őݒ���s���ƁA�g���g�����s�\�t�@�C���Ɠ������O�ŁA�g���q�� .cf �ɂȂ����t�@�C�����o�͂���܂��B�����ɂ� -datapath �I�v�V�����Ȃǂ̏d�v�ȃI�v�V�������L�q����Ă��܂�����A������Ƃ��ɔz�z����K�v������܂��B<r/>
-�@���ɂ��̃t�@�C���������Ȃ�Δz�z����K�v�͂���܂���B<r/>
+　吉里吉里設定 (krkrconf.exe) で設定を行うと、吉里吉里実行可能ファイルと同じ名前で、拡張子が .cf になったファイルが出力されます。ここには -datapath オプションなどの重要なオプションが記述されていますから、これをともに配布する必要があります。<r/>
+　特にこのファイルが無いならば配布する必要はありません。<r/>
 </dd>
 <dt><kw>krmovie.dll</kw></dt>
 <dd>
-�@�Q�[������ MPEG �ɂ�郀�[�r�[���Đ�����ꍇ�͋��ɔz�z���Ȃ���΂Ȃ�܂���B���̃t�@�C���͋g���g���̎��s�\�t�@�C�� ( Releaser �ŏo�͂������s�\�t�@�C�����܂� ) �Ɠ����t�H���_�ɐݒu���Ȃ���΂Ȃ�܂���B
+　ゲーム内で MPEG によるムービーを再生する場合は共に配布しなければなりません。このファイルは吉里吉里の実行可能ファイル ( Releaser で出力した実行可能ファイルも含む ) と同じフォルダに設置しなければなりません。
 </dd>
 <dt><kw>krflash.dll</kw></dt>
 <dd>
-�@�Q�[������ Flash �R���e���c���Đ�����ꍇ�͋��ɔz�z���Ȃ���΂Ȃ�܂���B���̃t�@�C���͋g���g���̎��s�\�t�@�C�� ( Releaser �ŏo�͂������s�\�t�@�C�����܂� ) �Ɠ����t�H���_�ɐݒu���Ȃ���΂Ȃ�܂���B
+　ゲーム内で Flash コンテンツを再生する場合は共に配布しなければなりません。このファイルは吉里吉里の実行可能ファイル ( Releaser で出力した実行可能ファイルも含む ) と同じフォルダに設置しなければなりません。
 </dd>
-<dt>���̂ق��̃v���O�C��</dt>
+<dt>そのほかのプラグイン</dt>
 <dd>
-�@�g���g���̎��s�\�t�@�C���Ɠ����t�H���_���A�g���g�����s�\�t�@�C���̃t�H���_�ɂ��� plugin �t�H���_�ɐݒu���Ȃ���΂Ȃ�܂���B<r/>
-�@�v���W�F�N�g�t�H���_���Ƀv���O�C����z�u���邱�Ƃ��o���܂����A<b>��������܂���</b>�B�o����΋g���g���̎��s�\�t�@�C���Ɠ����t�H���_���A�g���g�����s�\�t�@�C���̃t�H���_�ɂ��� plugin �t�H���_�ɂ����Ĕz�z���������ǂ��ł� ( �v���W�F�N�g�t�H���_���Ƀv���O�C����z�u���A�A�[�J�C�u���Ɋ܂߂�� CD-ROM �ォ�璼�ڎ��s����ۂȂǂɃG���[�ɂȂ�܂� )�B
+　吉里吉里の実行可能ファイルと同じフォルダか、吉里吉里実行可能ファイルのフォルダにある plugin フォルダに設置しなければなりません。<r/>
+　プロジェクトフォルダ内にプラグインを配置することも出来ますが、<b>推奨されません</b>。出来れば吉里吉里の実行可能ファイルと同じフォルダか、吉里吉里実行可能ファイルのフォルダにある plugin フォルダにおいて配布した方が良いです ( プロジェクトフォルダ内にプラグインを配置し、アーカイブ内に含めると CD-ROM 上から直接実行する際などにエラーになります )。
 </dd>
-<dt><kw>�Z�[�u�f�[�^�t�H���_</kw></dt>
+<dt><kw>セーブデータフォルダ</kw></dt>
 <dd>
-�@�g���g�����s�\�t�@�C���Ɠ����t�H���_�ɃZ�[�u�f�[�^���쐬����ꍇ���̂����A�Z�[�u�f�[�^���i�[����t�H���_�����ɔz�z���Ȃ���΂Ȃ�܂���B�Ƃ��� lzh �Ȃǂň��k����ꍇ�A��̃t�H���_�͓W�J����Ȃ��ꍇ������̂ŁA���̂悤�ȃA�[�J�C�u�`���Ŕz�z����ꍇ�́A�Z�[�u�f�[�^�̃t�H���_�Ƀ_�~�[�̃t�@�C�������Ă����Ƃ悢�ł��傤�B
+　吉里吉里実行可能ファイルと同じフォルダにセーブデータを作成する場合をのぞき、セーブデータを格納するフォルダも共に配布しなければなりません。とくに lzh などで圧縮する場合、空のフォルダは展開されない場合があるので、そのようなアーカイブ形式で配布する場合は、セーブデータのフォルダにダミーのファイルを入れておくとよいでしょう。
 </dd>
 </dl>
 <r/>
-���̂ق��A�g���g�� SDK �w���v�u�t�@�C��/�t�H���_���v���Q�l�ɂ��Ă��������B<r/>
+そのほか、吉里吉里 SDK ヘルプ「ファイル/フォルダ覧」も参考にしてください。<r/>
 </para>
 
 <para>
-<ptitle>�G���h���[�U�����ݒ�c�[���̔z�z</ptitle>
-�@�G���h���[�U���g���g���̐ݒ���ȒP�ɍs����悤�ɂ��邽�߂ɁA�G���h���[�U�����ݒ�c�[�� <kw>�G���W���ݒ�.exe</kw> ���Q�[���Ƌ��ɁA���邢�̓Q�[���ƕʂɔz�z���邱�Ƃ��ł��܂��B<r/>
-�@�����̎g�����ɂ��Ă͋g���g�� SDK �w���v���Q�Ƃ��Ă��������B<r/>
+<ptitle>エンドユーザ向け設定ツールの配布</ptitle>
+　エンドユーザが吉里吉里の設定を簡単に行えるようにするために、エンドユーザ向け設定ツール <kw>エンジン設定.exe</kw> をゲームと共に、あるいはゲームと別に配布することができます。<r/>
+　これらの使い方については吉里吉里 SDK ヘルプを参照してください。<r/>
 <r/>
-�@�z�z�e�ʂɖ�肪�Ȃ��Ȃ�A���̃c�[���̓Q�[���ȂǂƂƂ��ɔz�z���邱�Ƃ����������߂��܂��B<r/>
+　配布容量に問題がないなら、このツールはゲームなどとともに配布することを強くお勧めします。<r/>
 </para>
 
 <para>
-<ptitle>�t�@�C���j���`�F�b�N�c�[���̔z�z</ptitle>
-�@�C���X�g�[������C���X�g�[����ɔj�������t�@�C�������o���邽�߂̃c�[���ł���u�t�@�C���j���`�F�b�N�c�[���v �t�@�C���j���`�F�b�N�c�[��.exe ���Q�[���Ƌ��ɁA���邢�̓Q�[���ƕʂɔz�z���邱�Ƃ��ł��܂��B<r/>
-�@�����̎g�����ɂ��Ă͋g���g�� SDK �w���v���Q�Ƃ��Ă��������B<r/>
+<ptitle>ファイル破損チェックツールの配布</ptitle>
+　インストール時やインストール後に破損したファイルを検出するためのツールである「ファイル破損チェックツール」 ファイル破損チェックツール.exe をゲームと共に、あるいはゲームと別に配布することができます。<r/>
+　これらの使い方については吉里吉里 SDK ヘルプを参照してください。<r/>
 <r/>
 </para>
 
 <para>
-<ptitle>�p�b�`�z�z</ptitle>
-�@�Q�[����z�z������A�C�����s���K�v���������ꍇ�A�C���̂������t�@�C���݂̂��u�p�b�` ( ���͂� ) �v�Ƃ����`�Ŕz�z���邱�Ƃ��ł��܂��B<r/>
+<ptitle>パッチ配布</ptitle>
+　ゲームを配布した後、修正を行う必要が生じた場合、修正のあったファイルのみを「パッチ ( つぎはぎ ) 」という形で配布することができます。<r/>
 <r/>
 <dl>
-<dt>�g���g�����s�R�A�̃p�b�`</dt>
+<dt>吉里吉里実行コアのパッチ</dt>
 <dd>
-�@�g���g�����s�R�A�ɏC���̕K�v���������ꍇ�ł��B<r/>
-�@Releaser �Ŏ��s�\�t�@�C���ł͂Ȃ��Axp3 �`���A�[�J�C�u���o�͂����ꍇ�́A�V�����g���g�����s�\�t�@�C�����Â����s�\�t�@�C���̏�ɏ㏑�����邾���ł��B<r/>
-�@Releaser �Ŏ��s�\�t�@�C�����o�͂����ꍇ�͂�������ł��B�ȉ��̂��Ƃ��s���K�v������܂��B<r/>
+　吉里吉里実行コアに修正の必要が生じた場合です。<r/>
+　Releaser で実行可能ファイルではなく、xp3 形式アーカイブを出力した場合は、新しい吉里吉里実行可能ファイルを古い実行可能ファイルの上に上書きするだけです。<r/>
+　Releaser で実行可能ファイルを出力した場合はやっかいです。以下のことを行う必要があります。<r/>
 <ol>
-<li>����܂ł̎��s�\�t�@�C���� data.xp3 �ɖ��O��ς���</li>
-<li>�V�������s�\�t�@�C�� ( ��������Ă��Ă����܂��܂��� ) �����̃t�@�C���Ɠ����t�H���_�ɃR�s�[����</li>
-<li>���̐V�������s�\�t�@�C�������s����悤�ɂ���</li>
+<li>それまでの実行可能ファイルを data.xp3 に名前を変える</li>
+<li>新しい実行可能ファイル ( 改名されていてもかまいません ) をそのファイルと同じフォルダにコピーする</li>
+<li>その新しい実行可能ファイルを実行するようにする</li>
 </ol>
 </dd>
-<dt>�v���W�F�N�g�t�H���_���̃p�b�`</dt>
+<dt>プロジェクトフォルダ内のパッチ</dt>
 <dd>
-�@KAG �́A�g���g�����s�\�t�@�C���Ɠ����t�H���_�� patch.xp3 �Ƃ����t�@�C�����������ꍇ�A���̃t�@�C���̒��g��D��I�Ɍ��ɍs���Ƃ����@�\������܂��B<r/>
-�@���� patch.xp3 ���쐬����ɂ́A�C���̂������t�@�C����A�ǉ����ꂽ�t�@�C���݂̂���̃t�H���_�ɂ܂Ƃ߁AReleaser �ł��̃t�H���_���w�肵�� patch.xp3 �t�@�C�����쐬���܂��B<r/>
-�@�܂��Apatch2.xp3 �� patch3.xp3, patch4.xp3 �E�E�E�̂悤�ɁApatch2.xp3 �ȍ~�̃t�@�C��������ꍇ�́A�������ǂݍ��܂�܂��B�����̃t�@�C����A���X�z�z����Ă��� ( �p�b�`�ł͂Ȃ����Ƃ� ) �t�@�C���̒��ɓ����̃t�@�C��������ꍇ�́A�����̑傫���p�b�`�t�@�C���̒��̃t�@�C�����D�悳��Ďg�p����܂��Bpatch2.xp3, patch3.xp3, patch4.xp3 �E�E�E�̂Ȃ�тɌ��Ԃ��������ꍇ�͂����Ńp�b�`�p�A�[�J�C�u��T���̂���߂Ă��܂��܂��̂Œ��ӂ��Ă��������B
+　KAG は、吉里吉里実行可能ファイルと同じフォルダに patch.xp3 というファイルがあった場合、このファイルの中身を優先的に見に行くという機能があります。<r/>
+　この patch.xp3 を作成するには、修正のあったファイルや、追加されたファイルのみを一つのフォルダにまとめ、Releaser でそのフォルダを指定して patch.xp3 ファイルを作成します。<r/>
+　また、patch2.xp3 や patch3.xp3, patch4.xp3 ・・・のように、patch2.xp3 以降のファイルがある場合は、それらも読み込まれます。これらのファイルや、元々配布されていた ( パッチではないもとの ) ファイルの中に同名のファイルがある場合は、数字の大きいパッチファイルの中のファイルが優先されて使用されます。patch2.xp3, patch3.xp3, patch4.xp3 ・・・のならびに欠番があった場合はそこでパッチ用アーカイブを探すのをやめてしまいますので注意してください。
 </dd>
 </dl>
 </para>
 
 <para>
-<ptitle>�g���u���V���[�e�B���O</ptitle>
-�@�G���h���[�U�����ݒ�c�[����z�z�����ꍇ�́A���[�U���g�ł�����x�̃g���u���V���[�e�B���O���s�����Ƃ��ł��܂��B<r/>
-�@�܂��A�g���g���ݒ�ŃR���\�[���̃��O���o�͂���悤�ɂ��Ă����ƁA�g���u�����̔��ɗL�p�ȉ�͎����ƂȂ�܂��B�R���\�[���̃��O�́A�x�̕ۑ���f�B���N�g���� krkr.console.log �Ƃ��đ��݂��܂��B<r/>
+<ptitle>トラブルシューティング</ptitle>
+　エンドユーザ向け設定ツールを配布した場合は、ユーザ自身である程度のトラブルシューティングを行うことができます。<r/>
+　また、吉里吉里設定でコンソールのログを出力するようにしておくと、トラブル時の非常に有用な解析資料となります。コンソールのログは、栞の保存先ディレクトリに krkr.console.log として存在します。<r/>
 </para>
 
 <para>
-<ptitle>���쌠��</ptitle>
-�@SDK �t���� <kw>license.txt</kw> �͕K�����ǂ݂��������B<r/>
+<ptitle>著作権等</ptitle>
+　SDK 付属の <kw>license.txt</kw> は必ずお読みください。<r/>
 </para>
 
 </doc>

@@ -1,73 +1,73 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <doc>
-<title>�T�u���[�`�����g����</title>
+<title>サブルーチンを使おう</title>
 
 
 <para>
-<ptitle>�T�u���[�`���Ƃ�</ptitle>
-�@�T�u���[�`���Ƃ́A�������̏����̂��܂Ƃ߂����ŁA�ق��̉ӏ�����u�Ăяo���āv�������ł��B�T�u���[�`���̏������I���ƁA�Ăяo�������֐��䂪�߂�܂��B<r/>
+<ptitle>サブルーチンとは</ptitle>
+　サブルーチンとは、いくつかの処理のをまとめた物で、ほかの箇所から「呼び出して」つかう物です。サブルーチンの処理が終わると、呼び出した所へ制御が戻ります。<r/>
 <r/>
-�@�}�N�� <comlink href="Macro"/> �Ƌ@�\�͎��Ă��܂����A�T�u���[�`���̕������{�i�I�ȏ������s���̂ɑ΂��A�}�N���͊ȒP�ȏ������s���p�r�ł��B<r/>
+　マクロ <comlink href="Macro"/> と機能は似ていますが、サブルーチンの方がより本格的な処理を行うのに対し、マクロは簡単な処理を行う用途です。<r/>
 </para>
 
 <para>
-<ptitle>�T�u���[�`���̊�{�I�Ȏg����</ptitle>
-�@�T�u���[�`���̓��x���ɂ���ċ�ʂ���܂��̂ŁA���x�����`���܂��B�T�u���[�`������Ăяo�����ɖ߂�Ƃ���� <kw>return</kw> �^�O�A�T�u���[�`�����Ăяo���ɂ� <kw>call</kw> �^�O��p���܂��B<r/>
-�@���̗�����Ă��������B<r/>
+<ptitle>サブルーチンの基本的な使い方</ptitle>
+　サブルーチンはラベルによって区別されますので、ラベルを定義します。サブルーチンから呼び出し元に戻るところに <kw>return</kw> タグ、サブルーチンを呼び出すには <kw>call</kw> タグを用います。<r/>
+　下の例を見てください。<r/>
 <bq>
 [wait time=200]<r/>
-*start|�X�^�[�g<r/>
+*start|スタート<r/>
 [cm]<r/>
-�T�u���[�`�����Ăяo���܂��B[l][r]<r/>
+サブルーチンを呼び出します。[l][r]<r/>
 <b>[call target=*subroutine]</b><r/>
-�T�u���[�`�����Ăяo���܂����B<r/>
+サブルーチンを呼び出しました。<r/>
 [s]<r/>
 <r/>
 <b>*subroutine</b><r/>
-����̓T�u���[�`���ł��B[l][r]<r/>
-�N���b�N������ƌĂяo�����ɖ߂�܂��B[l][r]<r/>
+これはサブルーチンです。[l][r]<r/>
+クリックをすると呼び出し元に戻ります。[l][r]<r/>
 <b>[return]</b><r/>
 </bq>
 <r/>
-�@���āA���̗�����s������ƁA�u�T�u���[�`�����Ăяo���܂��B�v�̃��b�Z�[�W�̂��ƂɁu����̓T�u���[�`���ł��B�v�ƕ\������A�u�N���b�N������ƌĂяo�����ɖ߂�܂��B�v�ŃN���b�N����ƁA�u�T�u���[�`�����Ăяo���܂����B�v�ƕ\�������͂��ł��B<r/>
-�@�܂�Acall �^�O�Ŏw�肵�����x���ɃW�����v������̂ł����A���̂Ƃ��ɌĂяo�����ʒu�������I�ɋL�^����Areturn �^�O�ł́A���̋L�^���ꂽ�Ăяo�����Ɏ����I�ɖ߂�܂� ( ���̎����I�ɋL�^�������̂��u<kw>�R�[���X�^�b�N</kw>�v�ƌĂ�ł��܂� )�B<r/>
-�@���̗�ł́A<tt>*subroutine</tt> ���� <tt>[return]</tt> �܂ł��u�T�u���[�`���v�ł��B<r/>
+　さて、この例を実行させると、「サブルーチンを呼び出します。」のメッセージのあとに「これはサブルーチンです。」と表示され、「クリックをすると呼び出し元に戻ります。」でクリックすると、「サブルーチンを呼び出しました。」と表示されるはずです。<r/>
+　つまり、call タグで指定したラベルにジャンプをするのですが、このときに呼び出した位置が自動的に記録され、return タグでは、この記録された呼び出し元に自動的に戻ります ( この自動的に記録されるものを「<kw>コールスタック</kw>」と呼んでいます )。<r/>
+　この例では、<tt>*subroutine</tt> から <tt>[return]</tt> までが「サブルーチン」です。<r/>
 <r/>
-�@�T�u���[�`���̒�����ق��̃T�u���[�`�����Ăяo�����Ƃ��ł��܂��B�Ăяo���̐[�� ( return �����ɂ����܂� call �ł��邩 ) �ɐ����͂���܂���B<r/>
+　サブルーチンの中からほかのサブルーチンを呼び出すこともできます。呼び出しの深さ ( return せずにいくつまで call できるか ) に制限はありません。<r/>
 <r/>
-�@���Ȃ݂Ɂu�I�������g���Ă݂悤�v�̏��ł̓��x���̎��ɂ� [cm] �������Ə����܂������A�Z�[�u�̉ӏ��ƂȂ�悤�� ( | �t���� ) ���x���̎��łȂ���� [cm] �������Ȃ��Ă� OK �ł��B<r/>
+　ちなみに「選択肢を使ってみよう」の所ではラベルの次には [cm] を書くと書きましたが、セーブの箇所となるような ( | 付きの ) ラベルの次でなければ [cm] を書かなくても OK です。<r/>
 <r/>
 <r/>
-�@�R�[���X�^�b�N�ɂ́A�V�i���I�t�@�C�����A�V�i���I���̒��O�̃��x���Ƃ��ꂩ�� call �^�O�̂���s�܂ł̍s���Acall �^�O�̂���s�̓��e�A���̍s���ł̈ʒu�̏�񂵂��L�^����܂���B�V�i���I�̃f�o�b�O���ȂǂŁA�߂��̃V�i���I�t�@�C�����̍\�����ς��ƂƂ�ł��Ȃ��ʒu�ɖ߂��Ă��܂��ꍇ������̂Œ��ӂ��Ă��������B<r/>
-�@��{�I�ɂ́A�T�u���[�`���̃��x����T�u���[�`�����ɂ́A�Z�[�u�ӏ��ƂȂ郉�x�� ( | �t���̃��x�� ) ���g��Ȃ�/���Ȃ����g�ł��B<r/>
+　コールスタックには、シナリオファイル名、シナリオ中の直前のラベルとそれから call タグのある行までの行数、call タグのある行の内容、その行内での位置の情報しか記録されません。シナリオのデバッグ中などで、戻り先のシナリオファイル中の構成が変わるととんでもない位置に戻ってしまう場合があるので注意してください。<r/>
+　基本的には、サブルーチンのラベルやサブルーチン中には、セーブ箇所となるラベル ( | 付きのラベル ) を使わない/作らないが吉です。<r/>
 </para>
 
 <para>
-<ptitle>�T�u���[�`���Ɋւ��钍��</ptitle>
-�@call �Ŏ������g���Ăт����Ă��܂����肷��Ɩ������[�v�ɂ͂܂�܂��B<r/>
-�@call �� return �̑Ή����Ƃ�Ă��Ȃ��ƁA�ǂ�ǂ�R�[���X�^�b�N�������Ă�������A���邢�� return �^�O�̂Ƃ���ŌĂяo�����ɖ߂�Ȃ��Ȃ��ăG���[�ɂȂ鎖������܂��̂ŁA���ӂ��Ă��������B<r/>
+<ptitle>サブルーチンに関する注意</ptitle>
+　call で自分自身を呼びだしてしまったりすると無限ループにはまります。<r/>
+　call と return の対応がとれていないと、どんどんコールスタックが増えていったり、あるいは return タグのところで呼び出し元に戻れなくなってエラーになる事がありますので、注意してください。<r/>
 <r/>
-�@����ƁA���̗�̂悤��<r/>
+　それと、次の例のように<r/>
 <r/>
 <bq>
 *subroutine<r/>
-�E�E�E<r/>
+・・・<r/>
 [if exp="f.flag1"]<b>[jump target=*otherplaces1]</b>[endif]<r/>
 [if exp="f.flag2"]<b>[jump target=*otherplaces2]</b>[endif]<r/>
-�E�E�E<r/>
+・・・<r/>
 [return]<r/>
 <r/>
 *otherplaces1<r/>
-�E�E�E<r/>
+・・・<r/>
 [return]<r/>
 <r/>
 *otherplaces2<r/>
-;���̐�ɂ� return �^�O���Ȃ��E�E�E<r/>
+;この先には return タグがない・・・<r/>
 </bq>
 <r/>
-�@�T�u���[�`�����ő��̏ꏊ�ɃW�����v����ꍇ�͒��ӂ��Ă��������Botherplaces1 �ɃW�����v����ꍇ�́A�W�����v��� return ������̂� call �` return �̃o�����X��������Ƃ͂���܂���B�������Aotherplaces2 �ɃW�����v����ꍇ�A�W�����v������� return ������Ȃ��̂ŁA���̃T�u���[�`������́u�߂��ĂȂ��v���ƂɂȂ�܂��B�܂�Acall �` return �̃o�����X������Ă��܂��܂��B<r/>
+　サブルーチン中で他の場所にジャンプする場合は注意してください。otherplaces1 にジャンプする場合は、ジャンプ先に return があるので call 〜 return のバランスを崩すことはありません。しかし、otherplaces2 にジャンプする場合、ジャンプした先に return が現れないので、そのサブルーチンからは「戻ってない」ことになります。つまり、call 〜 return のバランスを崩してしまいます。<r/>
 <r/>
-�@�����A�Ăяo�����ɖ߂�̂ł͂Ȃ��A�C�ӂ̏ꏊ�ɖ߂肽���ꍇ�́Areturn �^�O�� storage �� target �����𗘗p���āA�C�ӂ̏ꏊ�ɖ߂邱�Ƃ��ł��܂��B<r/>
+　もし、呼び出し元に戻るのではなく、任意の場所に戻りたい場合は、return タグの storage や target 属性を利用して、任意の場所に戻ることができます。<r/>
 </para>
 </doc>

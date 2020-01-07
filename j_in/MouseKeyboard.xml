@@ -1,68 +1,68 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
-<title>������@</title>
+<title>操作方法</title>
 
 <para>
-<ptitle>������@</ptitle>
-�@KAG �̑�����@���ȉ��Ő������܂��B<r/>
-<note>�@����͈�ʓI�ɏ��������ł��B�Q�[���Ȃǂɂ���Ă͎g��Ȃ��@�\������ł��傤����A��������̂܂܃R�s�[���y�[�X�g���ăQ�[���Ȃǂ̐������Ȃǂɏ����̂͂ǂ����Ǝv���܂�(��)</note><r/>
+<ptitle>操作方法</ptitle>
+　KAG の操作方法を以下で説明します。<r/>
+<note>　これは一般的に書いた物です。ゲームなどによっては使わない機能もあるでしょうから、これをそのままコピー＆ペーストしてゲームなどの説明書などに書くのはどうかと思います(汗)</note><r/>
 </para>
 
 <para>
-<ptitle>��{�I�ȑ���</ptitle>
+<ptitle>基本的な操作</ptitle>
 <dl>
-<dt>�u���N���b�N�v�܂��́u�z�C�[������O�ɉ�]�v�܂��́u���^�[���L�[�v�܂��́u�X�y�[�X�L�[�v</dt>
-<dd>�ǂ݂����� �܂��� �I�����̌���A�{�^���������A�`�F�b�N�{�b�N�X���`�F�b�N����Ȃǂ̓���</dd>
+<dt>「左クリック」または「ホイールを手前に回転」または「リターンキー」または「スペースキー」</dt>
+<dd>読みすすみ または 選択肢の決定、ボタンを押す、チェックボックスをチェックするなどの動作</dd>
 
-<dt>�u�E�N���b�N�v�܂��́uESC �L�[�v</dt>
-<dd>���b�Z�[�W�����̕\�� �܂��� �E�N���b�N�T�u���[�`���̌Ăяo��</dd>
+<dt>「右クリック」または「ESC キー」</dt>
+<dd>メッセージ履歴の表示 または 右クリックサブルーチンの呼び出し</dd>
 
-<dt>�u���v�u���v �܂��� �u���v�u���v �܂��� �uTAB�v�uSHIFT+TAB�v </dt>
-<dd>�I�����A�{�^���A�P��s�G�f�B�b�g�A�`�F�b�N�{�b�N�X�Ԃ̈ړ�</dd>
+<dt>「↑」「↓」 または 「←」「→」 または 「TAB」「SHIFT+TAB」 </dt>
+<dd>選択肢、ボタン、単一行エディット、チェックボックス間の移動</dd>
 
-<dt>�u�z�C�[�������ɉ�]�v�܂��́uR �L�[�v�܂��́uSHIFT�{���v</dt>
-<dd>���b�Z�[�W�����̕\��</dd>
+<dt>「ホイールを奥に回転」または「R キー」または「SHIFT＋↑」</dt>
+<dd>メッセージ履歴の表示</dd>
 
-<dt>�uF �L�[�v</dt>
-<dd>���̑I����/���ǂ܂Ői��</dd>
+<dt>「F キー」</dt>
+<dd>次の選択肢/未読まで進む</dd>
 
-<dt>�uA �L�[�v</dt>
-<dd>�����I�ɓǂݐi��</dd>
+<dt>「A キー」</dt>
+<dd>自動的に読み進む</dd>
 
-<dt>�uB �L�[�v</dt>
-<dd>�O�ɖ߂�</dd>
+<dt>「B キー」</dt>
+<dd>前に戻る</dd>
 
-<dt>�uS �L�[�v</dt>
-<dd>(�t���[�Z�[�u���[�h�ɂ�����) �x������</dd>
+<dt>「S キー」</dt>
+<dd>(フリーセーブモードにおいて) 栞を挟む</dd>
 
-<dt>�uL �L�[�v</dt>
-<dd>(�t���[�Z�[�u���[�h�ɂ�����) �x�����ǂ�</dd>
+<dt>「L キー」</dt>
+<dd>(フリーセーブモードにおいて) 栞をたどる</dd>
 </dl>
 </para>
 
 <para>
-<ptitle>���b�Z�[�W����\�����̑���</ptitle>
+<ptitle>メッセージ履歴表示中の操作</ptitle>
 <dl>
-<dt>�u���^�[���L�[�v�܂��́u�X�y�[�X�L�[�v�܂��́uESC �L�[�v</dt>
-<dd>���b�Z�[�W���������</dd>
+<dt>「リターンキー」または「スペースキー」または「ESC キー」</dt>
+<dd>メッセージ履歴を閉じる</dd>
 
-<dt>�u�z�C�[����]�v�܂��́u���v�u���v �܂��� �u���v�u���v </dt>
-<dd>�X�N���[��</dd>
+<dt>「ホイール回転」または「↑」「↓」 または 「←」「→」 </dt>
+<dd>スクロール</dd>
 </dl>
 </para>
 
 
 <para>
-<ptitle>�u�͂��v�u�������v�������˂�_�C�A���O</ptitle>
+<ptitle>「はい」「いいえ」をたずねるダイアログ</ptitle>
 <dl>
-<dt>�u�N���b�N�v</dt>
-<dd>�u�͂��v�܂��́u�������v��I��</dd>
+<dt>「クリック」</dt>
+<dd>「はい」または「いいえ」を選択</dd>
 
-<dt>�u���v�u���v </dt>
-<dd>�{�^���̑I��</dd>
+<dt>「←」「→」 </dt>
+<dd>ボタンの選択</dd>
 
-<dt>�u���^�[���L�[�v�܂��́u�X�y�[�X�L�[�v </dt>
-<dd>�I�������{�^��������</dd>
+<dt>「リターンキー」または「スペースキー」 </dt>
+<dd>選択したボタンを押す</dd>
 </dl>
 </para>
 

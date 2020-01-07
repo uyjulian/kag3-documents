@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
-<title>�͂��߂�</title>
+<title>はじめに</title>
 
 <para>
-<ptitle>�͂��߂�</ptitle>
-�@KAG �� Kirikiri Adventure Game �̗��ł��B�g���g���ŃA�h�x���`���[�Q�[����m�x���Q�[������邽�߂̃X�N���v�g�ł��B<r/>
-�@KAG ���ꎩ�̂́A�g���g���������ł��� TJS<small>(2)</small> �X�N���v�g����ŏ����Ă���܂����AKAG ����������t�@�C���́A�V�i���I�t�@�C���Ƃ����A���͒��Ɂu�^�O�v(�w��) ���������񂾃e�L�X�g�t�@�C���ł��B<r/>
-�@�V�i���I�t�@�C�����́A�e�L�X�g�G�f�B�^��ł̍�Ƃ���ƂȂ�܂��B�~���͂��������������m��܂���B�������A���Ƃ��΁AHTML ���e�L�X�g�G�f�B�^�ł����ɏ������Ƃ̂ł���l�ł���΁A�����ɂȂ��߂�Ǝv���܂��B<r/>
+<ptitle>はじめに</ptitle>
+　KAG は Kirikiri Adventure Game の略です。吉里吉里でアドベンチャーゲームやノベルゲームを作るためのスクリプトです。<r/>
+　KAG それ自体は、吉里吉里が理解できる TJS<small>(2)</small> スクリプト言語で書いてありますが、KAG が理解するファイルは、シナリオファイルという、文章中に「タグ」(指令) を書き込んだテキストファイルです。<r/>
+　シナリオファイル作りは、テキストエディタ上での作業が主となります。敷居はすこし高いかも知れません。しかし、たとえば、HTML をテキストエディタでじかに書くことのできる人であれば、すぐになじめると思います。<r/>
 <r/>
-�@�W���ŗp�ӂ��ꂽ�^�O�݂̂��g�p���Ă����������̂��Ƃ͂ł��܂����AKAG ���̂� TJS �X�N���v�g�ŏ����Ă��邽�߁A���������������A�܂��̓V�i���I�t�@�C������ TJS �X�N���v�g����������Œ��ڋg���g���{�̂ɓ���������΁A���ʂ̓����ʂ̋@�\���g�����鎖���ł��܂��B����� �g���g��/KAG �̑傫�ȓ����̈�ł��B<r/>
+　標準で用意されたタグのみを使用してもそこそこのことはできますが、KAG 自体が TJS スクリプトで書いてあるため、これを改造したり、またはシナリオファイル中に TJS スクリプトを書き込んで直接吉里吉里本体に働きかければ、より別の動作や別の機能を拡張する事ができます。これは 吉里吉里/KAG の大きな特徴の一つです。<r/>
 <r/>
 <note>
-�@KAG 3 �ȍ~�ɑΉ�����g���g���{�̂� �g���g���Q�ł��B�g���g���Q�͋g���g���P�Ɏ����ĂقڂP�����蒼�����g���g���ŁA����ɔ��� KAG ���V�����������������̂� KAG 3 �ł��BKAG 3 �� KAG 3 ������ KAG �ƃV�i���I���x���ł̌݊����������Ă��܂����AKAG 3 �����̃v���W�F�N�g���ڐA����ꍇ�͂������̒��ӓ_������܂��B<link href="PortFromOldKAG"/> ���������������B<r/>
+　KAG 3 以降に対応する吉里吉里本体は 吉里吉里２です。吉里吉里２は吉里吉里１に似せてほぼ１から作り直した吉里吉里で、それに伴い KAG も新しく書き直したものが KAG 3 です。KAG 3 は KAG 3 未満の KAG とシナリオレベルでの互換性を持っていますが、KAG 3 未満のプロジェクトを移植する場合はいくつかの注意点があります。<link href="PortFromOldKAG"/> をご覧ください。<r/>
 </note>
 <r/>
 <note>
-�@�g���g���{�̂� TJS �Ƃ����X�N���v�g��������߂��邱�Ƃ��ł��܂��B���� TJS �Ƃ����X�N���v�g����ŏ����ꂽ KAG �́AKAG �p�ɏ����ꂽ�V�i���I�t�@�C�������߂��邱�Ƃ��ł���Ƃ����\���ɂȂ��Ă��܂��B���̂��߁A�����ł́A�Ƃ��� KAG �Ɍ��肵�ĕ����������Ƃ��́uKAG�v�ƁA�܂��g���g���{�̂Ɍ��肵�Č����Ƃ��́u�g���g���v�A�܂������Ɋւ�邱�Ƃł���΁u�g���g��/KAG�v�Ƃ��������������邱�Ƃɂ��܂��B<r/>
-�@�܂��ATJS �X�N���v�g�� KAG �V�i���I�̋�ʂ�t���邽�߁ATJS �X�N���v�g���L�q�������̂́u�X�N���v�g�v���邢�́u�X�N���v�g�t�@�C���v�AKAG �V�i���I���L�q�������̂́u�V�i���I�v���邢�́u�V�i���I�t�@�C���v�Ƃ��������������邱�Ƃɂ��܂��B
+　吉里吉里本体は TJS というスクリプト言語を解釈することができます。その TJS というスクリプト言語で書かれた KAG は、KAG 用に書かれたシナリオファイルを解釈することができるという構造になっています。そのため、ここでは、とくに KAG に限定して物事を言うときは「KAG」と、また吉里吉里本体に限定して言うときは「吉里吉里」、また両方に関わることであれば「吉里吉里/KAG」という言い方をすることにします。<r/>
+　また、TJS スクリプトと KAG シナリオの区別を付けるため、TJS スクリプトを記述したものは「スクリプト」あるいは「スクリプトファイル」、KAG シナリオを記述したものは「シナリオ」あるいは「シナリオファイル」という言い方をすることにします。
 </note>
 </para>
 
 <para>
-<ptitle>�ǂ�ȃQ�[��������̂�</ptitle>
-�@KAG �͌��X�A�h�x���`���[�Q�[������邽�߂̃X�N���v�g�ł��̂ŁA�A�h�x���`���[�Q�[������邱�Ƃ��ł��܂�(������O��)�B<r/>
-�@�A�h�x���`���[�Q�[���Ƃ����Ă����낢�날��܂����AKAG �ł͎�ɕ��͂�\�����A���͒��ɐݒ肳�ꂽ�I���������ǂ邱�Ƃŕ��ꂪ���򂷂�A�Ƃ����^�C�v�̃A�h�x���`���[�Q�[������邱�Ƃ��ł��܂��B<r/>
+<ptitle>どんなゲームを作れるのか</ptitle>
+　KAG は元々アドベンチャーゲームを作るためのスクリプトですので、アドベンチャーゲームを作ることができます(当たり前か)。<r/>
+　アドベンチャーゲームといってもいろいろありますが、KAG では主に文章を表示し、文章中に設定された選択肢をたどることで物語が分岐する、というタイプのアドベンチャーゲームを作ることができます。<r/>
 </para>
 
 <para>
-<ptitle>���̃h�L�������g�̒��쌠��</ptitle>
-�@���̃h�L�������g�̕��͂�قƂ�ǂ̉摜�̒��쌠�� W.Dee ���ۗL���܂��B���p�͋������s���Ă��܂��܂��񂪁A���̃h�L�������g���Ŏg�p���Ă���摜�ɂ͑��̕��̒��앨���܂܂�邽�߁A�摜���̂��̂𗬗p������A�摜���܂ވ��p���s���ꍇ�� W.Dee �ɘA��������Ă��������B<r/>
+<ptitle>このドキュメントの著作権等</ptitle>
+　このドキュメントの文章やほとんどの画像の著作権は W.Dee が保有します。引用は許可無く行ってかまいませんが、このドキュメント中で使用している画像には他の方の著作物が含まれるため、画像そのものを流用したり、画像を含む引用を行う場合は W.Dee に連絡を取ってください。<r/>
 <r/>
-�T�|�[�g��_�E�����[�h�͈ȉ��̃y�[�W�ōs���Ă���܂�<r/>
-�g���g��/KAG �_�E�����[�h�y�[�W : <at target="_top" href="http://kikyou.info/tvp/">http://kikyou.info/tvp/</at><r/>
+サポートやダウンロードは以下のページで行っております<r/>
+吉里吉里/KAG ダウンロードページ : <at target="_top" href="http://kikyou.info/tvp/">http://kikyou.info/tvp/</at><r/>
 </para>
 
 

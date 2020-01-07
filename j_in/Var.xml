@@ -1,189 +1,189 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
-<title>�ϐ����g����</title>
+<title>変数を使おう</title>
 
 <para>
-<ptitle>�ϐ��Ƃ�</ptitle>
+<ptitle>変数とは</ptitle>
 <r/>
-�@KAG �ɂ�����ϐ��Ƃ́A<r/>
+　KAG における変数とは、<r/>
 <r/>
-�E�Ȃɂ����L�������Ă�����<r/>
+・なにかを記憶させておく物<r/>
 <r/>
-�@�ɂ����܂���B<r/>
+　にすぎません。<r/>
 <r/>
-�@�������AKAG �́A<kw>TJS2</kw> �Ƃ����X�N���v�g������x�[�X�ɂ��Ă���V�X�e���ł���AKAG �ɂ�����ϐ��Ƃ� TJS2 �̕ϐ����̂��̂ł��̂ł��Ȃ苭�͂ȋ@�\�𔭊����܂��B<r/>
+　ただし、KAG は、<kw>TJS2</kw> というスクリプト言語をベースにしているシステムであり、KAG における変数とは TJS2 の変数そのものですのでかなり強力な機能を発揮します。<r/>
 <r/>
-�@�����̓`���[�g���A���ł��̂ŁA��{�I�Ȏg�����݂̂��q�ׂ܂����A����� KAG �����̃��\�b�h��v���p�e�B�ɃA�N�Z�X����Ƃ��A�g���g���̋@�\�𒼐ڎg���ƂȂ�ƁA�ق�<b>�D��</b>��ԂȂ̂ŁA�͂܂�₷�����i�̕��͂����ӂ�(��)�B<r/>
+　ここはチュートリアルですので、基本的な使い方のみを述べますが、さらに KAG 内部のメソッドやプロパティにアクセスするとか、吉里吉里の機能を直接使うとなると、ほぼ<b>泥沼</b>状態なので、はまりやすい性格の方はご注意を(笑)。<r/>
 </para>
 
 <para>
-<ptitle>�ϐ��̎��</ptitle>
-�@KAG �̕ϐ��̎�ނɂ� 3 ����܂��B�x�̃Z�[�u�ƃ��[�h�ƂƂ��ɃZ�[�u�E���[�h����镁�ʂ́u<kw>�Q�[���ϐ�</kw>�v�ƁA�x�̃Z�[�u�E���[�h�Ƃ͊֌W�Ȃ��ɁA��ɒl��ێ��ł���u<kw>�V�X�e���ϐ�</kw>�v�A�ꎞ�I�ɒl�������Ă������߂́u<kw>�ꎞ�ϐ�</kw>�v������܂��B�u�V�X�e���ϐ��v�́A�g���g��/KAG ���I�������āA�܂������Q�[�����N������Βl��ێ����Ă��܂��B�u�ꎞ�ϐ��v�͋g���g�����I��������Ɠ��e�͎����Ă��܂��܂����A�x�ɂ��l�͕ۑ�����܂���B<r/>
+<ptitle>変数の種類</ptitle>
+　KAG の変数の種類には 3 つあります。栞のセーブとロードとともにセーブ・ロードされる普通の「<kw>ゲーム変数</kw>」と、栞のセーブ・ロードとは関係なしに、常に値を保持できる「<kw>システム変数</kw>」、一時的に値をおいておくための「<kw>一時変数</kw>」があります。「システム変数」は、吉里吉里/KAG を終了させて、また同じゲームを起動すれば値を保持しています。「一時変数」は吉里吉里を終了させると内容は失われてしまいますし、栞にも値は保存されません。<r/>
 <r/>
-�@�Q�[���ϐ��ɂ� <kw>f</kw> �Ƃ������O���A�V�X�e���ϐ��ɂ� <kw>sf</kw> �Ƃ������O���A�ꎞ�ϐ��ɂ� <kw>tf</kw> �Ƃ������O���^�����Ă܂��B<r/>
+　ゲーム変数には <kw>f</kw> という名前が、システム変数には <kw>sf</kw> という名前が、一時変数には <kw>tf</kw> という名前が与えられてます。<r/>
 <r/>
-�@�܂��AKAG ( �Ƃ����� TJS2 ) �̕ϐ��ɂ́A������ł����l�ł�����邱�Ƃ��ł��܂� ( ������␔�l�Ȃǂ́A�ϐ��̒��ɓ������̂̎�ނ��u<kw>�^</kw>�v�Ƃ����܂� )�B�ϐ��ɂ�(�ق�)���R�Ȗ��O��t���邱�Ƃ��ł��A�ϐ��̐��ɐ����͂���܂��񂵁A������̒����ɐ����͂���܂���B���l�͎������������Ƃ��ł��܂��B<r/>
-�@KAG 3.x ����́u�z��v�Ɓu�����z��v���������Ƃ��ł���悤�ɂȂ�܂��� ( �����ł͐������܂��� )�B<r/>
+　また、KAG ( というか TJS2 ) の変数には、文字列でも数値でも入れることができます ( 文字列や数値などの、変数の中に入れるものの種類を「<kw>型</kw>」といいます )。変数には(ほぼ)自由な名前を付けることができ、変数の数に制限はありませんし、文字列の長さに制限はありません。数値は実数も扱うことができます。<r/>
+　KAG 3.x からは「配列」と「辞書配列」も扱うことができるようになりました ( ここでは説明しません )。<r/>
 <note>
-�@TJS2 �̐����^�� 64bit�A�����^�� double ( �{���x ) �̐��x�������Ă��܂��B<r/>
-�@������̓[���I�� UNICODE ������������A���������͂���܂���B<r/>
+　TJS2 の整数型は 64bit、実数型は double ( 倍精度 ) の精度を持っています。<r/>
+　文字列はゼロ終結 UNICODE 文字列を扱い、長さ制限はありません。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>�ϐ��Ƃ��Ďg�p�\�Ȗ��O</ptitle>
-�@�g���g�� / KAG �ł́A�ϐ��͂قڎ��R�ɖ��O��t���邱�Ƃ��ł��܂��B�������A���R�Ƃ����Ă��g���g�� / KAG ���g�p�\�ȕϐ��̖��O�ɂ̓��[��������܂��B<r/>
+<ptitle>変数として使用可能な名前</ptitle>
+　吉里吉里 / KAG では、変数はほぼ自由に名前を付けることができます。しかし、自由といっても吉里吉里 / KAG が使用可能な変数の名前にはルールがあります。<r/>
 <r/>
 <dl>
-<dt>�ϐ����ɂ͔��p�p���ƑS�p�����A_ (�A���_�[�o�[) ���g�����Ƃ��ł���</dt>
+<dt>変数名には半角英数と全角文字、_ (アンダーバー) を使うことができる</dt>
 <dd>
-�@<b><tt>abc&amp;def</tt></b> ��A<b><tt>a-z</tt></b> �̂悤�ȕϐ����͎g�p�ł��܂���B<r/>
-�@<b><tt>final_count</tt></b> �̂悤�ɃA���_�[�o�[���܂񂾂�A<b><tt>��l���̖��O</tt></b> �̂悤�ɑS�p�������g�p���邱�Ƃ��ł��܂�(�S�p�̋L���͂��ׂĎg�p�\�ł�)�B
+　<b><tt>abc&amp;def</tt></b> や、<b><tt>a-z</tt></b> のような変数名は使用できません。<r/>
+　<b><tt>final_count</tt></b> のようにアンダーバーを含んだり、<b><tt>主人公の名前</tt></b> のように全角文字を使用することができます(全角の記号はすべて使用可能です)。
 </dd>
-<dt>������ �ϐ��̖����ɔ��p�̐��������邱�Ƃ͂ł��Ȃ�</dt>
+<dt>ただし 変数の名頭に半角の数字が来ることはできない</dt>
 <dd>
-�@<b><tt>2friends</tt></b> �� <b><tt>3com</tt></b> �̂悤�ȕϐ����͎g�p�ł��܂��� ( �S�p�̐������擪�ɗ���̂ł���� OK �ł�)�B
+　<b><tt>2friends</tt></b> や <b><tt>3com</tt></b> のような変数名は使用できません ( 全角の数字が先頭に来るのであれば OK です)。
 </dd>
 </dl>
 <r/>
-�@�����̕ϐ����̑O�ɁA�Q�[���ϐ��ł���� <b><tt>f.</tt></b> ���A�V�X�e���ϐ��ł���� <b><tt>sf.</tt></b> ���A�ꎞ�ϐ��ł���� <b><tt>tf.</tt></b> ��t���܂��B
+　これらの変数名の前に、ゲーム変数であれば <b><tt>f.</tt></b> を、システム変数であれば <b><tt>sf.</tt></b> を、一時変数であれば <b><tt>tf.</tt></b> を付けます。
 <r/>
-�@���Ƃ��΁A�ȉ��̂悤�ȕϐ������l�����܂��B<r/>
+　たとえば、以下のような変数名が考えられます。<r/>
 <r/>
-<tt> <b>f.flag1  sf.username  sf.playcount  tf.i  f.enokazu  f.�ϐ����̂P </b>...</tt><r/>
+<tt> <b>f.flag1  sf.username  sf.playcount  tf.i  f.enokazu  f.変数その１ </b>...</tt><r/>
 <r/>
-�@�܂��A���߂Ďg���ϐ��͂��ׂĐ��l�Ƃ��Ă� 0 �ŁA������Ƃ��Ă� '' ( �󕶎��� ) �Ƃ����A����������ȏ�Ԃɂ���܂��B��ʓI�ɂ́A�ϐ��͍ŏ��ɒl������Ă���g���Ă��������B<r/>
+　また、初めて使う変数はすべて数値としては 0 で、文字列としては '' ( 空文字列 ) という、すこし特殊な状態にあります。一般的には、変数は最初に値をいれてから使ってください。<r/>
 <r/>
 <note>
-�@<b>f</b> �� <b>sf</b> �� <b>tf</b> �̑��� <b>kag</b> �Ƃ����̂��������邩���m��܂��񂪁A<b>kag</b> �� KAG �̃V�X�e�������ɒ��ڃA�N�Z�X����Ƃ��Ɏg���镨�ł��B<r/>
+　<b>f</b> や <b>sf</b> や <b>tf</b> の他に <b>kag</b> というのを見かけるかも知れませんが、<b>kag</b> は KAG のシステム内部に直接アクセスするときに使われる物です。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>�ϐ��ւ̑��</ptitle>
-�@����������A�ϐ��ɒl��������ɂ́A�ʏ� <kw>eval</kw> �^�O���g���܂��B���Ƃ��΁A<tt>f.flag1</tt> �� 1000 �����������ꍇ�E�E�E<r/>
+<ptitle>変数への代入</ptitle>
+　そうしたら、変数に値を代入するには、通常 <kw>eval</kw> タグを使います。たとえば、<tt>f.flag1</tt> に 1000 を代入したい場合・・・<r/>
 <bq>
 [eval exp="<b>f.flag1 <kw>=</kw> 1000</b>"]<r/>
 </bq>
-�@�Ƃ��܂��B�܂�A�ϐ����̌�� = �������A���̌�ɑ�����������l���w�肵�܂��B<r/>
+　とします。つまり、変数名の後に = を書き、その後に代入したい数値を指定します。<r/>
 <r/>
-�@����������������ꍇ�́A<r/>
+　文字列を代入したい場合は、<r/>
 <bq>
-[eval exp="<b>f.�ϐ����̂P = '������'</b>"]<r/>
+[eval exp="<b>f.変数その１ = '文字列'</b>"]<r/>
 </bq>
-�@�Ƃ��܂��B�܂�A = �̌�� '' �ł���������������w�肵�܂� ( �V���O���N�H�[�e�[�V�����ƃ_�u���N�H�[�e�[�V�����ɒ��ӂ��Ă������� )�B<r/>
-�@������p�̕ϐ���A���l�p�̕ϐ��Ƃ����悤�ɁA�ϐ��ɓ������̂̌^�ɂ���Ė��O���ς��ƌ������Ƃ͂���܂���B���ꂽ���̂̌^�ɂȂ�܂��B<r/>
+　とします。つまり、 = の後に '' でくくった文字列を指定します ( シングルクォーテーションとダブルクォーテーションに注意してください )。<r/>
+　文字列用の変数や、数値用の変数というように、変数に入れるものの型によって名前が変わると言うことはありません。入れたものの型になります。<r/>
 <r/>
-�@�ق��̕ϐ��ɓ��e���R�s�[����ꍇ�́A<r/>
+　ほかの変数に内容をコピーする場合は、<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag2</b>"]<r/>
 </bq>
 <r/>
-�̂悤�ɂ��܂��B<r/>
+のようにします。<r/>
 </para>
 
 <para>
-<ptitle>�ϐ��̉��Z</ptitle>
+<ptitle>変数の演算</ptitle>
 <r/>
-�@�v�Z���������ꍇ�́A<r/>
+　計算をしたい場合は、<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag1 + 1</b>"]<r/>
 </bq>
-�@���Ƃ��܂��B���̗�ł́Af.flag1 �� 1 �𑫂������� f.flag1 �ɑ�����Ă��܂� ( �܂� f.flag1 �� 1 �𑫂��Ă��� )�B<r/>
-�@exp �����ɂ� TJS2 �ɂ�����u<kw>��</kw>�v�������܂��B<r/>
-�@���ɂ́A<kw>*</kw>(��Z) <kw>/</kw>(���Z) <kw>+</kw>(���Z) <kw>-</kw>(���Z) �̂悤�ȕ��ʂ�<kw>���Z�q</kw>�͕��ʂɎg���܂� ( ���w�̎��̂悤�ɗD�揇�ʂ�����܂� )�B(  )  �J�b�R�����ʂɎg���܂��B<r/>
-�@���Ƃ��΁A<r/>
+　等とします。この例では、f.flag1 に 1 を足した物を f.flag1 に代入しています ( つまり f.flag1 に 1 を足している )。<r/>
+　exp 属性には TJS2 における「<kw>式</kw>」を書きます。<r/>
+　式には、<kw>*</kw>(乗算) <kw>/</kw>(除算) <kw>+</kw>(加算) <kw>-</kw>(減算) のような普通の<kw>演算子</kw>は普通に使えます ( 数学の式のように優先順位もあります )。(  )  カッコも普通に使えます。<r/>
+　たとえば、<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag1 + f.flag2 * f.flag3</b>"]<r/>
 </bq>
-�@�Ƃ���ƁAf.flag2 �� f.flag3 �����������̂� f.flag1 �����Z���ꂽ���̂� f.flag1 �ɓ���܂��B<r/>
+　とすると、f.flag2 と f.flag3 をかけたものに f.flag1 が加算されたものが f.flag1 に入ります。<r/>
 <r/>
-�@���Z���s���Ƃ��� / (�X���b�V��) ��p���܂��B<r/>
+　除算を行うときは / (スラッシュ) を用います。<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag2 / f.flag3</b>"]<r/>
 </bq>
-�@���̏ꍇ�� f.flag2 �� f.flag3 �Ŋ��������� f.flag1 �ɓ���܂��B<r/>
-�@�������A����؂�Ȃ������ꍇ�� f.flag1 �������ɂȂ��Ă��܂��̂ŁA���܂�������؂�̂ĂĐ����̌��ʂ𓾂����ꍇ�́A�������Z���Z�q \ ��p���āA<r/>
+　この場合は f.flag2 を f.flag3 で割った物が f.flag1 に入ります。<r/>
+　しかし、割り切れなかった場合は f.flag1 が実数になってしまうので、あまった分を切り捨てて整数の結果を得たい場合は、整数除算演算子 \ を用いて、<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag2 \ f.flag3</b>"]<r/>
 </bq>
-�@�ƋL�q���܂��B<r/>
+　と記述します。<r/>
 <r/>
 <r/>
-�@���ƁA�����񓯎m�̂Ȃ����킹�ɂ� + ���Z�q���g���܂��B<r/>
+　あと、文字列同士のつなぎ合わせにも + 演算子を使います。<r/>
 <r/>
 <bq>
 [eval exp="f.flag2 = 'hoge'"]<r/>
 [eval exp="f.flag3 = 'une'"]<r/>
 [eval exp="<b>f.flag1= f.flag2 + f.flag3</b>"]<r/>
 </bq>
-�@��L�̗�ł́A f.flag1 �ɂ� 'hogeune' �Ƃ��������񂪓���܂��B<r/>
+　上記の例では、 f.flag1 には 'hogeune' という文字列が入ります。<r/>
 <r/>
 <note>
-�@TJS2 �̕��@�� JavaScript (ECMAScript) ���Q�l�ɂ��č��ꂽ���߁A����ɂ悭���Ă��܂� ( ���S�ɓ����ł͂���܂��� )�B<r/>
-�@�ʏ�̎Z�p���Z�̐U�镑���͂قړ����ł��B������̈����╶����Ɛ��l�̍������Z���قړ����ł��B<r/>
+　TJS2 の文法は JavaScript (ECMAScript) を参考にして作られたため、これによく似ています ( 完全に同じではありません )。<r/>
+　通常の算術演算の振る舞いはほぼ同じです。文字列の扱いや文字列と数値の混合演算もほぼ同じです。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>������Ɛ��l</ptitle>
-�@KAG �̕ϐ��́A������p�̕ϐ��A���l�p�̕ϐ��Ƃ����悤�ɕϐ���������邱�Ƃ��A���O���ς�邱�Ƃ�����܂���B<r/>
-�@�����������΂��̕ϐ��͕����񂪁A���l�������΂��̕ϐ��͐��l�̓������ϐ��ɂȂ�܂��B<r/>
-�@���Ȃ̂͂������܂��Ďg���Ƃ��ł��B+ ���Z�q�ɂ͂��낢��ȈӖ��Ƃ��̎g����������܂�(^^;<r/>
+<ptitle>文字列と数値</ptitle>
+　KAG の変数は、文字列用の変数、数値用の変数というように変数が分かれることも、名前が変わることもありません。<r/>
+　文字列を入れればその変数は文字列が、数値をいれればその変数は数値の入った変数になります。<r/>
+　厄介なのはこれらをまぜて使うときです。+ 演算子にはいろいろな意味とその使い方があります(^^;<r/>
 <r/>
-�@�����񓯎m�̂Ȃ����킹�ɂ� + ���Z�q�A���l�̉��Z�ɂ� + ���Z�q���g���܂����A������Ɛ��l�𑫂����Ƃ����Ƃ��́A�ǂ��炩�����������Ȃ�΁A�Е��̐��l�͕�����ɕϊ�����ĂȂ����킳��Ƃ������[��������܂��B<r/>
+　文字列同士のつなぎ合わせには + 演算子、数値の加算にも + 演算子を使いますが、文字列と数値を足そうとしたときは、どちらか一方が文字列ならば、片方の数値は文字列に変換されてつなぎ合わさるというルールがあります。<r/>
 <r/>
-�@���Ƃ��΁Af.flag2 �� 'hoge' �Ƃ���������Af.flag3 �� 10 �Ƃ������l�������Ă����ꍇ�A<r/>
+　たとえば、f.flag2 に 'hoge' という文字列、f.flag3 に 10 という数値が入っていた場合、<r/>
 <bq>
 [eval exp="<b>f.flag1 = f.flag2 + f.flag2</b>"]<r/>
 </bq>
-�@�ł́Af.flag1 �ɂ� 'hoge10' �Ƃ��������񂪓���܂��B
+　では、f.flag1 には 'hoge10' という文字列が入ります。
 <r/>
 <r/>
-�@�܂��A�ǂ����Ă�������𐔒l�ɕϊ��������ꍇ������Ǝv���܂��B���Ƃ��� [input] �^�O�œ��͂������̂𐔒l�Ƃ��Ĉ��������Ƃ��Ȃǂł����A���̏ꍇ�ɂ� + ���Z�q���g���܂��B+ ���Z�q�́A���l�ɂ������ϐ��̑O�ɂ��Ďg���܂��B���Ƃ��΁Af.flag1 �� '20' �Ƃ��������񂪓����Ă����Ƃ��āA<r/>
+　また、どうしても文字列を数値に変換したい場合があると思います。たとえば [input] タグで入力したものを数値として扱いたいときなどですが、この場合にも + 演算子を使います。+ 演算子は、数値にしたい変数の前につけて使います。たとえば、f.flag1 に '20' という文字列が入っていたとして、<r/>
 <r/>
 <bq>
 [eval exp="<b>f.flag1 = +f.flag1</b>"]<r/>
 </bq>
 <r/>
-�@�Ə����΁Af.flag1 �̓��e�͐��l�ɕϊ�����A�Ă� f.flag1 �ɓ���܂��Bf.flag1 �͐��l�� 20 �ɂȂ�܂��B<r/>
+　と書けば、f.flag1 の内容は数値に変換され、再び f.flag1 に入ります。f.flag1 は数値の 20 になります。<r/>
 <r/>
 <note>
-�@+ ���Z�q�������ꍇ�͒��ӂ��Ȃ���΂Ȃ�܂���Bf.flag3 �𐔒l�ɂ��� f.flag2 �ɉ��Z����ȂǂƂ������������ꍇ�A<tt>f.flag2++f.flag3</tt> �Ƃ����������ł̓G���[�ɂȂ�܂� ( ++ �Ƃ����ʂ̉��Z�q�����邽�� )�B�X�y�[�X���󂯂� <tt>f.flag2+ +f.flag3</tt> �Ə����Ă��������B<r/>
+　+ 演算子が続く場合は注意しなければなりません。f.flag3 を数値にして f.flag2 に加算するなどという式を書く場合、<tt>f.flag2++f.flag3</tt> という書き方ではエラーになります ( ++ という別の演算子があるため )。スペースを空けて <tt>f.flag2+ +f.flag3</tt> と書いてください。<r/>
 </note>
 <note>
-�@�P���� + ���Z�q ( ��L��� <tt>f.flag1 = +f.flag1</tt> �̂悤�ȏꍇ�� + ) �́A�����񂪂��������\�L���܂ޏꍇ ( 0.3 �Ƃ� ) �́A���ʂ������ɂȂ�܂��B�����݂̂𓾂����ꍇ�� ( �����_�ȉ���؂�̂ĂĂ��܂������ꍇ�� )�Aint + �Ə����� OK �ł��B���Ƃ��Ώ�L��ł����΁A<tt>f.flag1 = int +f.flag1</tt> �ƂȂ�܂��B<r/>
+　単項の + 演算子 ( 上記例の <tt>f.flag1 = +f.flag1</tt> のような場合の + ) は、文字列がもし小数表記を含む場合 ( 0.3 とか ) は、結果が実数になります。整数のみを得たい場合は ( 小数点以下を切り捨ててしまいたい場合は )、int + と書けば OK です。たとえば上記例でいけば、<tt>f.flag1 = int +f.flag1</tt> となります。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>�ϐ��̍폜�E���̂ق�</ptitle>
-�@�ϐ����폜����ɂ� <kw>delete</kw> ��p���܂��B<b>delete �ϐ���</b> �ł��̕ϐ����폜���邱�Ƃ��ł��܂��B<r/>
-�@���Ƃ��΁A<tt>f.flag1</tt> ���폜�������ꍇ�́A<r/>
+<ptitle>変数の削除・そのほか</ptitle>
+　変数を削除するには <kw>delete</kw> を用います。<b>delete 変数名</b> でその変数を削除することができます。<r/>
+　たとえば、<tt>f.flag1</tt> を削除したい場合は、<r/>
 <bq>
 [eval exp="<b>delete f.flag1</b>"]<r/>
 </bq>
-�@�Ƃ��܂��B<r/>
+　とします。<r/>
 <r/>
-�@�܂��A<kw>clearvar</kw> �^�O�́A�Q�[���ϐ������ׂč폜���܂��B<r/>
+　また、<kw>clearvar</kw> タグは、ゲーム変数をすべて削除します。<r/>
 <r/>
-�@���̂ق��ATJS2 �Ŏg�p�\�ȉ��Z�q�� math �I�u�W�F�N�g�ɂ��O�p�֐����̌v�Z ( ����Ȃ̕K�v���͂킩��܂��� ) �Ȃǂ����ׂĎg���܂��B�ڂ����͋g���g�� SDK �� TJS2 �w���v���Q�Ƃ��Ă��������B<r/>
+　そのほか、TJS2 で使用可能な演算子や math オブジェクトによる三角関数等の計算 ( そんなの必要かはわかりませんが ) などをすべて使えます。詳しくは吉里吉里 SDK の TJS2 ヘルプを参照してください。<r/>
 <r/>
-�@<kw>,</kw> (�J���})���g���ĕ����̎������ eval �^�O���ɏ������Ƃ��ł��܂��B<r/>
-���Ƃ��΁A<r/>
+　<kw>,</kw> (カンマ)を使って複数の式を一つの eval タグ内に書くことができます。<r/>
+たとえば、<r/>
 <bq>
 [eval exp="f.first=true"]<r/>
 [eval exp="f.flag0=0"]<r/>
 [eval exp="f.flag1=0"]<r/>
 </bq>
-�@�Ƃ����悤�Ȏ��́A�ȉ��̂悤�ɊȌ��ɏ������Ƃ��ł��܂��B<r/>
+　というような式は、以下のように簡潔に書くことができます。<r/>
 <bq>
 [eval exp="f.first=true<b>,</b> f.flag0=0<b>,</b> f.flag1=0"]<r/>
 </bq>
 <r/>
-�@�܂��A<kw>iscript</kw> �^�O��p����ƁA�A������ eval �^�O���Ȍ��ɏ������Ƃ��ł��܂��B<r/>
+　また、<kw>iscript</kw> タグを用いると、連続した eval タグを簡潔に書くことができます。<r/>
 <r/>
-�@���Ƃ��΁A��̎��́A<r/>
+　たとえば、上の式は、<r/>
 <r/>
 <bq>
 [iscript]<r/>
@@ -193,70 +193,70 @@ f.flag1=0<b>;</b><r/>
 [endscript]<r/>
 </bq>
 <r/>
-�@�Ə������Ƃ��ł��܂��B�e���̂��Ƃ� ; ( �Z�~�R���� ) ��Y��Ȃ��ł��������B<r/>
-�@���̂悤�� , (�J���}) �� iscript ���g���ƁA�g��Ȃ��ꍇ�ɔ�ׂĔ��ɍ����ɂȂ�܂��B<r/>
+　と書くことができます。各式のあとに ; ( セミコロン ) を忘れないでください。<r/>
+　このように , (カンマ) や iscript を使うと、使わない場合に比べて非常に高速になります。<r/>
 </para>
 
 <para>
-<ptitle>�ϐ��̓��e��\������</ptitle>
-�@�ϐ��̓��e���V�i���I���ɕ\���������ꍇ�́A<kw>emb</kw> �^�O���g���܂��B<r/>
-�@���Ƃ��΁A�ȉ��̂悤�ɂȂ�܂��B<r/>
+<ptitle>変数の内容を表示する</ptitle>
+　変数の内容をシナリオ中に表示したい場合は、<kw>emb</kw> タグを使います。<r/>
+　たとえば、以下のようになります。<r/>
 <bq>
 [wait time=200]<r/>
 *start<r/>
 [cm]<r/>
-[eval exp="f.���l=200"][eval exp="f.mojiretu='������'"]<r/>
-f.���l �̓��e : [emb exp="f.���l"][l][r]<r/>
-f.mojiretu �̓��e : [emb exp="f.mojiretu"][l][r]<r/>
+[eval exp="f.数値=200"][eval exp="f.mojiretu='文字列'"]<r/>
+f.数値 の内容 : [emb exp="f.数値"][l][r]<r/>
+f.mojiretu の内容 : [emb exp="f.mojiretu"][l][r]<r/>
 </bq>
 <r/>
-�@���s����ƁA<r/>
+　実行すると、<r/>
 <r/>
-f.���l �̓��e : 200<r/>
-f.mojiretu �̓��e : ������<r/>
+f.数値 の内容 : 200<r/>
+f.mojiretu の内容 : 文字列<r/>
 <r/>
-�@�ƕ\�������͂��ł��B<r/>
+　と表示されるはずです。<r/>
 </para>
 
 <para>
-<ptitle>�G���e�B�e�B</ptitle>
-�@�G���e�B�e�B�Ƃ����̂́A�ϐ��̓��e�ŁA���̃^�O�̑����̒l��u��������@�\�ł��B<r/>
-�@�����̒l�ɁA <kw>&amp;</kw> �ɑ����ĕϐ����������܂��B<r/>
+<ptitle>エンティティ</ptitle>
+　エンティティというのは、変数の内容で、他のタグの属性の値を置き換える機能です。<r/>
+　属性の値に、 <kw>&amp;</kw> に続けて変数名を書きます。<r/>
 <bq>
 [wait time=200]<r/>
 *start<r/>
 [cm]<r/>
 [eval exp="f.fontsize=60"]<r/>
-[font size="&amp;f.fontsize"]�T�C�Y 60 �̕���[resetfont]<r/>
+[font size="&amp;f.fontsize"]サイズ 60 の文字[resetfont]<r/>
 </bq>
 <r/>
-�@���̏ꍇ�́Af.fontsize �ɑ�����ꂽ 60 �Ƃ������l�ŁAfont �^�O�� size �����̒l��u�������Ă��܂��B<r/>
+　この場合は、f.fontsize に代入された 60 という数値で、font タグの size 属性の値を置き換えています。<r/>
 <r/>
-�@���ۂ̓G���e�B�e�B�́A&amp; �̌�ɏ����ꂽ�����̒l�̓��e���ATJS2 ���Ƃ��Ď��s���āA���̌��ʂő����̒l��u��������@�\�ł��B�]���āA&amp; �̌�ɂ� TJS2 �����������Ƃ��o���܂��B<r/>
+　実際はエンティティは、&amp; の後に書かれた属性の値の内容を、TJS2 式として実行して、その結果で属性の値を置き換える機能です。従って、&amp; の後には TJS2 式を書くことが出来ます。<r/>
 </para>
 
 
 <para>
-<ptitle>�����̔��f</ptitle>
-�@�ϐ�������l�Ɠ����ł��邩�𔻒f���邽�߂ɂ͈ȉ��̉��Z�q���g�����Ƃ��ł��܂��B<r/>
+<ptitle>条件の判断</ptitle>
+　変数がある値と同じであるかを判断するためには以下の演算子を使うことができます。<r/>
 <bq>
-a<kw>==</kw>b    a �� b �Ɠ������Ƃ��ɐ^(true)<r/>
-a<kw>!=</kw>b    a �� b �Ɠ������Ȃ��ꍇ�ɐ^(true)<r/>
-a<kw>&lt;</kw>b     a �� b ��菭�Ȃ��ꍇ�ɐ^(true)<r/>
-a<kw>&gt;</kw>b     a �� b ���傫���ꍇ�ɐ^(true)<r/>
+a<kw>==</kw>b    a が b と等しいときに真(true)<r/>
+a<kw>!=</kw>b    a が b と等しくない場合に真(true)<r/>
+a<kw>&lt;</kw>b     a が b より少ない場合に真(true)<r/>
+a<kw>&gt;</kw>b     a が b より大きい場合に真(true)<r/>
 </bq>
 <r/>
-�@���̂ق� >= �� &lt;= (���������傫���A��������菬����) ���g�����Ƃ��ł��܂��B<r/>
-�@���̂悤�ȏ������f�͎�� if �^�O�Ŏg���܂��B<r/>
+　このほか >= や &lt;= (同じかより大きい、同じかより小さい) も使うことができます。<r/>
+　このような条件判断は主に if タグで使います。<r/>
 <r/>
-�@<kw>if</kw> �^�O�́Aexp �Ŏw�肵������ �^(true) ���������ꍇ�ɂ̂� endif �^�O�܂łɂ��镶�͂�^�O�����s���܂��B<r/>
+　<kw>if</kw> タグは、exp で指定した式が 真(true) を示した場合にのみ endif タグまでにある文章やタグを実行します。<r/>
 <r/>
 <bq>
-[if exp="f.flag1<b>==</b>2"]f.flag1 �� 2 �ł�[endif]<r/>
-[if exp="f.flag1<b>!=</b>2"]f.flag1 �� 2 �ł͂���܂���[endif]<r/>
+[if exp="f.flag1<b>==</b>2"]f.flag1 は 2 です[endif]<r/>
+[if exp="f.flag1<b>!=</b>2"]f.flag1 は 2 ではありません[endif]<r/>
 </bq>
 <r/>
-�@�ϐ��͎g��������Ŕ��ɋ��͂ȋ@�\�ƂȂ�܂��B<r/>
+　変数は使い方次第で非常に強力な機能となります。<r/>
 </para>
 
 </doc>

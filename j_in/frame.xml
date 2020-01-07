@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <doc>
 <anchor target="main"/>
 <keywords/>
-<title>KAG System リファレンス 目次</title>
+<title>KAG System 繝ｪ繝輔ぃ繝ｬ繝ｳ繧ｹ 逶ｮ谺｡</title>
 <para>
-<ptitle>チュートリアル</ptitle>
+<ptitle>繝√Η繝ｼ繝医Μ繧｢繝ｫ</ptitle>
 <link href="Intro"/><r/>
 <link href="Prepare"/><r/>
 <link href="Letter"/><r/>
@@ -24,12 +24,12 @@
 </para>
 
 <para>
-<ptitle>リファレンス</ptitle>
+<ptitle>繝ｪ繝輔ぃ繝ｬ繝ｳ繧ｹ</ptitle>
 <link href="Tags"/><r/>
 </para>
 
 <para>
-<ptitle>Tips/その他</ptitle>
+<ptitle>Tips/縺昴�ｮ莉�</ptitle>
 <link href="Misses"/><r/>
 <link href="SaveData"/><r/>
 <link href="GraphicFormats"/><r/>

@@ -1,196 +1,196 @@
-<?xml version="1.0" encoding="Shift_JIS" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <doc>
-<title>���������悤</title>
+<title>準備をしよう</title>
 
 <para>
-<ptitle>���������悤</ptitle>
-�@�܂��A�g���g�� SDK �̃t�H���_ ( <tt>krkr.eXe</tt> �̂���Ƃ��� ) �̉��ɁA�v���W�F�N�g���������t�H���_�����܂��傤�B�v���W�F�N�g���͉��ł������ł��B�������A"<tt>data</tt>" �Ƃ����t�H���_���͔����Ă������� ( <tt>data</tt> �Ƃ����t�H���_���ɂ���͕̂K�v�ɉ����Ĕz�z���鎞�ɂ������܂� )�B���̃t�H���_��<kw>�v���W�F�N�g�t�H���_</kw>�ƌĂт܂��B<r/>
+<ptitle>準備をしよう</ptitle>
+　まず、吉里吉里 SDK のフォルダ ( <tt>krkr.eXe</tt> のあるところ ) の下に、プロジェクト名をつけたフォルダを作りましょう。プロジェクト名は何でもいいです。ただし、"<tt>data</tt>" というフォルダ名は避けてください ( <tt>data</tt> というフォルダ名にするのは必要に応じて配布する時にそうします )。このフォルダを<kw>プロジェクトフォルダ</kw>と呼びます。<r/>
 <r/>
-�@����������A���̃t�H���_�̉��ɁAKAG �̃V�X�e�����R�s�[���܂��B<tt>template</tt> �Ƃ����t�H���_���A�_�E�����[�h���� KAG �� LZH �t�@�C����W�J����Ƃ���͂��ł��B����<b>���g</b>( <tt>template</tt> �t�H���_���Ƃł͂Ȃ��� ) �����̃v���W�F�N�g�t�H���_�ɃR�s�[���܂��B<r/>
+　そうしたら、そのフォルダの下に、KAG のシステムをコピーします。<tt>template</tt> というフォルダが、ダウンロードした KAG の LZH ファイルを展開するとあるはずです。その<b>中身</b>( <tt>template</tt> フォルダごとではなくて ) をこのプロジェクトフォルダにコピーします。<r/>
 <r/>
-�@�z�u�͈ȉ��̂悤�ɂȂ�܂��B<r/>
+　配置は以下のようになります。<r/>
 <descimg>
-<dititle>�t�@�C�����R�s�[����</dititle>
+<dititle>ファイルをコピーした</dititle>
 <img src="Folders.png"/>
 </descimg>
-�@����������A<tt>system</tt> �t�H���_�̒��� <tt>Config.~new</tt> �Ƃ����t�@�C��������܂��̂ŁA����� <tt><kw>Config.tjs</kw></tt> �ɉ������Ă��������B���ꂩ��A�e�L�X�g�G�f�B�^�� <tt>Config.tjs</tt> ���J���Ă��������B<r/>
+　そうしたら、<tt>system</tt> フォルダの中に <tt>Config.~new</tt> というファイルがありますので、それを <tt><kw>Config.tjs</kw></tt> に改名してください。それから、テキストエディタで <tt>Config.tjs</tt> を開いてください。<r/>
 <r/>
 <r/>
-�@<tt>Config.tjs</tt> �͂��̂ق��ɂ����낢��Ɛݒ肷��ӏ��������āA��X�����鎖�ɂȂ�Ǝv���܂��B�ڂ��������� <tt>Config.tjs</tt> ���ɏ����Ă���܂��̂ł�������Q�Ƃ��Ă��������B<r/>
+　<tt>Config.tjs</tt> はそのほかにもいろいろと設定する箇所があって、後々いじる事になると思います。詳しい説明は <tt>Config.tjs</tt> 内に書いてありますのでそちらを参照してください。<r/>
 <r/>
 <r/>
-�@�Ȃ��A�R�s�[�����t�H���_�̒��Ɂu�`���̃t�@�C���͍폜���Ă��܂��܂���`�v�Ƃ����t�@�C��������ꍇ������܂����A����̓A�[�J�C�u�W�J�\�t�g���A��̃t�H���_��W�J���Ȃ��ꍇ�����邽�߂ɒu���Ă���_�~�[�̃t�@�C���ł��B�폜���Ă��܂��܂��� ( ���̂܂܂ɂ��Ă����Ă����ɖ��͂���܂��� )�B<r/>
+　なお、コピーしたフォルダの中に「〜このファイルは削除してかまいません〜」というファイルがある場合がありますが、これはアーカイブ展開ソフトが、空のフォルダを展開しない場合があるために置いてあるダミーのファイルです。削除してかまいません ( そのままにしておいても特に問題はありません )。<r/>
 <note>
-�@KAG �̃A�b�v�f�[�g������ꍇ�́A��{�I�ɂ́A�V���� KAG �� <tt>system</tt> �t�H���_�̒��g���A������ <tt>system</tt> �t�H���_�ɏ㏑�����邾���� OK �ł��B�V����������̏���̎��s�Ŏ����I�ɌÂ� <tt>Config.tjs</tt> �̈��p���s���܂��̂ŁA��ʂ̎w���ɏ]���Ă��������B<r/>
+　KAG のアップデートをする場合は、基本的には、新しい KAG の <tt>system</tt> フォルダの中身を、既存の <tt>system</tt> フォルダに上書きするだけで OK です。新しくした後の初回の実行で自動的に古い <tt>Config.tjs</tt> の引継が行われますので、画面の指示に従ってください。<r/>
 </note>
 
 </para>
 
 <para>
-<ptitle>�t�H���_�̐���</ptitle>
-�@�R�s�[����ƁA�������̃t�H���_���ꏏ�ɃR�s�[����܂��B�e�t�H���_�̐��������܂��B<r/>
-�@�����̃t�H���_�̒ʂ�ɂ��Ȃ��Ă��{���͂����̂ł����A�t�H���_�̔z�u��������ꍇ�� <tt><kw>Initialise.tjs</kw></tt> �̓��e���ύX���Ȃ���΂Ȃ�Ȃ��ꍇ������܂��B�ڂ����� <tt>Initialise.tjs</tt> �̓��e�������������� ( .tjs �t�@�C���̓e�L�X�g�t�@�C���ł��̂ŁA�e�L�X�g�G�f�B�^�ŊJ���܂� )�B<r/>
-�@�Ȃ��A�����̃t�H���_�̂ǂ��ɉ������Ă��AKAG �̃t�@�C���w��ł̓t�H���_�����w�肷��K�v�͂���܂���B�ʂ� <tt>bgimage</tt> �t�H���_�� MIDI �t�@�C���������Ă��Ă����܂�Ȃ��ł��B�����A�֋X��A���炩���߃t�H���_������Ă��邾���ł��̂�<tt>(^^)</tt><r/>
+<ptitle>フォルダの説明</ptitle>
+　コピーすると、いくつかのフォルダも一緒にコピーされます。各フォルダの説明をします。<r/>
+　これらのフォルダの通りにしなくても本当はいいのですが、フォルダの配置を換える場合は <tt><kw>Initialise.tjs</kw></tt> の内容も変更しなければならない場合があります。詳しくは <tt>Initialise.tjs</tt> の内容をご覧ください ( .tjs ファイルはテキストファイルですので、テキストエディタで開きます )。<r/>
+　なお、これらのフォルダのどこに何を入れても、KAG のファイル指定ではフォルダ名を指定する必要はありません。別に <tt>bgimage</tt> フォルダに MIDI ファイルが入っていてもかまわないです。ただ、便宜上、あらかじめフォルダが作ってあるだけですので<tt>(^^)</tt><r/>
 <r/>
-�@�����̃t�H���_�͋�̂܂܂ł����͂���܂���B�K�v�̂Ȃ��t�H���_�͍폜���Ă� OK �ł��B<r/>
+　これらのフォルダは空のままでも問題はありません。必要のないフォルダは削除しても OK です。<r/>
 <r/>
 <dl>
-<dt><img src="folder.png"/> <kw>system �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>system フォルダ</kw></dt>
 <dd>
-�@<tt>system</tt> �t�H���_�ɂ� KAG �̓���ɕK�v�ȃV�X�e���������Ă��܂��B
+　<tt>system</tt> フォルダには KAG の動作に必要なシステムが入っています。
 </dd>
 
-<dt><img src="folder.png"/> <kw>scenario �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>scenario フォルダ</kw></dt>
 <dd>
-�@<tt>scenario</tt> �t�H���_�ɂ́A�V�i���I�t�@�C�������܂��B�V�i���I�t�@�C���́AKAG �ŉ�ʂɕ\�����镶�͂��w�肵����A�ǂ̉摜��\�����邩�Ȃǂ̎w�����^�O���g���Ė��ߍ��񂾁A�g���q�� .ks �̃t�@�C���ł��B<r/>
-�@���Ȃ݂ɋg���g���𗧂��グ���Ƃ��Ɏw�肷��̂́u�v���W�F�N�g�t�H���_�v�ł����ČX�̃V�i���I�t�@�C���ł͂���܂���B
+　<tt>scenario</tt> フォルダには、シナリオファイルを入れます。シナリオファイルは、KAG で画面に表示する文章を指定したり、どの画像を表示するかなどの指示をタグを使って埋め込んだ、拡張子が .ks のファイルです。<r/>
+　ちなみに吉里吉里を立ち上げたときに指定するのは「プロジェクトフォルダ」であって個々のシナリオファイルではありません。
 </dd>
 
-<dt><img src="folder.png"/> <kw>bgimage �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>bgimage フォルダ</kw></dt>
 <dd>
-�@�\������w�i�摜�����Ă����t�H���_�ł��B
+　表示する背景画像を入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>fgimage �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>fgimage フォルダ</kw></dt>
 <dd>
-�@�\������O�i�摜 (�L�����̗����|�[�Y�Ȃ�) �����Ă����t�H���_�ł��B
+　表示する前景画像 (キャラの立ちポーズなど) を入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>image �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>image フォルダ</kw></dt>
 <dd>
-�@���̑��̉摜 (���Ƃ��Έꖇ�G) �Ȃǂ����Ă����t�H���_�ł��B
+　その他の画像 (たとえば一枚絵) などを入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>bgm �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>bgm フォルダ</kw></dt>
 <dd>
-�@BGM (�o�b�N�O���E���h�~���[�W�b�N)�̃f�[�^�����Ă����t�H���_�ł��B
+　BGM (バックグラウンドミュージック)のデータを入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>sound �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>sound フォルダ</kw></dt>
 <dd>
-�@���ʉ��̃f�[�^�����Ă����t�H���_�ł��B
+　効果音のデータを入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>rule �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>rule フォルダ</kw></dt>
 <dd>
-�@���j�o�[�T���g�����W�V�����̃��[���摜�����Ă����t�H���_�ł��B
+　ユニバーサルトランジションのルール画像を入れておくフォルダです。
 </dd>
 
-<dt><img src="folder.png"/> <kw>others �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>others フォルダ</kw></dt>
 <dd>
-�@���̑��B
+　その他。
 </dd>
 
-<dt><img src="folder.png"/> <kw>video �t�H���_</kw></dt>
+<dt><img src="folder.png"/> <kw>video フォルダ</kw></dt>
 <dd>
-�@����t�@�C����u���Ă����܂��B
+　動画ファイルを置いておきます。
 </dd>
 </dl>
 </para>
 
 <para>
-<ptitle>������摜�`��</ptitle>
-�@KAG ( �Ƃ������g���g�� ) �ň�����摜�`���͈ȉ��̒ʂ�ł��B<r/>
-�@<link href="GraphicFormats"/> ���������������B<r/>
+<ptitle>扱える画像形式</ptitle>
+　KAG ( というか吉里吉里 ) で扱える画像形式は以下の通りです。<r/>
+　<link href="GraphicFormats"/> もご覧ください。<r/>
 <r/>
 <dl>
-<dt><kw>BMP �摜</kw></dt>
+<dt><kw>BMP 画像</kw></dt>
 <dd>
-�@�g���q�� .bmp �܂��� .dib �ł��B�g���g���ł́A�����k�� BMP �̂݃T�|�[�g���Ă��܂��B<r/>
-�@32bit (32bpp) �� BMP �̓A���t�@�`���l���t���r�b�g�}�b�v�Ƃ��Č��Ȃ���܂��B
+　拡張子は .bmp または .dib です。吉里吉里では、無圧縮の BMP のみサポートしています。<r/>
+　32bit (32bpp) の BMP はアルファチャネル付きビットマップとして見なされます。
 </dd>
-<dt><kw>JPEG �摜</kw></dt>
+<dt><kw>JPEG 画像</kw></dt>
 <dd>
-�@�g���q�� .jpeg �܂��� .jpg �ł��B�l�X�ȃO���t�B�b�N�c�[���̏o�͂��� JPEG �摜���������Ƃ��ł��܂��B
-</dd>
-
-<dt><kw>Portable Network Graphic �摜</kw> ( <kw>PNG �摜</kw> )</dt>
-<dd>
-�@�g���q�� .png �ł��B�l�X�ȃO���t�B�b�N�c�[���ŏo�͂ł��܂��B�A���t�@�`���l���ⓧ���F�w��ɂ��Ή����Ă��܂��B
+　拡張子は .jpeg または .jpg です。様々なグラフィックツールの出力する JPEG 画像を扱うことができます。
 </dd>
 
-<dt><kw>Entis Rasterized Image format �摜</kw> ( <kw>ERI �摜</kw> ) </dt>
+<dt><kw>Portable Network Graphic 画像</kw> ( <kw>PNG 画像</kw> )</dt>
 <dd>
-�@�g���q�� .eri �ł��BLeshade Entis �� �ɂ��J���E�l�Ă��ꂽ�t�摜���k�Z�p�E�t�H�[�}�b�g�ł��B�ʏ́u�b�������v�ł��B<r/>
-�@�摜�R���o�[�^�Ȃǂ̃��[�e�B���e�B�ނ́u�b�������club�v <at target="_top"  href="http://www.entis.jp/eri/">http://www.entis.gr.jp/eri/</at> �������ł��܂��B<r/>
+　拡張子は .png です。様々なグラフィックツールで出力できます。アルファチャネルや透明色指定にも対応しています。
+</dd>
+
+<dt><kw>Entis Rasterized Image format 画像</kw> ( <kw>ERI 画像</kw> ) </dt>
+<dd>
+　拡張子は .eri です。Leshade Entis 氏 により開発・考案された可逆画像圧縮技術・フォーマットです。通称「恵理ちゃん」です。<r/>
+　画像コンバータなどのユーティリティ類は「恵理ちゃんclub」 <at target="_top"  href="http://www.entis.jp/eri/">http://www.entis.gr.jp/eri/</at> から入手できます。<r/>
 <r/>
-�@���̉摜���k�`����p����ꍇ�́A���쌠�֌W��<b>����</b>���ӂ��K�v�ł��B�ڂ����� �g���g�� SDK Help �́u�g�p�������v����я�L�u�b������� club�v���������������B
+　この画像圧縮形式を用いる場合は、著作権関係で<b>特に</b>注意が必要です。詳しくは 吉里吉里 SDK Help の「使用条件等」および上記「恵理ちゃん club」をご覧ください。
 </dd>
 
-<dt><kw>TLG5 �摜</kw></dt>
+<dt><kw>TLG5 画像</kw></dt>
 <dd>
-�@�g���q�� .tlg �ł� ( .tlg5 �ł͂���܂��� )�B�g���g���Ǝ��̉t�摜���k�`���ŁA�����ɓW�J�ł���̂������ł��B�t���J���[�摜�ƁA�A���t�@�`�����l���t���̃t���J���[�摜�ɑΉ����Ă��܂��B
+　拡張子は .tlg です ( .tlg5 ではありません )。吉里吉里独自の可逆画像圧縮形式で、高速に展開できるのが特徴です。フルカラー画像と、アルファチャンネル付きのフルカラー画像に対応しています。
 </dd>
 
-<dt><kw>TLG6 �摜</kw></dt>
+<dt><kw>TLG6 画像</kw></dt>
 <dd>
-�@�g���q�� .tlg �ł� ( .tlg6 �ł͂���܂��� )�B�g���g���Ǝ��̉t�摜���k�`���ŁA�������k���Ɣ�r�I�����ȓW�J�������ł��B�t���J���[�摜�ƁA�A���t�@�`�����l���t���̃t���J���[�摜�ɑΉ����Ă��܂��B
+　拡張子は .tlg です ( .tlg6 ではありません )。吉里吉里独自の可逆画像圧縮形式で、高い圧縮率と比較的高速な展開が特徴です。フルカラー画像と、アルファチャンネル付きのフルカラー画像に対応しています。
 </dd>
 
-<dt>���̑��̉摜</dt>
+<dt>その他の画像</dt>
 <dd>
-�@<kw>Susie Plug-in</kw> ���g���΁A�����ȊO�̉摜�`���ɂ��Ή��ł��܂��BSusie Plug-in �́A�g���g���̎��s�\�t�@�C�� krkr.eXe �Ɠ����t�H���_���A���̉��� <tt>plugin</tt> �t�H���_���A�v���W�F�N�g�t�H���_�ɒu���Ă��������B(����ƁA��q�́u�v���O�C���ɂ��āv���Q�Ƃ��Ă������� )
+　<kw>Susie Plug-in</kw> を使えば、これら以外の画像形式にも対応できます。Susie Plug-in は、吉里吉里の実行可能ファイル krkr.eXe と同じフォルダか、その下の <tt>plugin</tt> フォルダか、プロジェクトフォルダに置いてください。(それと、後述の「プラグインについて」を参照してください )
 </dd>
 </dl>
 </para>
 
 <para>
-<ptitle>������I�[�f�B�I�`��</ptitle>
+<ptitle>扱えるオーディオ形式</ptitle>
 <r/>
-�@KAG ( �Ƃ������g���g�� ) �ň�����I�[�f�B�I�`���͈ȉ��̒ʂ�ł��B<r/>
-�@���ʉ��ɂ� PCM �݂̂��g�p�ł��܂��B<r/>
-�@BGM �ɂǂ̌`�����g�����ɂ���āAKAG �� Congif.tjs �̕ύX���K�v�ɂȂ�܂��B�ڂ����� Config.tjs �̓��e���������������B<r/>
+　KAG ( というか吉里吉里 ) で扱えるオーディオ形式は以下の通りです。<r/>
+　効果音には PCM のみを使用できます。<r/>
+　BGM にどの形式を使うかによって、KAG の Congif.tjs の変更が必要になります。詳しくは Config.tjs の内容をご覧ください。<r/>
 <r/>
 <dl>
 <dt><kw>PCM</kw></dt>
 <dd>
-�@�W���ł́A�����k�� RIFF-WAVE ( �g���q�� .wav ) ���Đ����邱�Ƃ��ł��܂��B<r/>
+　標準では、無圧縮の RIFF-WAVE ( 拡張子は .wav ) を再生することができます。<r/>
 <r/>
-�@�����k�� RIFF-WAVE �ȊO�ɂ� Ogg Vorbis ( *.ogg ) �ATCWF ( *.tcw )�AMicrosoft ADPCM ( *.wav ) �Ȃǂ��Đ��ł��܂����A�v���O�C�����K�v�ɂȂ�܂��B<r/>
-�@�v���O�C���͋g���g���Q�z�z�t�@�C���Ƃ��āAOgg Vorbis�p ( wuvorbis.dll )�ATCWF�p ( wutcwf.dll )�AMicrosoft ADPCM�p ( wumsadp.dll ) ���Y�t����Ă��܂��B<r/>
+　無圧縮の RIFF-WAVE 以外には Ogg Vorbis ( *.ogg ) 、TCWF ( *.tcw )、Microsoft ADPCM ( *.wav ) などを再生できますが、プラグインが必要になります。<r/>
+　プラグインは吉里吉里２配布ファイルとして、Ogg Vorbis用 ( wuvorbis.dll )、TCWF用 ( wutcwf.dll )、Microsoft ADPCM用 ( wumsadp.dll ) が添付されています。<r/>
 <r/>
-�@Ogg Vorbis �́A�����E�������t���[�̈��k���y�`���ŁAMP3 �Ɠ����̎g���������邱�Ƃ��ł��܂��B�G���R�[�_�� <at target="_top"  href="http://www.vorbis.com/">http://www.vorbis.com/</at> �������ł��܂��B<r/>
+　Ogg Vorbis は、特許・特許料フリーの圧縮音楽形式で、MP3 と同等の使い方をすることができます。エンコーダは <at target="_top"  href="http://www.vorbis.com/">http://www.vorbis.com/</at> から入手できます。<r/>
 <r/>
-�@���̂ق��̃v���O�C�� ( �����A����� ) ���g�p���čĐ��\�Ȍ`���𑝂₷���Ƃ��ł��܂��B�v���O�C���ɂ��Ă͊e�v���O�C���̐������̑��A��q�́u�v���O�C���ɂ��āv���Q�Ƃ��Ă��������B<r/>
+　そのほかのプラグイン ( もし、あれば ) を使用して再生可能な形式を増やすこともできます。プラグインについては各プラグインの説明書の他、後述の「プラグインについて」を参照してください。<r/>
 <r/>
-�@�����k Wave, Ogg Vorbis, TCWF, Microsoft ADPCM �̊e�`���́ALoop Tuner ( �T�|�[�g�y�[�W�������\ ) ��p���ă��[�v�̏����쐬���邱�Ƃɂ��A���[�v�ʒu���ׂ����w�肷�鎖���ł��܂��B����ɂ��A���[�v�̂Ȃ��ڂ����������Ȃ����[�v���t���\�ɂȂ�܂��B
+　無圧縮 Wave, Ogg Vorbis, TCWF, Microsoft ADPCM の各形式は、Loop Tuner ( サポートページから入手可能 ) を用いてループの情報を作成することにより、ループ位置を細かく指定する事ができます。これにより、ループのつなぎ目を感じさせないループ演奏が可能になります。
 </dd>
 
-<dt><kw>MIDI�V�[�P���X�f�[�^</kw></dt>
+<dt><kw>MIDIシーケンスデータ</kw></dt>
 <dd>
-�@Standerd MIDI Format ( �g���q�� .smf �܂��� .mid ) ���Đ����邱�Ƃ��ł��܂��B�N���X�t�F�[�h���s�������ꍇ�͎኱�̒��ӂ��K�v�ł��A�ڂ����� �g���g�� SDK Help �́uMIDI �T�E���h�o�b�t�@�ɂ��āv���������������B
+　Standerd MIDI Format ( 拡張子は .smf または .mid ) を再生することができます。クロスフェードを行いたい場合は若干の注意が必要です、詳しくは 吉里吉里 SDK Help の「MIDI サウンドバッファについて」をご覧ください。
 </dd>
 
 <dt><kw>CD-DA</kw></dt>
 <dd>
-�@<kw>CD-XA</kw> �� CD-DA �������Đ����邱�Ƃ��ł��܂��BCD-XA �́ACD-ROM �Ƃ��ăR���s���[�^�p�̃f�[�^�ƁACD-DA �Ƃ��ăI�[�f�B�I�̃f�[�^����������`���� CD �ł��B�g���g���́A�g�p�\�� CD-ROM �h���C�u�̌����� CD-ROM �̃R���s���[�^�p�̃f�[�^�Ƃ��Ẵ{�����[�����x�������Ɍ������s���̂ŁACD-XA �`���� CD �łȂ��ƈ������Ƃ��ł��܂���B ( �����Ƃ����̃`���[�g���A�����ōs���悤�Ƀh���C�u���𖾎�����Ȃ�΍Đ��ł��܂����E�E�E )
+　<kw>CD-XA</kw> の CD-DA 部分を再生することができます。CD-XA は、CD-ROM としてコンピュータ用のデータと、CD-DA としてオーディオのデータが同居する形式の CD です。吉里吉里は、使用可能な CD-ROM ドライブの検索に CD-ROM のコンピュータ用のデータとしてのボリュームラベルを元に検索を行うので、CD-XA 形式の CD でないと扱うことができません。 ( もっともこのチュートリアル内で行うようにドライブ名を明示するならば再生できますが・・・ )
 </dd>
 </dl>
 </para>
 
 <para>
-<ptitle>�����郀�[�r�[�`��</ptitle>
+<ptitle>扱えるムービー形式</ptitle>
 <dl>
 <dt><kw>MPEG I</kw></dt>
 <dd>
-�@��ʓI�� MPEG I �ɑΉ����Ă��܂��B<r/>
-�@�������A�z�z���ɂ́A <kw>krmovie.dll</kw> ���g���g�����s�\�t�@�C���Ɠ����ꏊ�ɒu���Ă����K�v������܂��B�܂��A���[�r�[�̍Đ��ɂ� DirectX 8 ���A�Đ���������ɕK�v�ɂȂ�܂��B<r/>
+　一般的な MPEG I に対応しています。<r/>
+　ただし、配布時には、 <kw>krmovie.dll</kw> を吉里吉里実行可能ファイルと同じ場所に置いておく必要があります。また、ムービーの再生には DirectX 8 が、再生する環境側に必要になります。<r/>
 <note>
-�@�I�[�f�B�I�ƃ}���`�v���N�V���O���s���Ă��Ȃ��A�r�f�I�݂̂� MPEG I �X�g���[���̊g���q�� .mpeg/.mpg �ł͂Ȃ��� .mpv �ɂ��Ă��������B�g���g���� �g���q�Ńr�f�I�`���𔻒f���܂��B<r/>
+　オーディオとマルチプレクシングを行っていない、ビデオのみの MPEG I ストリームの拡張子は .mpeg/.mpg ではなくて .mpv にしてください。吉里吉里は 拡張子でビデオ形式を判断します。<r/>
 </note>
 </dd>
 <dt><kw>WMV</kw></dt>
 <dd>
-�@WMV �ɑΉ����Ă��܂��B<r/>
-�@�Đ��\�� WMV �̃o�[�W�����́A�V�X�e���ɃC���X�g�[������Ă��� Media Player �� DirectX �Ɉˑ����܂����ADirectX 9 �ȍ~���C���X�g�[������Ă�����𐄏����܂��B
+　WMV に対応しています。<r/>
+　再生可能な WMV のバージョンは、システムにインストールされている Media Player や DirectX に依存しますが、DirectX 9 以降がインストールされている環境を推奨します。
 </dd>
 </dl>
 <note>
-�@�g���g����Releaser�ō쐬�����A�[�J�C�u����s�\�t�@�C�����Ƀr�f�I���i�[����Ă��Ă��A���ڃA�[�J�C�u���� (�e���|�����t�@�C������邱�ƂȂ�) ���[�r�[���Đ��ł��܂��B�������AReleaser �ł̓��[�r�[�t�@�C���́u���k���Ȃ��v�ɕ��ނ���K�v������܂� (�f�t�H���g�̕��ނł͈��k���Ȃ��ݒ�Ɏ����I�ɂȂ�܂� )�B<r/>
+　吉里吉里はReleaserで作成したアーカイブや実行可能ファイル内にビデオが格納されていても、直接アーカイブから (テンポラリファイルを介することなく) ムービーを再生できます。ただし、Releaser ではムービーファイルは「圧縮しない」に分類する必要があります (デフォルトの分類では圧縮しない設定に自動的になります )。<r/>
 </note>
 <note>
-�@AVI�`���̃��[�r�[�̓T�|�[�g�O�ł��B
+　AVI形式のムービーはサポート外です。
 </note>
 </para>
 
@@ -199,35 +199,35 @@
 <dl>
 <dt><kw>SWF</kw></dt>
 <dd>
-�@Macromedia Flash �̍Đ��ɑΉ����Ă��܂��B<r/>
-�@�������A�z�z���ɂ� <kw>krflash.dll</kw> ���g���g�����s�\�t�@�C���Ɠ����ꏊ�ɒu���Ă����K�v������܂��B�܂��ASWF �̍Đ��ɂ� Flash Player ���C���X�g�[������Ă���K�v������܂��B<r/>
-�@Flash �̍Đ����@�̓r�f�I�Ɠ��������ł��B
+　Macromedia Flash の再生に対応しています。<r/>
+　ただし、配布時には <kw>krflash.dll</kw> を吉里吉里実行可能ファイルと同じ場所に置いておく必要があります。また、SWF の再生には Flash Player がインストールされている必要があります。<r/>
+　Flash の再生方法はビデオと同じ扱いです。
 </dd>
 </dl>
 <note>
-�@Flash �ւ̑Ή��͊��S�Ȃ��̂ł͂���܂���B�L�[�{�[�h���͂�K�v�Ƃ���悤�� Flash �R���e���c�͐���ɓ��삵�Ȃ��\��������܂��B�܂��AXP3 �Ȃǂ̃A�[�J�C�u���� SWF �t�@�C�����i�[����Ă����ꍇ�́A��������e���|�����t�@�C���ɏ��������Ďg�p���邽�߁A�傫�� SWF �t�@�C�� ( 3�`5MB ���z������� ) �̓A�[�J�C�u�Ɋi�[���Ȃ������ǂ����Ǝv���܂��B<r/>
+　Flash への対応は完全なものではありません。キーボード入力を必要とするような Flash コンテンツは正常に動作しない可能性があります。また、XP3 などのアーカイブ内に SWF ファイルが格納されていた場合は、いったんテンポラリファイルに書きだして使用するため、大きな SWF ファイル ( 3〜5MB を越えるもの ) はアーカイブに格納しない方が良いかと思います。<r/>
 </note>
 <note>
-�@��҂� Flash �̐�����������Ă��Ȃ��̂Ńe�X�g���Ă��܂��񂪁AFlash �R���e���c�̐���� KAG �V�i���I�̔C�ӂ̃��x���ɃW�����v�����邱�Ƃ��ł��܂��BAction Get URL ( URL �\���̃A�N�V���� ) �ɁAURL �Ƃ��� <tt><b>FSCommand:Go</b></tt> ���A�\����̃E�B���h�E�Ƃ��� �u�V�i���I�t�@�C��/���x���v�̌`���ŕ�������w�肵�܂� ( ��: <tt><b>first.ks/label2</b></tt> )<r/>
-�@<tt><b>FSCommand:Eval</b></tt> �ŁA�\����E�B���h�E�Ƃ��� TJS �����w�肷��ƁA�A�N�V���������������Ƃ��ɔC�ӂ� TJS �������s���邱�Ƃ��ł��܂� ( �ϐ��ɒl��������Ƃ� )�B<r/>
-�@openvideo �^�O�܂��� playvideo �^�O�ŁAstorage �����Ńt�@�C�����ɑ��� ? �������A���̌�� Flash �ɓn���p�����[�^���w�肷�邱�Ƃ��ł��܂� ( �� : <tt>hoge.swf?name=value&amp;param=content</tt> )�B<r/>
+　作者は Flash の制作環境を持っていないのでテストしていませんが、Flash コンテンツの制御で KAG シナリオの任意のラベルにジャンプさせることができます。Action Get URL ( URL 表示のアクション ) に、URL として <tt><b>FSCommand:Go</b></tt> を、表示先のウィンドウとして 「シナリオファイル/ラベル」の形式で文字列を指定します ( 例: <tt><b>first.ks/label2</b></tt> )<r/>
+　<tt><b>FSCommand:Eval</b></tt> で、表示先ウィンドウとして TJS 式を指定すると、アクションが発生したときに任意の TJS 式を実行することができます ( 変数に値を代入するとか )。<r/>
+　openvideo タグまたは playvideo タグで、storage 属性でファイル名に続き ? を書き、その後に Flash に渡すパラメータを指定することができます ( 例 : <tt>hoge.swf?name=value&amp;param=content</tt> )。<r/>
 </note>
 </para>
 
 
 
 <para>
-<ptitle>������A�[�J�C�u�`��</ptitle>
+<ptitle>扱えるアーカイブ形式</ptitle>
 <dl>
-<dt><kw>XP3</kw> �� <kw>PEXP3</kw></dt>
+<dt><kw>XP3</kw> と <kw>PEXP3</kw></dt>
 <dd>
-�@�g���g���Ǝ��̃A�[�J�C�u�`���ł��� XP3 �`�����������Ƃ��ł��܂��B<r/>
-�@PEXP3 �́u�g���g�����s�\�t�@�C���v�� XP3 �`�����g���킳�����`���ŁA�P�̂̎��s�\�t�@�C�����ɍ�i��[�߂�����̂ł��B<r/>
-�@�ǂ���̌`�����g���g�� SDK �t���� Releaser �ō쐬�ł��܂��B
+　吉里吉里独自のアーカイブ形式である XP3 形式を扱うことができます。<r/>
+　PEXP3 は「吉里吉里実行可能ファイル」と XP3 形式が組合わさった形式で、単体の実行可能ファイル中に作品を納められるものです。<r/>
+　どちらの形式も吉里吉里 SDK 付属の Releaser で作成できます。
 </dd>
-<dt>���̑��̃A�[�J�C�u�`��</dt>
+<dt>その他のアーカイブ形式</dt>
 <dd>
-�@<kw>Susie Plug-in</kw> ���g���΁A�����ȊO�̃A�[�J�C�u�`���ɂ��Ή��ł��܂��B(��q�́u�v���O�C���ɂ��āv���Q�Ƃ��Ă������� )
+　<kw>Susie Plug-in</kw> を使えば、これら以外のアーカイブ形式にも対応できます。(後述の「プラグインについて」を参照してください )
 </dd>
 </dl>
 </para>
@@ -235,68 +235,68 @@
 
 
 <para>
-<ptitle>�����_�����O�ς݃t�H���g</ptitle>
-�@�����_�����O�ς݃t�H���g�́A����ґ��ō쐬�����t�H���g�f�[�^�ł��B������g�p���邱�ƂŁA��ɐ���ґ��̈Ӑ}�����t�H���g�ŁAOS ����ɉe������邱�ƂȂ��\�������邱�Ƃ��ł��܂��B�܂��A�O�������R�Ɏg�p���邱�Ƃ��ł��܂��B<r/>
-�@�����_�����O�ς݃t�H���g�� <kw>krkrfont.exe</kw> �ō쐬���܂��B�쐬����Ƃ��A�c�����Ɏg�p����t�H���g�� @ �̓��ɒ������t�H���g�ɂ��Ă��������B<r/>
+<ptitle>レンダリング済みフォント</ptitle>
+　レンダリング済みフォントは、制作者側で作成したフォントデータです。これを使用することで、常に制作者側の意図したフォントで、OS や環境に影響されることなく表示をすることができます。また、外字も自由に使用することができます。<r/>
+　レンダリング済みフォントは <kw>krkrfont.exe</kw> で作成します。作成するとき、縦書きに使用するフォントは @ の頭に着いたフォントにしてください。<r/>
 <r/>
-�@�����_�����O�ς݃t�H���g�t�@�C���� .tft �̊g���q�������Ă��܂��B�g�p����ꍇ�� others �t�H���_�Ȃǂɂ����Amappfont �^�O�ŔC�ӂ̃t�H���g�Ɋ��蓖�ĂĂ��������B<r/>
+　レンダリング済みフォントファイルは .tft の拡張子を持っています。使用する場合は others フォルダなどにおき、mappfont タグで任意のフォントに割り当ててください。<r/>
 <r/>
 <note>
-�@�����_�����O�ς݃t�H���g�쐬�c�[���̎g�����͋g���g�� SDK �w���v���Q�Ƃ��Ă��������B<r/>
+　レンダリング済みフォント作成ツールの使い方は吉里吉里 SDK ヘルプを参照してください。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>�v���O�C���ɂ���</ptitle>
-�@Susie-Plugin ���邢�� PCM �̍Đ��\�Ȍ`�����g�����邽�߂̃v���O�C���A�������͂��̑��̃v���O�C���́A<kw>loadplugin</kw> �^�O�Ŏw�肵�Ȃ��Ǝg�p�\�ɂȂ�܂���B<r/>
+<ptitle>プラグインについて</ptitle>
+　Susie-Plugin あるいは PCM の再生可能な形式を拡張するためのプラグイン、もしくはその他のプラグインは、<kw>loadplugin</kw> タグで指定しないと使用可能になりません。<r/>
 <r/>
-�@���Ƃ��΁Awuvorbis.dll ���g�������ꍇ�́A<r/>
+　たとえば、wuvorbis.dll を使いたい場合は、<r/>
 <r/>
 <bq>
 @loadplugin module=wuvorbis.dll<r/>
 </bq>
 <r/>
-�@�ƋL�q���܂��B<r/>
+　と記述します。<r/>
 <r/>
-�@�܂��A�v���O�C���́A
+　また、プラグインは、
 <ul>
-<li>�g���g�����s�\�t�@�C�� ( krkr.eXe ) �Ɠ����ꏊ</li>
-<li>���s�\�t�@�C���̂���t�H���_�ȉ��� <kw>plugin �t�H���_</kw></li>
-<li>�v���W�F�N�g�t�H���_</li>
+<li>吉里吉里実行可能ファイル ( krkr.eXe ) と同じ場所</li>
+<li>実行可能ファイルのあるフォルダ以下の <kw>plugin フォルダ</kw></li>
+<li>プロジェクトフォルダ</li>
 </ul>
-�@�̂����ꂩ�ɒu���Ă����K�v������܂��B�v���W�F�N�g�t�H���_�ɒu�����ꍇ�� Releaser �ŃA�[�J�C�u�����邢�͎��s�\�t�@�C�����Ɋ܂܂�鎖�ɂȂ�܂����A<b>��������܂���</b>�B�ł���΃A�[�J�C�u���ɂ͊܂߂��A�{�̂ƈꏏ�̃t�H���_�ɔz�u���Ĕz�z����̂��ǂ��ł��傤 ( �A�[�J�C�u���Ɋ܂߂�� CD-ROM �ォ�璼�ڎ��s����ۂȂǂɃG���[�ɂȂ�܂� )�B<r/>
+　のいずれかに置いておく必要があります。プロジェクトフォルダに置いた場合は Releaser でアーカイブ内あるいは実行可能ファイル内に含まれる事になりますが、<b>推奨されません</b>。できればアーカイブ内には含めず、本体と一緒のフォルダに配置して配布するのが良いでしょう ( アーカイブ内に含めると CD-ROM 上から直接実行する際などにエラーになります )。<r/>
 <r/>
-�@krmovie.dll �� krflash.dll �̓v���O�C���ł͂Ȃ��̂ŁAloadplugin �^�O�Ŏw�肷��K�v�͂���܂���B<r/>
+　krmovie.dll や krflash.dll はプラグインではないので、loadplugin タグで指定する必要はありません。<r/>
 <r/>
-�@�g���g�� SDK �w���v�́u�v���O�C���ɂ��āv���������������B<r/>
+　吉里吉里 SDK ヘルプの「プラグインについて」もご覧ください。<r/>
 <note>
-�@�g���g���P�̏ꍇ�͎��s�\�t�@�C���Ɠ����ꏊ�ɒu�������Ŏg�p�\�ɂȂ�܂������A�g���g���Q�̏ꍇ�͖����I�Ƀv���O�C�����w�肷��K�v������܂��B<r/>
+　吉里吉里１の場合は実行可能ファイルと同じ場所に置くだけで使用可能になりましたが、吉里吉里２の場合は明示的にプラグインを指定する必要があります。<r/>
 </note>
 </para>
 
 <para>
-<ptitle>UNICODE�ւ̑Ή�</ptitle>
-�@�V�i���I�t�@�C���� TJS �X�N���v�g��ҏW���邽�߁A�e�L�X�g�G�f�B�^���K�v�ɂȂ�܂��B<r/>
-�@���ʂ͕��i���g���̂��莝���̃e�L�X�g�G�f�B�^�Ŗ�肠��܂��񂪁A�g���g�����o�͂���R���\�[���̃��O�t�@�C���� KAG �̃Z�[�u�f�[�^�� UNICODE �ŏo�͂���邽�߁AUNICODE �e�L�X�g��ҏW�������ꍇ�� UNICODE �ɑΉ������e�L�X�g�G�f�B�^���K�v�ɂȂ�܂��B<r/>
-�@�܂��A�V�i���I�t�@�C���� TJS �X�N���v�g�ɓ��{�ꕶ�� (�����ł������{�ꕶ���Ƃ͓��{��� Windows �Œʏ�g���镶��) �ȊO���L�q�������ꍇ�́A������ UNICODE �e�L�X�g�ŋL�q����K�v������܂��B<r/>
+<ptitle>UNICODEへの対応</ptitle>
+　シナリオファイルや TJS スクリプトを編集するため、テキストエディタが必要になります。<r/>
+　普通は普段お使いのお手持ちのテキストエディタで問題ありませんが、吉里吉里が出力するコンソールのログファイルや KAG のセーブデータは UNICODE で出力されるため、UNICODE テキストを編集したい場合は UNICODE に対応したテキストエディタが必要になります。<r/>
+　また、シナリオファイルや TJS スクリプトに日本語文字 (ここでいう日本語文字とは日本語版 Windows で通常使える文字) 以外を記述したい場合は、これらを UNICODE テキストで記述する必要があります。<r/>
 <r/>
-�@���{�ꕶ���ȊO�̌����\�����邽�߂ɂ͂���������������܂��B<r/>
+　日本語文字以外の言語を表示するためにはいくつか条件があります。<r/>
 <r/>
 <ul>
-<li>�Y������V�i���I�t�@�C���� TJS �X�N���v�g�t�@�C���� UNICODE �ŋL�q����Ă��邱�� ( UNICODE �ŏ����ꂽ�e�L�X�g�t�@�C���Ƃ����łȂ��e�L�X�g�t�@�C�������݂��Ă��Ă����܂��܂��� )</li>
-<li>�����_�����O�ς݃t�H���g�t�@�C�����g��Ȃ��ꍇ�́A�Q�[�����v���C���鑤�� OS �� Windows NT �n ( Windows 2000 �� Windows XP, Vista �ȍ~ ) �ł��邱�� ( �����_�����O�ς݃t�H���g�t�@�C�����g�p����ꍇ�̓v���C���鑤�� OS �͊֌W����܂��� )</li>
-<li>�\�����悤�Ƃ��錾��̕������܂񂾃t�H���g���w�肷�邱��</li>
-<li>�\�����悤�Ƃ��錾�ꂪ������E�֏���(������)���ꂠ�邢�͏ォ�牺�֏���(�c����)����ł��邱��</li>
+<li>該当するシナリオファイルや TJS スクリプトファイルが UNICODE で記述されていること ( UNICODE で書かれたテキストファイルとそうでないテキストファイルが混在していてもかまいません )</li>
+<li>レンダリング済みフォントファイルを使わない場合は、ゲームをプレイする側の OS が Windows NT 系 ( Windows 2000 や Windows XP, Vista 以降 ) であること ( レンダリング済みフォントファイルを使用する場合はプレイする側の OS は関係ありません )</li>
+<li>表示しようとする言語の文字を含んだフォントを指定すること</li>
+<li>表示しようとする言語が左から右へ書く(横書き)言語あるいは上から下へ書く(縦書き)言語であること</li>
 </ul>
 <r/>
-�@�ǂ̏ꍇ���A���{��ȊO�̕�����\���ł���̂̓Q�[���̉�ʓ����炢�ŁA�E�B���h�E�̃^�C�g���o�[�⃁�j���[���ڂȂǁAWindows �W���̃��[�U�C���^�[�t�F�[�X���g�p���Ă��镔�ʂɂ͓��{�ꕶ�������\���ł��܂���B�܂��Aedit �^�O�Ő��������G�f�B�b�g�ɓ��͂ł��镶���͓��{�ꕶ�������ł��B<r/>
+　どの場合も、日本語以外の文字を表示できるのはゲームの画面内ぐらいで、ウィンドウのタイトルバーやメニュー項目など、Windows 標準のユーザインターフェースを使用している部位には日本語文字しか表示できません。また、edit タグで生成されるエディットに入力できる文字は日本語文字だけです。<r/>
 <r/>
 <note>
-�@��ł͓��{�ꕶ���Ə����܂������A��{�I�ɋg���g���͂��ꂪ���s����Ă��� OS �̌��ꃍ�P�[���ɏ]���܂� ( ���{��� Windows �Ȃ�� ���{�ꕶ���A������Windows�Ȃ�Β����Ȃ� )�B��������҂̓`�F�b�N���Ă܂���B<r/>
+　上では日本語文字と書きましたが、基本的に吉里吉里はそれが実行されている OS の言語ロケールに従います ( 日本語版 Windows ならば 日本語文字、中文版Windowsならば中文など )。ただし作者はチェックしてません。<r/>
 </note>
 <note>
-�@���݂̋g���g��/KAG �� Windows ��ł̂ݓ��삷�邽�߁A�Ƃ肠���� UNICODE �Ƃ����ƃ��g���G���f�B�A���� UTF-16 �̂��Ƃł� ( �������T���Q�[�g�y�A�͎g�p�ł��܂��� )�B<r/>
-�@�܂��A�g���g���́AUNICODE �e�L�X�g�̓��g���G���f�B�A���� UTF-16�ŁA����� BOM ( Byte Order Mark ) ���擪�ɂȂ��ƕ����R�[�h�𐳏�Ɏ��ʂł��܂��� ( ����ł̓r�b�O�G���f�B�A���� UTF-16 �͂��Ƃ������� BOM �����Ă����Ƃ��Ă��ǂݍ��ނ��Ƃ��ł��܂��� )�B<r/>
+　現在の吉里吉里/KAG は Windows 上でのみ動作するため、とりあえず UNICODE というとリトルエンディアンの UTF-16 のことです ( ただしサロゲートペアは使用できません )。<r/>
+　また、吉里吉里は、UNICODE テキストはリトルエンディアンの UTF-16で、さらに BOM ( Byte Order Mark ) が先頭にないと文字コードを正常に識別できません ( 現状ではビッグエンディアンの UTF-16 はたとえ正式な BOM がついていたとしても読み込むことができません )。<r/>
 </note>
 </para>
 
