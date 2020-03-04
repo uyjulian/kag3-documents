@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Use variables</title>
+
+<para>
+<ptitle>What is a variable?</ptitle>
+<r/>
+　Variables in KAG are<r/>
+<r/>
+・ Things to remember something<r/>
+<r/>
+　It's just<r/>
+<r/>
+　However, KAG is a system based on the scripting language <kw>TJS2</kw>, and the variables in KAG are TJS2 variables themselves, so they have quite powerful functions.<r/>
+<r/>
+　Since this is a tutorial, only the basic usage will be described. However, if you access the methods and properties inside KAG or use the Kirikiri features directly, it is almost <b>bog</b> state, Be careful of those who are easily fit (laughs).<r/>
+</para>
+
+<para>
+<ptitle>Variable type</ptitle>
+　There are three types of variables in KAG. Normal "<kw>game variables</kw>" that are saved and loaded along with saving and loading of bookmarks, and "<kw>system variables</kw>" that can always hold values regardless of bookmarking saving and loading, and "<kw>temporary variable</kw>" to temporarily store a value. "System variable" retains the value if you exit Kirikiri / KAG and start the same game again. "Temporary variable" loses its contents when quitting Kirikiri, and the value is not saved in bookmark.<r/>
+<r/>
+　Game variables are named <kw>f</kw>, system variables are named <kw>sf</kw>, and temporary variables are named <kw>tf</kw>.<r/>
+<r/>
+　In addition, a variable in KAG (or TJS2) can be a string or a number (the type of thing that is contained in a variable, such as a string or a number, is called a "<kw>type</kw>" ). Variables can be (almost) free lying, there is no limit to the number of variables, and there is no limit to the length of the string. Numbers can also handle real numbers.<r/>
+　Starting with KAG 3.x, "arrays" and "dictionary arrays" can be handled (not described here).<r/>
+<note>
+　The integer type of TJS2 has a precision of 64 bits, and the real type has a precision of double (double precision).<r/>
+　Strings handle zero-terminated UNICODE strings and have no length restrictions.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Names that can be used as variables</ptitle>
+　In Kirikiri / KAG, variables can be almost freely named. However, there is a rule about the names of variables that can be used by Kirikiri / KAG even though they are free.<r/>
+<r/>
+<dl>
+<dt>You can use half-width alphanumeric and full-width characters and _ (under bar) in variable names</dt>
+<dd>
+　<b>Variable names such as <tt>abc&amp;def</tt></b> or <b><tt>a-z</tt></b> are not allowed.<r/>
+　<b>You can include underscores like <b><tt>final_count</tt></b> or use double-byte characters like <b><tt>主人公の名前</tt></b> (All double-byte symbols can be used.)
+</dd>
+<dt>However, a single-byte number cannot come at the beginning of the variable name</dt>
+<dd>
+　<b>Variable names such as <b><tt>2friends</tt></b> and <b><tt>3com</tt></b> cannot be used.
+</dd>
+</dl>
+<r/>
+　Prefix these variables with <b><tt>f.</tt></b> for game variables and <b><tt>sf.</tt></b> for system variables, and <b><tt>tf.</tt></b> for temporary variables.
+<r/>
+　For example, the following variable names are possible:<r/>
+<r/>
+<tt> <b>f.flag1  sf.username  sf.playcount  tf.i  f.enokazu  f.variable_1 </b>...</tt><r/>
+<r/>
+　Also, the variables that are used for the first time are all in a special state: 0 as a numeric value, and '' (an empty string) as a character string. In general, use variables after putting them in first.<r/>
+<r/>
+<note>
+　You may see <b>kag</b> in addition to <b>f</b>, <b>sf</b>, and <b>tf</b>, but <b>kag</b> is used to directly access the inside of the KAG system.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Assignment to variables</ptitle>
+　Then, to assign a value to a variable, you typically use the <kw>eval</kw> tag. For example, if you want to substitute 1000 for <tt>f.flag1</tt>...<r/>
+<bq>
+[eval exp="<b>f.flag1 <kw>=</kw> 1000</b>"]<r/>
+</bq>
+　will do. That is, write = after the variable name, followed by the number you want to assign.<r/>
+<r/>
+　If you want to substitute a string,<r/>
+<bq>
+[eval exp="<b>f.variable_1 = 'String</b>"]<r/>
+</bq>
+　will do. That is, the string enclosed in '' after the = (note single and double quotes).<r/>
+　There is no such thing as a variable for a string or a variable for a number that changes its name depending on the type of what is put in the variable. It becomes the type of what you put.<r/>
+<r/>
+　If you want to copy the contents to another variable,<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag2</b>"]<r/>
+</bq>
+<r/>
+Like so.<r/>
+</para>
+
+<para>
+<ptitle>Operations on variables</ptitle>
+<r/>
+　If you want to calculate<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag1 + 1</b>"]<r/>
+</bq>
+　And so on. In this example, f.flag1 plus 1 is assigned to f.flag1 (that is, 1 is added to f.flag1).<r/>
+　In the exp attribute, write "<kw>expression</kw>" in TJS2.<r/>
+　Expressions include <kw>*</kw> (multiplication) <kw>/</kw> (division) <kw>+</kw> (addition) <kw>-</kw> (subtraction) The normal <kw>operator</kw> can be used normally (it has precedence like a mathematical expression). () Parentheses can be used normally.<r/>
+　For example,<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag1 + f.flag2 * f.flag3</b>"]<r/>
+</bq>
+　then, f.flag1 is the result of multiplying f.flag2 and f.flag3 and adding f.flag1.<r/>
+<r/>
+　Use / (slash) to divide.<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag2 / f.flag3</b>"]<r/>
+</bq>
+　In this case, f.flag2 is divided by f.flag3 and the result is f.flag1.<r/>
+　However, if it is not divisible, f.flag1 will be a real number, so if you want to round down and get an integer result, use the integer division operator \<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag2 \ f.flag3</b>"]<r/>
+</bq>
+　Is written.<r/>
+<r/>
+<r/>
+　Also, use the + operator to join strings.<r/>
+<r/>
+<bq>
+[eval exp="f.flag2 = 'hoge'"]<r/>
+[eval exp="f.flag3 = 'une'"]<r/>
+[eval exp="<b>f.flag1= f.flag2 + f.flag3</b>"]<r/>
+</bq>
+　In the above example, f.flag1 contains the string 'hogeune'.<r/>
+<r/>
+<note>
+　The grammar of TJS2 is very similar to (not exactly the same as) it was created with reference to JavaScript (ECMAScript).<r/>
+　The behavior of normal arithmetic operations is almost the same. The handling of strings and the mixed operation of strings and numbers are almost the same.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Strings and numbers</ptitle>
+　Variables in KAG are not divided into variables, such as variables for strings and variables for numbers, and their names do not change.<r/>
+　If you put a string, the variable will be a string, if you put a number, the variable will be a variable with a number.<r/>
+　The trouble is when you mix and use these. The + operator has various meanings and uses (^^;<r/>
+<r/>
+　The + operator is used to join strings and the + operator is used to add numbers, but when trying to add a string and a number, if either one is a string, one of the numbers is There is a rule that they are converted to strings and joined.<r/>
+<r/>
+　For example, if f.flag2 contains the string 'hoge' and f.flag3 contains the number 10,<r/>
+<bq>
+[eval exp="<b>f.flag1 = f.flag2 + f.flag2</b>"]<r/>
+</bq>
+　So, f.flag1 will contain the string 'hoge10'.
+<r/>
+<r/>
+　Also, you may want to convert a string to a number. For example, if you want to treat what you enter in the [input] tag as a number, you also use the + operator in this case. Use the + operator in front of the variable you want to be a number. For example, if f.flag1 contains the string '20',<r/>
+<r/>
+<bq>
+[eval exp="<b>f.flag1 = +f.flag1</b>"]<r/>
+</bq>
+<r/>
+　Would convert the contents of f.flag1 into a number and re-enter f.flag1. f.flag1 is the number 20.<r/>
+<r/>
+<note>
+　Care must be taken when the + operator follows. When writing an expression such as adding f.flag3 to f.flag2 with f.flag3 as a numeric value, it is an error to write <tt>f.flag2 ++ f.flag3</tt> (another operator called ++ Because there is). Write <tt>f.flag2 + + f.flag3</tt> with a space.<r/>
+</note>
+<note>
+　The unary + operator (+ for <tt>f.flag1 = + f.flag1</tt> in the example above) will return a result if the string contains decimal notation (such as 0.3) It is a real number. If you want to get only integers (if you want to truncate the decimal point), you can write int +. For example, in the above example, <tt>f.flag1 = int + f.flag1</tt>.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Variable deletion, etc.</ptitle>
+　Use <kw>delete</kw> to delete a variable. You can delete the variable with <b>delete variable_name</b>.<r/>
+　For example, if you want to delete <tt>f.flag1</tt>:<r/>
+<bq>
+[eval exp="<b>delete f.flag1</b>"]<r/>
+</bq>
+　will do.<r/>
+<r/>
+　Also, the <kw>clearvar</kw> tag removes all game variables.<r/>
+<r/>
+　In addition, you can use all the operators available in TJS2 and calculations such as trigonometric functions using math objects (I don't know if you need them). Please refer to TJS2 Help of Kirikiri SDK for details.<r/>
+<r/>
+　Multiple expressions can be written in one eval tag using <kw>,</kw> (comma).<r/>
+For example,<r/>
+<bq>
+[eval exp="f.first=true"]<r/>
+[eval exp="f.flag0=0"]<r/>
+[eval exp="f.flag1=0"]<r/>
+</bq>
+　Such an expression can be succinctly written as follows:<r/>
+<bq>
+[eval exp="f.first=true<b>,</b> f.flag0=0<b>,</b> f.flag1=0"]<r/>
+</bq>
+<r/>
+　Also, if you use <kw>iscript</kw> tag, you can write a series of eval tags concisely.<r/>
+<r/>
+　For example, the above expression:<r/>
+<r/>
+<bq>
+[iscript]<r/>
+f.first=true<b>;</b><r/>
+f.flag0=0<b>;</b><r/>
+f.flag1=0<b>;</b><r/>
+[endscript]<r/>
+</bq>
+<r/>
+　You can write Remember; (semicolon) after each expression.<r/>
+　Thus, using, (comma) or iscript is much faster than not using it.<r/>
+</para>
+
+<para>
+<ptitle>Display the contents of a variable</ptitle>
+　If you want to display the contents of a variable in a scenario, use the <kw>emb</kw> tag.<r/>
+　For example:<r/>
+<bq>
+[wait time=200]<r/>
+*start<r/>
+[cm]<r/>
+[eval exp="f.number=200"][eval exp="f.mojiretu='String'"]<r/>
+Contents of f.number: [emb exp="f.number"][l][r]<r/>
+Contents of f.mojiretu: [emb exp="f.mojiretu"][l][r]<r/>
+</bq>
+<r/>
+　When executed,<r/>
+<r/>
+Contents of f.number: 200<r/>
+Contents of f.mojiretu: String<r/>
+<r/>
+　should be displayed.<r/>
+</para>
+
+<para>
+<ptitle>entity</ptitle>
+　An entity is the ability to replace the value of an attribute of another tag with the contents of a variable.<r/>
+　For the attribute value, write <kw>&amp;</kw> followed by the variable name.<r/>
+<bq>
+[wait time=200]<r/>
+*start<r/>
+[cm]<r/>
+[eval exp="f.fontsize=60"]<r/>
+[font size="&amp;f.fontsize"]Size 60 characters[resetfont]<r/>
+</bq>
+<r/>
+　In this case, the value of 60 assigned to f.fontsize replaces the value of the size attribute of the font tag.<r/>
+<r/>
+　In fact, the entity is a function that executes the contents of the attribute value written after &amp; as a TJS2 expression and replaces the attribute value with the result. Therefore, you can write a TJS2 expression after &amp;.<r/>
+</para>
+
+
+<para>
+<ptitle>Determining conditions</ptitle>
+　You can use the following operators to determine whether a variable is equal to a value.<r/>
+<bq>
+a<kw>==</kw>b    true if a is equal to b<r/>
+a<kw>!=</kw>b    true if a is not equal to b<r/>
+a<kw>&lt;</kw>b     true if a is less than b<r/>
+a<kw>&gt;</kw>b     true if a is greater than b<r/>
+</bq>
+<r/>
+　You can also use >= and &lt;= (same or greater, same or less).<r/>
+　Such conditional judgment is mainly used in the if tag.<r/>
+<r/>
+　The <kw>if</kw> tag executes the text or tag up to the endif tag only when the expression specified by exp indicates true.<r/>
+<r/>
+<bq>
+[if exp="f.flag1<b>==</b>2"]f.flag1 is 2[endif]<r/>
+[if exp="f.flag1<b>!=</b>2"]f.flag1 is not 2[endif]<r/>
+</bq>
+<r/>
+　Variables can be very powerful depending on how you use them.<r/>
+</para>
+
+</doc>

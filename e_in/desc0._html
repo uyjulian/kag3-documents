@@ -1,0 +1,19 @@
+<table width="100%">
+<tr><td bgcolor="#ffc0c0"><span class="script">
+*part_1<br />
+@cm<br />
+Here is part one.[l][r]<br />
+Usually, up to the next label is one "part".[p][r]<br />
+</span></td></tr>
+<tr><td bgcolor="#c0ffc0"><span class="script">
+*part_2<br />
+@cm<br />
+Here is part two.[p][r]<br />
+</span></td></tr>
+<tr><td bgcolor="#c0c0ff"><span class="script">
+*part_3<br />
+@cm<br />
+Here is part three.[l][r]<br />
+[[s]Even a tag is one "part".[s]<br />
+</span></td></tr>
+</table>

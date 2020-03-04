@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>Use BGM</title>
+
+<para>
+<ptitle>Preparation for BGM</ptitle>
+　KAG can play Wave (uncompressed Wave and Ogg Vorbis, etc.), MIDI sequence data and CD-XA audio tracks as BGM.<r/>
+　Read <link href="Prepare"/> to get ready.<r/>
+<r/>
+　In this case (it's a tutorial-like thing), we'll use a CD-DA method, so in Config.tjs, set <tt>type</tt> to <tt>"CDDA"</tt>, and set <tt>doubleBuffered = false</tt>.<r/>
+<r/>
+　Oh, do I need to specify <tt>cdVolume</tt>? Is it not CD-XA? So, this time, we will specify the CD-ROM drive here, so there is no need to set <tt>cdVolume</tt>, and we have the information needed to search for the drive There is no need to use CD-XA.<r/>
+<r/>
+　Now, insert the appropriate music CD into the CD-ROM drive.<r/>
+</para>
+
+<para>
+<ptitle>Let's ring it for now</ptitle>
+　Use the tag playbgm to play. Use the stopbgm tag to stop playback. Then ...<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[playbgm storage="e:3"]</b><r/>
+Playing... Click to stop.[l]<r/>
+<b>[stopbgm]</b><r/>
+</bq>
+　By the way, <tt>e:3</tt> is specified in the attribute storage of playbgm here. <tt>e:</tt> is the CD-ROM drive letter for playing the CD-ROM, so please match it to your environment. The next three are tracks to play.<r/>
+<r/>
+　Here, <tt>e:</tt> is attached because it is a tutorial, but originally the CD with the volume label specified by <tt>cdVolume</tt> in Config.tjs is played. If you just write the track number without specifying the drive to be played as <tt>e:</tt>, KAG will use the CD-ROM with the volume label specified by <tt>cdVolume</tt> Go find a drive.<r/>
+<r/>
+　If you want to play back a non-CD-DA format, such as MIDI sequence data, you only need to specify the file name you want to play back in the storage attribute.<r/>
+</para>
+
+<para>
+<ptitle>Fade-in / fade-out</ptitle>
+　To perform fade-in and fade-out, use the fadeinbgm and fadeoutbgm tags.<r/>
+　At this time, there is a time attribute, which specifies the time during the fade-in and fade-out.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[fadeinbgm storage="e:3" time=5000]</b><r/>
+Playing... Click to stop.[l]<r/>
+<b>[fadeoutbgm time=5000]</b><r/>
+</bq>
+　Note that these tags do not wait for the end of the fade-in / fade-out, so you must use the [wb] tag to wait for the end.<r/>
+</para>
+
+<para>
+<ptitle>Other background music tags</ptitle>
+　There is a tag called xchgbgm that replaces the background music. Crossfade is also possible for Wave and MIDI systems (see Config.tjs).<r/>
+<r/>
+　Please note that if you use OggVorbis, TCWF or Micsoroft ADPCM in Wave type, you need to specify the plug-in (see <link href="Prepare"/>). This is the same for sound effects.<r/>
+<r/>
+<note>
+　To perform a crossfade in the MIDI system, you need data that is "created to be crossfaded" (for example, do not use the same channel for two songs playing at the same time). However, it is not very realistic.<r/>
+</note>
+</para>
+
+</doc>
+

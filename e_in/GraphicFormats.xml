@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>About image format</title>
+
+<para>
+<ptitle>Features of each image format</ptitle>
+　Kirikiri / KAG can use various image formats, but each has its own features.<r/>
+<dl>
+<dt><kw>BMP image</kw></dt>
+<dd>
+　Kirikiri supports only uncompressed BMP. The BMP used by Kirikiri cannot be RLE-compressed, and the compression rate does not increase very much if you try to compress it when distributing, so it will be large in terms of capacity, but it will be the fastest to read.
+</dd>
+<dt><kw>JPEG image</kw></dt>
+<dd>
+　JPEG provides a (usually) lossy compression method. Due to its characteristics, once compressed, it does not completely return to the original image even if expanded. Specifically, the sharpness of the image is lost, and debris appears around the edges and sharp edges of the image. However, the compression ratio is good, and garbage due to the irreversible compression characteristics is hardly noticeable in natural images such as photo capture and landscape images, so it is suitable for background images and single images. Not very suitable for saving foreground images (if you save the mask image in JPEG, use grayscale).
+</dd>
+
+<dt><kw>Portable Network Graphic image</kw> (<kw>PNG image</kw>)</dt>
+<dd>
+　Unlike JPEG, it performs lossless compression. Compression does not reduce the data size as much as JPEG, but the image quality does not degrade with compression. Suitable for CG. One channel can have alpha channel (transparency) information.<r/>
+　Also, the rule image used for layer transition <comlink href="Trans.html"/> should be compressed in PNG.
+</dd>
+
+<dt><kw>Entis Rasterized Image format image</kw> ( <kw>ERI image</kw> ) </dt>
+<dd>
+　It is mainly used for full-color images, but it features compression at a remarkably high compression ratio (about 50 to 70% the size of PNG) for lossless compression and high-speed decompression for that compression ratio. One channel can have alpha channel (transparency) information.
+</dd>
+
+<dt><kw>TLG5 image</kw></dt>
+<dd>
+　TLG5 images have a .tlg extension (not .tlg5). I think some places are just called TLG.<r/>
+　Only full-color images are supported. Performs lossless compression. One channel can have alpha channel (transparency) information.<r/>
+　The compression ratio is not very high, and the file size is about 30% larger than PNG, but it has the characteristic that it can be expanded at high speed. Images can be expanded at 4 to 5 times the speed of PNG.
+</dd>
+
+<dt><kw>TLG6 image</kw></dt>
+<dd>
+　TLG6 images have the same .tlg extension as TLG5 (but not .tlg6). This image format has been available since Kirikiri 2 Version 2.21 beta 3, and features high compression ratio and high speed expansion. The size is about 10 to 40% smaller than PNG, and the development speed is more than twice as fast as PNG. It cannot handle images with grayscale or palettes like PNG, but full color images and full color images with alpha channel can be used as a substitute for PNG.<r/>
+　Only full-color images are supported. Performs lossless compression. One channel can have alpha channel (transparency) information.<r/>
+</dd>
+
+</dl>
+<r/>
+</para>
+
+<para>
+<ptitle>Comparison of each image format</ptitle>
+<dl>
+<dt>Deployment speed</dt>
+<dd>
+　The following is a comparison of each format in terms of development speed.<r/>
+<r/>
+　(fast)    BMP > TLG5 > JPEG > TLG6 > ERI > PNG     (slow)<r/>
+<r/>
+　By the way, BMP classifies Releaser as "compress" by default, but when this compression is performed, the decompression speed is about ERI. If speed is important, Releaser should classify it as "no compression".<r/>
+　However, BMP has a large file size. I think that there is not much difference if reading from the hard disk of a recent PC, but when reading from an old HDD or CD-ROM, please note that the smaller the file size, the faster the reading speed may be.
+</dd>
+
+<dt>size</dt>
+<dd>
+　Comparing the size of each format after compression is as follows (it also depends on the image and compression rate settings).<r/>
+<r/>
+　(large)    BMP > TLG5 > PNG > ERI > TLG6 > JPEG     (small)
+</dd>
+
+<dt>image quality</dt>
+<dd>
+　The image quality is as follows because only JPEG is lossy compression and others are lossless compression.<r/>
+<r/>
+　(high)    BMP = PNG = ERI = TLG5 = TLG6  > JPEG     (low)
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Selection by application</ptitle>
+<dl>
+<dt>background image</dt>
+<dd>
+　If you don't care about file size, BMP is the fastest and does not degrade image quality.<r/>
+　TLG5 is a good choice if it's fast and you don't care about the file size, but you don't want to lose the image quality and you don't want to compress it completely.<r/>
+　I'm a little concerned about file size, but if you don't want to lose the image quality, TLG6, ERI or PNG would be better.<r/>
+　If you are worried about the file size and can't help but degrade the image quality, JPEG is a good choice.
+</dd>
+
+<dt>Foreground image (standing picture, etc.)</dt>
+<dd>
+　This is the same as the background image.<r/>
+　However, JPEG cannot handle transparency information in one file, so it must be handled in main / mask separation format.
+</dd>
+
+<dt>Image in demo scene</dt>
+<dd>
+　Especially for demo scenes with a variety of dynamic expressions, it is better to use BMP, which has a fast development speed (however, the file size and read time are as described above).<r/>
+　However, since BMP becomes large, it is good to compress with TLG5. TLG5 can be deployed at high speed, so I think it is easy to use for such applications.<r/>
+　If you don't care about image quality, JPEG is a good option. JPEG decompression is faster than expected and can be expanded in less than half the time of ERI and PNG. Also, if you use it for dynamic expression, you will hardly notice the deterioration of image quality.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Benefits of the alpha channel</ptitle>
+　Kirikiri can handle images with alpha channel (transparency) as foreground images. The traditional color key transparency can only handle two states: completely transparent or completely opaque.<r/>
+　By using the alpha channel, you can smoothly blend the edges of transparent and opaque parts with the background, and create translucent parts in the image.<r/>
+<r/>
+<descimg>
+<dititle>Color key transparency and alpha channel transparency</dititle>
+<img src="kiri_a.png"/><img src="kiri_aa.png"/>
+</descimg>
+　The left is the color key and the right is the transparency through the alpha channel.<r/>
+　If you enlarge the edge with the transparent part, you can see. On the right side, the ribbon can be made translucent.<r/>
+</para>
+
+<para>
+<ptitle>Image format converter</ptitle>
+　Images can be easily converted using the image format converter (krkrtpc.exe) included with the Kirikiri SDK. Photoshop data (PSD) can also be used for input. This makes it easy to create a foreground image for Kirikiri from Photoshop data. In addition, this tool can also convert to TLG5 / TLG6, which is the original compression format of Kirikiri.<r/>
+　See the Kirikiri SDK Help for details.<r/>
+<note>
+　Currently, ERI input / output is not supported.<r/>
+</note>
+</para>
+
+</doc>
+

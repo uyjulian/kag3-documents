@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Common mistakes</title>
+
+<para>
+<ptitle>Common mistakes</ptitle>
+　Here are some common mistakes and inconveniences.<r/>
+<r/>
+<dl>
+<dt>Is it okay to skip?</dt>
+<dd>
+　KAG enters skip mode by clicking, "going to the next choice", holding down the space or enter key. At this time, for example, if the skip operation is not prohibited by the time limit option, the time will be over immediately (To avoid this, when the time limit option comes, @cancelskip and @clickskip enabled=false, @clickskip enabled=true when you are done with your choices). It is also necessary to consider the implications of skipping in staff rolls and demo scenes.<r/>
+　"Automatically read" can also be a problem if you use a p tag or the like just to wait for a click. Use the cancelautomode tag to forcibly cancel "read automatically".<r/>
+<r/>
+　Also, if there is no wt tag corresponding to the trans tag, there will be a problem if there is no <b>tag that takes some time to process and a corresponding "wait" tag</b> There is no problem if you always use these as a set by using macros, etc., but you need to be especially careful when using multiple "tags that take some time" and overlapping them.
+</dd>
+<dt>Is it okay to follow the bookmark?</dt>
+<dd>
+　There is a habit of saving and loading related to KAG, and it is not possible to restore the contents described in the message layer when following a bookmark, and execution always starts with all message layers cleared. In addition, transitions, background music, and sound effect fades are all stopped and started. They all start with a "saveable label", so <b>is there a tag immediately after the saveable label, such as a cm or ct tag, to clear the message layer (or a saveable label? Is it safe to start with all message layers cleared at position)</b> and <b>If the saveable label is transitioning or fading out</b> Please check carefully.
+</dd>
+<dt>Is the state restored?</dt>
+<dd>
+　For example, if you create a CG mode and change the state of the message layer etc. for the CG mode while in the CG mode, you must of course return to the original state when exiting the CG mode.
+</dd>
+<dt>Is message history OK?</dt>
+<dd>
+　It is a good idea to confirm what is displayed in the message history.
+</dd>
+<dt>Is the weight changed depending on the machine specifications?</dt>
+<dd>
+　If you do not specify the mode attribute, wait simply waits for the time specified by the time attribute. So trying to show something every second<r/>
+<bq>
+@wait time=1000<r/>
+@display_something<r/>
+@wait time=1000<r/>
+@display_something<r/>
+@wait time=1000<r/>
+@display_something<r/>
+</bq>
+　<b>Not exactly every second</b>. wait itself waits for one second, but does not consider the time spent in "display_something".<r/>
+　So if you want to do this exactly every second, use the resetwait tag and wait mode=until,<r/>
+<bq>
+@resetwait<r/>
+@wait mode=until time=1000<r/>
+@display_something<r/>
+@wait mode=until time=2000<r/>
+@display_something<r/>
+@wait mode=until time=3000<r/>
+@display_something<r/>
+</bq>
+　will do. It feels like waiting for the time from the time origin specified by resetwait in wait mode=until.
+</dd>
+</dl>
+</para>
+
+</doc>

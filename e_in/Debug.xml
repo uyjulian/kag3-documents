@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Let's debug</title>
+
+<para>
+<ptitle>Debug support function</ptitle>
+　There are several debugging support functions, including those provided by Kirikiri and KAG.<r/>
+</para>
+
+<para>
+<ptitle>Debug menu</ptitle>
+　If <tt>debugMenu.visible</tt> of Config.tjs is set to true, the "debug" menu will be displayed. The items on this menu are explained.<r/>
+<dl>
+<dt><kw>Reload scenario</kw></dt>
+<dd>
+　Reload the current scenario file. Execution starts again from the "label that can be saved" that has just passed. After a fatal bug has occurred, it may not be possible to reload normally.
+</dd>
+<dt><kw>controller</kw></dt>
+<dd>
+　The "controller" of the Kirikiri body is displayed. It can also be displayed by Shift + F1. You can quit Kirikiri by pressing the X with a cross on the rightmost of the buttons on this controller.
+</dd>
+<dt>console</dt>
+<dd>
+　Displays the console (described below).
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>console</ptitle>
+　The console is the place where messages output by Kirikiri and KAG are displayed one after another. It can be displayed by Shift + F4 etc. If something goes wrong, this console may display information that might help you solve the problem.<r/>
+<r/>
+　In addition, there is an input field at the bottom of the console, you can execute any TJS expression on the spot and check the result.<r/>
+<r/>
+　For example, if you want to check the contents of the variable <tt>f.flag</tt>,<r/>
+<bq>
+f.flag<r/>
+</bq>
+　And press enter, the console<r/>
+<bq>
+15:25:04 console: f.flag = (int)1<r/>
+</bq>
+　is displayed (this is an example). In this way, you can check the contents of the variables on the spot.<r/>
+<note>
+　An (int) before the value indicates that the value is an integer. Similarly, (real) represents a real number, and (string) represents a string. (void) indicates that the variable is undefined or that void itself is assigned.<r/>
+</note>
+<r/>
+　If you want to substitute 0 for <tt>f.flag</tt>,<r/>
+<bq>
+f.flag=0<r/>
+</bq>
+　And press enter, you can substitute 0 for f.flag at that point.<r/>
+<note>
+　The console was called Debug Message Stream (DMS) in Kirikiri 1.
+</note>
+</para>
+
+<para>
+<ptitle>Other debugging tools</ptitle>
+　The <kw>trace</kw> tag outputs the contents of the variable to the console.<r/>
+　If the program stops responding, you may be able to forcibly shut down Kirikiri by pressing and holding <tt>Ctrl + Alt + F12</tt> for more than 2 seconds.<r/>
+</para>
+
+</doc>
+

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>About right click subroutine</title>
+
+<para>
+<ptitle>Right-click subroutine</ptitle>
+　A KAG subroutine called by a right mouse click.<r/>
+　Used to display the save / load screen by right-clicking.<r/>
+</para>
+
+<para>
+<ptitle>Anyway, for example</ptitle>
+　Use the rclick tag to create a right-click subroutine. This tag allows you to specify whether to call the specified subroutine when right-clicked, or to jump to the specified label.<r/>
+<r/>
+　For example, suppose you wrote the following to rclick.ks:<r/>
+<example>
+*rclick<r/>
+@rclick jump=true storage="rclick.ks" target="*exit" enabled=true<r/>
+@current layer=message1<r/>
+@layopt layer=message0 page=fore visible=false<r/>
+@layopt layer=message1 page=fore visible=true<r/>
+@er<r/>
+This is inside the right click routine.<r/>
+[s]<r/>
+<r/>
+*exit<r/>
+@layopt layer=message1 page=fore visible=false<r/>
+@layopt layer=message0 page=fore visible=true<r/>
+@current layer=message0<r/>
+@rclick call=true storage="rclick.ks" target="*rclick" enabled=true<r/>
+@return<r/>
+</example>
+　So, for example, first.ks would contain the following line:
+<bq>
+@rclick call=true storage="rclick.ks" target="*rclick" enabled=true<r/>
+</bq>
+<r/>
+　Then right click will call *rclick in rclick.ks.<r/>
+　In the above example, rclick.ks is set to jump to *exit when right-clicked first. This allows you to go back by right-clicking in the right-click subroutine.<r/>
+　Hiding message layer 0. This makes it impossible to select an option even if some options are displayed on message layer 0.<r/>
+　Display message layer 1 and display "This is in the right click routine." And stop there.<r/>
+</para>
+
+<para>
+<ptitle>Difficult example</ptitle>
+　The right-click subroutine is a complicated example, but it allows you to view the message history and save / load.
+<example>
+*sub1<r/>
+@tempsave<r/>
+; ↑Save state temporarily<r/>
+@history output=false<r/>
+; ↑Disable output to message history<r/>
+@mapdisable layer=0 page=fore<r/>
+; ↑If you are using a clickable map, disable it this way<r/>
+@backlay<r/>
+@layopt layer=message1 page=back visible=true<r/>
+; ↑Use message layer 1 in this subroutine<r/>
+@layopt layer=message0 page=back visible=false<r/>
+@current layer=message1 page=back<r/>
+@position left=0 top=0 width=640 height=480<r/>
+@eval exp="f.r_first=true"<r/>
+; ↑Only perform transitions when entering this routine<r/>
+;<r/>
+*menu<r/>
+@er<r/>
+@nowait<r/>
+[link target=*hide]Dismiss message[endlink][r]<r/>
+[link target=*history]View message history[endlink][r]<r/>
+[link target=*load]Follow the bookmark[endlink][r]<r/>
+[link target=*save]Insert a bookmark[endlink][r]<r/>
+[link target=*gotostart]Return to the beginning[endlink][r]<r/>
+[link target=*ret]Return[endlink][r]<r/>
+@endnowait<r/>
+@current layer=message1 page=fore<r/>
+@if exp="f.r_first"<r/>
+@trans time=500 rule=trans1 vague=128<r/>
+@wt<r/>
+@endif<r/>
+@eval exp="f.r_first=false"<r/>
+@s<r/>
+<r/>
+*ret<r/>
+; Return from subroutine<r/>
+@tempload bgm=false se=false backlay=true<r/>
+@trans time=500 rule=trans1 vague=128<r/>
+@wt<r/>
+@return<r/>
+<r/>
+*hide<r/>
+; Dismiss message<r/>
+@hidemessage<r/>
+@jump target=*menu<r/>
+<r/>
+*history<r/>
+; View message history<r/>
+@showhistory<r/>
+@jump target=*menu<r/>
+<r/>
+*load<r/>
+; Follow the bookmark<r/>
+; emb exp= ... See <link href="TJSTips"/> for more information<r/>
+@er<r/>
+@nowait<r/>
+[link target=*lt0][emb exp="kag.getBookMarkPageName(0)"][endlink][r]<r/>
+[link target=*lt1][emb exp="kag.getBookMarkPageName(1)"][endlink][r]<r/>
+[link target=*lt2][emb exp="kag.getBookMarkPageName(2)"][endlink][r]<r/>
+[link target=*lt3][emb exp="kag.getBookMarkPageName(3)"][endlink][r]<r/>
+[link target=*lt4][emb exp="kag.getBookMarkPageName(4)"][endlink][r]<r/>
+[link target=*menu]Return[endlink][r]<r/>
+@endnowait<r/>
+@s<r/>
+<r/>
+*lt0<r/>
+@load place=0 ask=true<r/>
+@jump target=*menu<r/>
+*lt1<r/>
+@load place=1 ask=true<r/>
+@jump target=*menu<r/>
+*lt2<r/>
+@load place=2 ask=true<r/>
+@jump target=*menu<r/>
+*lt3<r/>
+@load place=3 ask=true<r/>
+@jump target=*menu<r/>
+*lt4<r/>
+@load place=4 ask=true<r/>
+@jump target=*menu<r/>
+<r/>
+*save<r/>
+; Insert a bookmark<r/>
+; emb exp= ... See <link href="TJSTips"/> for more information<r/>
+@er<r/>
+@nowait<r/>
+[link target=*st0][emb exp="kag.getBookMarkPageName(0)"][endlink][r]<r/>
+[link target=*st1][emb exp="kag.getBookMarkPageName(1)"][endlink][r]<r/>
+[link target=*st2][emb exp="kag.getBookMarkPageName(2)"][endlink][r]<r/>
+[link target=*st3][emb exp="kag.getBookMarkPageName(3)"][endlink][r]<r/>
+[link target=*st4][emb exp="kag.getBookMarkPageName(4)"][endlink][r]<r/>
+[link target=*menu]Return[endlink][r]<r/>
+@endnowait<r/>
+@s<r/>
+<r/>
+*st0<r/>
+@save place=0 ask=true<r/>
+@jump target=*menu<r/>
+*st1<r/>
+@save place=1 ask=true<r/>
+@jump target=*menu<r/>
+*st2<r/>
+@save place=2 ask=true<r/>
+@jump target=*menu<r/>
+*st3<r/>
+@save place=3 ask=true<r/>
+@jump target=*menu<r/>
+*st4<r/>
+@save place=4 ask=true<r/>
+@jump target=*menu<r/>
+<r/>
+<r/>
+*gotostart<r/>
+; "Return to the beginning"<r/>
+@gotostart ask=true<r/>
+@jump target=*menu<r/>
+</example>
+<r/>
+　In addition, please note the locksnapshot and unlocksnapshot tags when saving thumbnail images in bookmark data.<r/>
+</para>
+</doc>

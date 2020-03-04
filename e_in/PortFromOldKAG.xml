@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Porting from below KAG 3 and what's new in KAG 3</title>
+<para>
+<ptitle>About transplantation from KAG 3 or less</ptitle>
+　KAG 3 is a new rewrite of the previous KAG and is compatible at the scenario level, but with minor differences.<r/>
+　The biggest change is that line breaks in the scenario file are now ignored, but this is done by setting <tt>global.ignoreCR</tt> in Config.tjs to <tt>false</tt> To get the same behavior as the old KAG.<r/>
+　Also, the time attribute of the quake tag is now in ms in KAG 3. If you want to use KAG less than 3 characters, set <tt>defaultQuakeTimeInChUnit</tt> in Config.tjs to <tt>true</tt>.<r/>
+<r/>
+　Characters appear larger than KAG 3 or less. Try specifying a smaller font.<r/>
+<r/>
+　Please note that the save data is saved by default in the savedata folder under the folder containing the executable file.<r/>
+<r/>
+　Tags also have some differences.<r/>
+<ul>
+  <li>emb tag has no zenkaku attribute</li>
+  <li>Playvideo usesound attribute removed</li>
+  <li>clearsysvar only clears system variables</li>
+</ul>
+<r/>
+　There may be other tags that behave differently, but it is probably a bug in KAG 3. If you feel weird, please let the author know.
+<r/>
+　See "About Plug-ins" in <link href="Prepare"/> for differences in the handling of plug-ins.<r/>
+</para>
+
+<para>
+<ptitle>What's new in KAG 3</ptitle>
+<dl>
+<dt>KAG's scenario analysis unit is built into Kirikiri 2</dt>
+<dd>
+　A function for analyzing KAG scenarios has been incorporated into the Kirikiri 2 main body. In KAG 2.x, processing was performed using a TJS script, but by incorporating it in the main body, the speed of scenario analysis has been dramatically increased.
+</dd>
+
+<dt>Most tags can use the cond attribute</dt>
+
+<dd>
+　The cond attribute can be used on almost any tag, and will only execute the tag if the expression specified by cond="expression" is true. For example,<r/>
+<bq>
+[jump cond="f.flag1==0" target=*loop]<r/>
+</bq>
+Would mean jump to the label *loop only when f.flag1 is 0.
+</dd>
+
+<dt>Animation information file changed from asq to asd</dt>
+<dd>
+　The more versatile format, asd format. asq2asd in the distribution file is a script that converts asq files to asd files. See AnimationLayer.tjs for the description of the asd file.<r/>
+　Also, multiple animations can be executed simultaneously on one image using a method called animation segment.
+</dd>
+
+<dt>Message history can be displayed vertically</dt>
+
+<dd>
+　Vertical writing can be displayed in addition to horizontal writing. Set in Config.tjs.
+</dd>
+
+<dt>Saved data encryption enabled</dt>
+
+<dd>
+　Saved data can now be easily encrypted. Set in Config.tjs.
+</dd>
+
+<dt>Support for UNICODE files</dt>
+
+<dd>
+　The text file output by Kirikiri 2 is basically UNICODE (UTF-16).<r/>
+　Save data etc. are output in UNICODE. I think it would be useful to have a text editor that can handle UNICODE.<r/>
+　Also, it is now possible to load a UNICODE format text file as a file (KAG scenario, etc.) to be loaded into Kirikiri 2.
+</dd>
+
+<dt>Formal support for MPEG as movie format</dt>
+
+<dd>
+　You can now play MPEG. You can play even if you put MPEG files in the archive.<r/>
+　However, in order to play the movie, krmovie.dll attached to Kirikiri 2 main unit must be placed in the same folder as Kirikiri 2 main unit.<r/>
+　Also, DirectX8 or later must be installed on the OS to play the movie (DirectX9 or later is recommended).
+</dd>
+
+<dt>Support for rendered fonts</dt>
+
+<dd>
+　By using rendered fonts, you can avoid font differences between operating systems and environments, as well as character-fill problems. In addition, since font data in the environment of the creator is used, fonts and external characters that do not exist in the environment of the player can be used.<r/>
+　Use krkrfont.exe to create a rendered font.
+</dd>
+</dl>
+</para>
+</doc>

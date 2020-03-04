@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Use macros</title>
+
+<para>
+<ptitle>What is a macro</ptitle>
+　Macros are meant to "make multiple tags and sentences appear in a single tag."<r/>
+<r/>
+　This is a way to freely define new tags by combining existing tags and sentences.<r/>
+　In KAG, you may have to specify the same tag many times, but using macro functions can greatly reduce such work.<r/>
+　Let's make it easy to macroize the sequence of tags.<tt>(^^)</tt><r/>
+</para>
+
+<para>
+<ptitle>Basic usage</ptitle>
+　To use a macro, you must first "define" it. You only need to define a macro once, and then use it any number of times. Therefore, when defining a macro, it is better to write it at the beginning of first.ks.<r/>
+<r/>
+　When defining a macro, enclose the part you want to be a macro with the <kw>macro</kw> and <kw>endmacro</kw> tags. Specify the macro name in the attribute name of the macro tag.<r/>
+<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+; -- Macro definition --<r/>
+<b>[macro name=newtag]</b>[font color=0xff0000]Make a macro like this[resetfont]<b>[endmacro]</b><r/>
+</bq>
+<r/>
+If you want to use this, use the macro name exactly as you would write a tag.<r/>
+<bq>
+; -- Using macros --<r/>
+[newtag]<r/>
+</bq>
+<r/>
+　When this is executed, the tag <tt>[newtag]</tt> will be replaced with <tt>[font color=0xff0000]Make a macro like this[resetfont]</tt> at <tt>[newtag]</tt>, so the red text "Make a macro like this"<r/>
+<r/>
+　It can be written on multiple lines.<r/>
+<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+; -- Macro definition --<r/>
+[macro name=newtag]<r/>
+[font color=0xff0000]<r/>
+Make a macro like this<r/>
+[resetfont]<r/>
+[endmacro]<r/>
+</bq>
+<bq>
+; -- Using macros --<r/>
+[newtag]<r/>
+</bq>
+</para>
+
+<para>
+<ptitle>Macro attributes</ptitle>
+　You can give an attribute to a macro and replace that attribute in the macro.<r/>
+　If you specify an attribute value starting with <kw>%</kw> in a macro, it will be replaced with the attribute given to the macro.<r/>
+　See the example below.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+; -- Macro definition --<r/>
+[macro name=newtag]<r/>
+[font color=<b>%iro</b>]<r/>
+Make a macro like this<r/>
+[resetfont]<r/>
+[endmacro]<r/>
+</bq>
+<bq>
+; -- Using macros --<r/>
+[newtag <b>iro=0x00ff00</b>]<r/>
+</bq>
+<r/>
+　In this example, we give the attribute iro and replace it with the color attribute of the font tag by entity.<r/>
+　When executed, you should see "Make a macro like this" in green text.<r/>
+<r/>
+<r/>
+　Also, if you specify <kw>*</kw> as the attribute of the tag in the macro, you can pass all the attributes passed to the macro. For example, if you want to create a macro with a trans tag followed by a wt tag,<r/>
+<r/>
+<bq>
+[macro name=transwait][trans <b>*</b>][wt][endmacro]<r/>
+</bq>
+<r/>
+　You can write In this way, for example, when using the transwait macro, the attributes specified for the transwait macro are passed exactly to the trans tag, which is useful when creating a macro with a hairy level on the existing tag.<r/>
+<r/>
+　Macros that were in the macro will be expanded again, so be careful not to write your own macro in the macro (^^)<r/>
+<r/>
+　If you want to specify a default value when the value is omitted, write <kw>|</kw> (vertical bar) in the attribute with %, and then specify the value when omitted. See the example below.<r/>
+<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+; -- Macro definition --<r/>
+[macro name=newtag]<r/>
+[font color=%color<b>|0xff0000</b>]<r/>
+Make a macro like this<r/>
+[resetfont]<r/>
+[endmacro]<r/>
+</bq>
+<bq>
+; -- Using macros --<r/>
+[newtag color=0x00ff00]<r/>
+[newtag]<r/>
+</bq>
+　Where the first [newtag] is used, the color attribute is specified, so it is replaced with the value of that attribute, 0x00ff00, and the characters are displayed in green.<r/>
+　Where the second [newtag] is used, no attributes are specified, so the default "0xff0000" is used and the text is displayed in red.<r/>
+<r/>
+<note>
+　Use single-byte lower case letters to specify attribute names. If you specify an uppercase letter, it will not work properly.
+</note>
+</para>
+</doc>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Introduction</title>
+
+<para>
+<ptitle>Introduction</ptitle>
+　KAG stands for Kirikiri Adventure Game. A script for making adventure and novel games in Kirikiri.<r/>
+　KAG itself is written in a TJS<small>(2)</small> scripting language that can be understood by Kirikiri. This is the written text file.<r/>
+　Creating a scenario file mainly involves working on a text editor. The threshold may be a little high. However, for example, if you can write HTML directly with a text editor, you will be familiar with it immediately.<r/>
+<r/>
+　It is possible to use a tag prepared as standard, but KAG itself is written in TJS script. If you work on the main unit, you can extend other operations and functions. This is one of the key features of Kirikiri / KAG.<r/>
+<r/>
+<note>
+　The Kirikiri body corresponding to KAG 3 or later is Kirikiri 2. Kirikiri 2 is Kirikiri, which was recreated from almost 1 to resemble Kirikiri 1, and KAG 3 was newly rewritten accordingly. Although KAG 3 is compatible with KAGs below KAG 3 at the scenario level, there are some caveats when porting projects below KAG 3. See <link href="PortFromOldKAG"/>.<r/>
+</note>
+<r/>
+<note>
+　Kirikiri can interpret TJS scripting language. KAG written in the script language TJS has a structure that can interpret scenario files written for KAG. For this reason, here, "KAG" is used to describe things specifically for KAG, "Kirikiri" is used only for Kirikiri body, and "Kiriri/KAG" is used for both.<r/>
+　To distinguish between TJS scripts and KAG scenarios, the TJS script is described as "script" or "script file", and the KAG scenario is described as "scenario" or "scenario file".
+</note>
+</para>
+
+<para>
+<ptitle>What kind of games you can make</ptitle>
+　KAG is originally a script for making adventure games, so you can make adventure games (of course).<r/>
+　There are various types of adventure games, but KAG allows you to create an adventure game that mainly displays sentences and branches the story by following the options set in the sentences.<r/>
+</para>
+
+<para>
+<ptitle>Copyright of this document</ptitle>
+　The text of this document and most of the images are copyrighted by W.Dee. Citations may be made without permission, but since the images used in this document include copyrighted works of other people, please contact W.Dee.<r/>
+<r/>
+Support and downloads are available on the following page<r/>
+Kirikiri / KAG download page: <at target="_top" href="http://kikyou.info/tvp/">http://kikyou.info/tvp/</at><r/>
+</para>
+
+
+</doc>
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>About creating the version information dialog</title>
+
+<para>
+<ptitle>About the version information dialog</ptitle>
+　This window is often referred to as "Help-About" of the software. In the case of KAG, this can be written in the KAG scenario file.<r/>
+　To use it, both <tt>helpMenu.visible</tt> and <tt>helpAboutMenuItem.visible</tt> in <tt>Config.tjs</tt> must be set to true.<r/>
+　Also, the size of the version information dialog is the size specified by <tt>aboutWidth</tt> and <tt>aboutHeight</tt>.<r/>
+　The KAG scenario file displayed in the version information dialog is named <tt>about.ks</tt>.<r/>
+<r/>
+　Normally, it is enough to display the image with the version information on the background, but depending on how you make it, you can make something elaborate.<r/>
+</para>
+
+<para>
+<ptitle>about.ks limits</ptitle>
+　about.ks has some limitations not found in the normal KAG scenario.<r/>
+　There are other restrictions other than those listed below (eg, most of the settings in Config.tjs are not followed).<r/>
+<r/>
+<dl>
+<dt>BGM, sound effects, video, etc.</dt>
+<dd>
+　Basically usable, but the number of sound effect buffers is fixed at one. Movies (AVI, SWF, etc.) cannot be used.
+</dd>
+<dt>Message layer</dt>
+<dd>
+　The number of message layers is fixed at one. Message history cannot be displayed. Message layer 0 is displayed in the initial state, but the size is undefined, so use it after hiding or specifying the position and size with the position tag.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Example of the version information dialog</ptitle>
+　This is an example of simply displaying an image on the background.<r/>
+<bq>
+@title name="About this software"<r/>
+@layopt layer=message0 page=fore visible=false<r/>
+@image storage=about.png layer=base page=fore<r/>
+@s<r/>
+</bq>
+<r/>
+　It's a bit more complicated and uses transitions to display information in the message layer. In addition, the support page can be opened by clicking the link created with the link tag. Clicking "Close" closes the dialog.<r/>
+<bq>
+@title name="About this software"<r/>
+@rclick enabled=false<r/>
+@clickskip enabled=false<r/>
+@position left=0 top=0 width=320 height=200 color=0xffffff opacity=255 marginl=0 margint=0 marginr=0 marginb=0<r/>
+@style align=center<r/>
+@font size=24 shadow=false color=0<r/>
+@wait time=200<r/>
+@nowait<r/>
+@backlay<r/>
+@current page=back<r/>
+Kirikiri 2<r/>
+[emb exp="System.versionString"]<r/>
+@trans method=crossfade time=500<r/>
+@wt<r/>
+KAG3<r/>
+[emb exp="kagVersion"]<r/>
+@trans method=crossfade time=500<r/>
+@wt<r/>
+[font size=12]Download page<r/>
+[link hint="Click to open download page" exp="System.shellExecute('http://kikyou.info/tvp/')"]http://kikyou.info/tvp/[endlink]<r/>
+@trans method=crossfade time=500<r/>
+@wt<r/>
+[link target=*exit]Close[endlink]<r/>
+@trans method=crossfade time=500<r/>
+@wt<r/>
+@s<r/>
+*exit<r/>
+@close<r/>
+</bq>
+</para>
+</doc>

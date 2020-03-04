@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>To use TJS more</title>
+
+<para>
+<ptitle>TJS2 and KAG</ptitle>
+　TJS (TJS2) is a scripting language that can be understood directly by Kirikiri and is based on JavaScript and JAVA. KAG is described in this TJS script.<r/>
+　TJS scripts can be written closer to the system (concrete) than the (abstract) scenarios that KAG understands, making them more difficult to handle, but offering a wider range of possibilities.<r/>
+<r/>
+　In KAG, there are several places to specify "TJS expression" such as exp attribute such as eval emb link if tag, cond attribute of each tag, entity (attribute of tag with &amp;) and so on.<r/>
+　Using the TJS formula, you can access Kirikiri, which is usually hidden behind the KAG, relatively easily.<r/>
+　Also, the iscript tag can execute TJS2 scripts directly. This allows you to perform advanced processing and extend the capabilities of KAG.<r/>
+<r/>
+　See TJS2's reference for the detailed syntax, and Kirikiri 2 for the function of Kirikiri.<r/>
+</para>
+
+<para>
+<ptitle>KAG Object Structure</ptitle>
+　The KAG itself is written in a TJS2 script, so you have direct access (good or bad) to the internal structure of the KAG.<r/>
+　It is better to be careful about writing values to the variables of objects managed by KAG, but you can also refer to the variables inside KAG and apply it to more advanced scenario description.<r/>
+<r/>
+<dl>
+<dt><kw>KAGWindow class</kw> object</dt>
+<dd>
+　The KAGWindow class (described in MainWindow.tjs) is a class for managing windows in KAG. Objects of this class can be accessed as global variable <tt><kw>kag</kw></tt>.<r/>
+　For example, to access the variable <tt>skipMode</tt> of the KAGWindow class (the variable that contains the current skip mode) <tt><kw>kag.skipMode</kw></tt>.
+</dd>
+<dt><kw>Background layer</kw></dt>
+<dd>
+　The background layer is an object of the <kw>BaseLayer class</kw> (described in GraphicLayer.tjs).<r/>
+　The front screen background layer is accessed using <tt><kw>kag.fore.base</kw></tt>, and the back screen background layer is accessed using <tt><kw>kag.back.base</kw></tt>.
+</dd>
+<dt><kw>Foreground layer</kw></dt>
+<dd>
+　The foreground layer is an object of the <kw>CharacterLayer class</kw> (described in GraphicLayer.tjs).<r/>
+　<tt><kw>kag.fore.layers</kw>[n]</tt> for the foreground layer on the front screen and <tt><kw>kag.back.layers</kw>[n]</tt> for the foreground layer on the back screen (where n is the foreground layer number 0 to).
+</dd>
+<dt><kw>Message layer</kw></dt>
+<dd>
+　The message layer is an object of <kw>MessageLayer class</kw> (described in MessageLayer.tjs).<r/>
+　The message layer on the front screen is <tt><kw>kag.fore.messages</kw>[n]</tt>, and the message layer on the back screen is <tt><kw>kag.back.messages</kw>[n]</tt> (where n is the message layer number from 0).<r/>
+　<tt><kw>kag.current</kw></tt> represents the message layer currently being operated on.
+</dd>
+<dt><kw>Objects in the message layer</kw></dt>
+<dd>
+　Use the links in the message layer to access the graphical buttons, edits, checkboxes, etc. created in the message layer.<r/>
+　links is an array object that contains references to the objects that manage them, in the order in which links, graphical buttons, edits, checkboxes, etc. are created. Of these, graphical buttons, edits, and checkboxes allow direct access to objects of each class by accessing the object variable.<r/>
+　For example, if the message layer 0 on the front screen has the following description,<r/>
+<bq>
+@cm<r/>
+@edit length=420 name="f.name"<r/>
+</bq>
+    　To set the focus on this edit (make it possible to type on the keyboard), you can further write<r/>
+<bq>
+@eval exp="kag.fore.messages[0].links[0].object.focus()"<r/>
+</bq>
+　(useful when you want to display the edit and prompt the user for input immediately).
+</dd>
+<dt><kw>Sound effect buffer</kw></dt>
+<dd>
+　The sound effect buffer is an object of <kw>SESoundBuffer class</kw> (described in SE.tjs).<r/>
+　You can access it with <tt><kw>kag.se</kw>[n]</tt> (where n is the sound effect buffer number 0 to).
+</dd>
+<dt><kw>BGM object</kw></dt>
+<dd>
+　BGM object is an object of <kw>BGM class</kw> (described in BGM.tjs).<r/>
+　It can be accessed using <tt><kw>kag.bgm</kw></tt>.
+</dd>
+<dt><kw>menu</kw></dt>
+<dd>
+　Menu objects can be accessed at <tt><kw>kag.menu</kw></tt>. <tt>kag.menu</tt> is an object of the MenuItem class. <tt>kag.menu</tt> itself shows the menu bar, and the items registered in its children are arranged in the menu bar.<r/>
+　Menu items are created in Menus.tjs, but if you directly rewrite Menus.tjs, you will have to rewrite it every time by updating the KAG system, so create AfterInit.tjs and change it there as described later It is easy to describe
+</dd>
+</dl>
+</para>
+
+
+<para>
+<ptitle>Precautions when using TJS</ptitle>
+　If KAG directly changes something that is not stored in the bookmark, it will not be possible to reproduce that part even if KAG reads the bookmark.<r/>
+　There is no problem if you hook up the KAG plug-in onStore or onRestore and save the information in the bookmark, but if you do not do so, you need to be careful.<r/>
+　In particular, be careful when using the drawing methods belonging to the Layer class to change the contents of the background layer and foreground layer managed by KAG. KAG keeps track of what images are loaded in a layer, but not the drawings or changes made to the layer. Therefore, in such a state, even if you pass the "label that can save bookmarks", save the bookmark there, and read out the bookmark, you will not be able to reproduce the changes made to the layer.<r/>
+　In such a case, clear the image or read another image before passing the "label that can save bookmarks" next time to return to a state where KAG can be managed, or You can avoid this by not writing "storable labels".<r/>
+　When using TJS, be very careful about the relationship with bookmarks.<r/>
+</para>
+
+<para>
+<ptitle>Items used in calculations, condition judgments, and displays in expressions</ptitle>
+<dl>
+<dt><tt><kw>&amp;&amp;</kw></tt> and <tt><kw>||</kw></tt></dt>
+<dd>
+　The two are operators, where <tt>&amp;&amp;</tt> represents "and" and <tt>||</tt> represents "or".<r/>
+　For example, if you want to do something on condition that <tt>f.flag1</tt> is 1 and <tt>f.flag2</tt> is 2,<r/>
+<r/>
+<tt>[if exp="f.flag1==1 &amp;&amp; f.flag2==1"]</tt><r/>
+<r/>
+　You can write.<r/>
+　Also, if f.flag1 is 1 or 2 or 3,<r/>
+<r/>
+<tt>[if exp="f.flag1==1 || f.flag1==2 || f.flag1==3"]</tt><r/>
+<r/>
+　(If f.flag1 is an integer, you can also write <tt>f.flag1>=1 &amp;&amp; f.flag1&lt;=3</tt>).<r/>
+　<tt>&amp;&amp;</tt> and <tt>||</tt> have different precedence so that <tt>&amp;&amp;</tt> takes precedence so that the calculation must be done with the precedence of addition over addition in ordinary formulas.<r/>
+　So, for example, if <tt>f.flag1</tt> is 1 and <tt>f.flag2</tt> is 3 or 5,<r/>
+<r/>
+<tt>[if exp="f.flag1==1 &amp;&amp; (f.flag2==3 || f.flag2==5)"]</tt><r/>
+<r/>
+　must be enclosed in ( ) parentheses.
+</dd>
+
+<dt><tt><kw>random</kw></tt> and <tt><kw>intrandom</kw></tt></dt>
+<dd>
+　random is a real random number between 0 and 1 inclusive.<r/>
+<r/>
+<example>@eval exp="f.ransuu = random"</example>
+<r/>
+　In the above example, f.ransuu contains a real random number between 0 and 1 inclusive.<r/>
+<r/>
+　In contrast, intrandom is a function that returns an integer random number between a specified value and a specified value.<r/>
+<r/>
+Format: <tt>intrandom(<b>minimum value</b>, <b>maximum value</b>)</tt><r/>
+<r/>
+<example>@eval exp="f.ransuu = intrandom(0, 5)"</example>
+<r/>
+　In the above example, f.ransuu contains a random number between 0 and 5 inclusive.
+</dd>
+<dt><tt><kw>length</kw></tt></dt>
+<dd>
+　length is the length of the string. To use it, write a . (dot) after the variable to which the string is assigned, followed by length.<r/>
+<r/>
+<example>[if exp="f.namae.length>=8"]Name is too long.[l][jump target=*input][endif]</example>
+<r/>
+　In the above example, if the length of f.namae is more than 8 characters, "Name is too long." is displayed and jump to *input label.<r/>
+　Characters are counted as one character, regardless of whether they are half-width or full-width. This is the same for functions that handle other strings.
+</dd>
+
+<dt><tt><kw>substring</kw></tt></dt>
+<dd>
+　substring can extract a part of a string (substring).<r/>
+　To use it, write a . (dot) after the variable (or the one that represents the string) to which the string is assigned, and then<r/>
+<r/>
+<tt>substring(<b>cut start position</b>, <b>cut length</b>)</tt><r/>
+<r/>
+　Write in the format of 0 indicates the beginning of the cutting start position.<r/>
+<r/>
+　For example, if you want to retrieve the second character of the f.furigana variable, you can retrieve it with <tt>f.furigana.substring(1, 1)</tt>.<r/>
+<r/>
+<example>@emb exp="f.furigana.substring(1, 1)"</example>
+<r/>
+　In the above example, the second character of the f.furigana variable is displayed.
+</dd>
+
+<dt><tt><kw>indexOf</kw></tt></dt>
+<dd>
+　indexOf gives the position of the first occurrence of a substring in a string. In other words, you can check whether a string contains another string.<r/>
+<r/>
+Format: <tt><b>string</b>.indexOf(<b>substring</b>)</tt><r/>
+<r/>
+　For example, if the string was <tt>"ABCDEFGHIJKL"</tt> and the substring was <tt>"ABC"</tt>, the <tt>"ABCDEFGHIJKL".indexOf("ABC")</tt> would be <b>0</b>. If the substring is <tt>"BCD"</tt>, it is <b>1</b>, and if it is <tt>"DEF"</tt>, it is <b>3</b>.
+　If the substring does not appear in the string, it will be <b>-1</b>, so to determine whether the substring is part of the string, use -1 and You just have to compare.<r/>
+<r/>
+<example>[if exp="'bitchfartass'.indexOf(f.objname)!=-1"]~~[endif]</example>
+<r/>
+　In the above example, <tt>f.objname</tt> is one of <tt>"bitch" "fart" "ass" "bitchfart" "fartass" "bitchfartass"</tt> In this case, execute up to <tt>endif</tt>.<r/>
+　If you want to set this as NG in <tt>"bitch", "fart", "ass"</tt> (OK only for <tt>"bitch" "fart" "ass"</tt>) If you want to do this, you can achieve this by separating each of the <tt>'nofia'</tt> with characters (or symbols) that do not appear in <tt>f.objname</tt>.<r/>
+　For example, using the special control symbol \v to separate<r/>
+<r/>
+<tt>[if exp="'bitch\vfart\vass'.indexOf(f.objname)!=-1"]~~[endif]</tt>
+<r/>
+You can do that (since \v doesn't usually appear in f.objname).<r/>
+<r/>
+　In the example below, if the character string 'cup' is included in f.itemname, the process is executed up to endif.<r/>
+<r/>
+<example>[if exp="f.itemname.indexOf('cup')!=-1"]~~[endif]</example>
+</dd>
+
+<dt><kw>Regular expression</kw></dt>
+<dd>
+　You can use regular expression patterns (parts enclosed by / and /) to decompose and inspect strings using regular expression patterns.<r/>
+　The regular expression pattern itself is very similar to Perl's regular expressions (they are different, but the regular expression patterns are almost compatible).<r/>
+<r/>
+　Use <tt><kw>test</kw></tt> to check if a string matches the desired pattern.<r/>
+<r/>
+<example>[if exp="/[^0-9]/.test(f.nyuryoku)"]The entered characters are not numbers[endif]</example>
+<r/>
+　Use test as in the example above. test is a function (a method of a regular expression object) that returns true if it matches the pattern and false if it doesn't. In the above example, <tt>[^0-9]</tt>, that is, using a regular expression pattern to check for non-numeric characters, use <tt>f.nyuryoku</tt> to check for mixed characters.<r/>
+<r/>
+　Use <tt><kw>match</kw></tt> to decompose a string. <tt>match</tt> returns an array object. If the pattern does not match, the number of elements in the array (<tt>count</tt>) will be 0. Otherwise, element 0 returns the entire match, element 1 and the rest of the pattern corresponding to ( ) (parentheses) in the pattern.<r/>
+<r/>
+<example>
+[eval exp="f.matched = /([0-9０-９]+)[-−]([0-9０-９]+)/.match(f.input)"]<r/>
+[if exp="f.matched.count == 0"]Please enter in the format "number-number".[jump target=*input][endif]<r/>
+[eval exp="f.s1 = str2num(f.matched[1]), f.s2 = str2num(f.matched[2])"]<r/>
+</example>
+　In the above example, <tt>f.input</tt> tests whether it conforms to the format "number-number", and if it does, the  in front of the-(hyphen) <tt>f.s1</tt> is converted to a numerical value, and the rest is converted to a numerical value in <tt>f.s2</tt>.
+</dd>
+
+<dt><tt><kw>str2num</kw></tt></dt>
+<dd>
+　str2num converts a string to a number.<r/>
+<r/>
+Format: <tt>str2num(<b>String or variable containing string</b>)</tt><r/>
+<r/>
+　Unlike the unary <tt>+</tt> operator, <tt>str2num</tt> can be converted to a number even if it is a full-width number. I think it can be used when there is a possibility that the user will enter a numerical value in full width like an input tag. If a string that is not recognized as a number is passed, it will be 0.<r/>
+<r/>
+<example>[input name="f.kazu" prompt="Please enter a number"][emb exp="f.kazu=str2num(f.kazu)"]</example>
+</dd>
+
+
+<dt><tt><kw>kansuuji</kw></tt> and <tt><kw>kansuuji_simple</kw></tt></dt>
+<dd>
+　<tt>kansuuji</tt> converts the specified number to kanji numeric notation. The same applies to <tt>kansuuji_simple</tt>, but without a unit to represent the digits.<r/>
+　Converts the number 9223372036854775807 to "九百二十二京三千三百七十二兆三百六十八億五千四百七十七万五千八百七" for <tt>kansuuji</tt> and "九二二三三七二〇三六八五四七七五八〇七" for <tt>kansuuji_simple</tt>.<r/>
+<example>
+@emb exp="kansuuji(f.num)"<r/>
+</example>
+　In the above example, f.num is displayed in Chinese numeral notation.<r/>
+</dd>
+
+<dt><tt><kw>number_format</kw></tt></dt>
+<dd>
+　<tt>number_format</tt> indicates the specified number in three digits separated by, (comma). For example, the number 9223372036854775807 is converted to "9,223,372,036,854,775,807".<r/>
+<example>
+@emb exp="number_format(f.num)"<r/>
+</example>
+　In the above example, f.num is displayed every three digits, separated by commas.<r/>
+</dd>
+
+
+<dt><tt><kw>Storages.addAutoPath</kw> and <kw>System.exePath</kw></tt></dt>
+<dd>
+　Storages.addAutoPath adds an automatic search path.<r/>
+　System.exePath indicates the folder where the Kirikiri executable file is located.<r/>
+　For more information, please refer to the Kirikiri SDK Help, which allows you to set automatic search paths for archives and folders.<r/>
+　The automatic search path is a mechanism for automatically finding files without having to specify a folder. By default, all of system image scenario bgimage fgimage bgm sound rule others video are set, but can be added by Storages.addAutoPath.<r/>
+System.exePath is the folder where the Kirikiri executable file is located.<r/>
+<r/>
+　For example, if there is a folder called cgdata directly under the Kirikiri executable file and you want to specify that as the automatic search path,<r/>
+<r/>
+<tt>[eval exp="Storages.addAutoPath(System.exePath + 'cgdata/')"]</tt><r/>
+<r/>
+　(Be sure to put the / after cgdata).<r/>
+<r/>
+　If you have an archive file cgdata.xp3 in the same location as the Kirikiri executable file, and you want to specify an automatic search path in this archive,<r/>
+<r/>
+<tt>[eval exp="Storages.addAutoPath(System.exePath + 'cgdata.xp3&gt;')"]</tt><r/>
+<r/>
+　will do. The symbol after cgdata.xp3 is &gt;. Use &gt; to specify a search path within the archive, or / to specify a search path within a folder.<r/>
+　The symbol after the archive was changed from '#' to '&gt;' in Kirikiri 2 2.19 beta 14.<r/>
+</dd>
+
+<dt><tt><kw>Storages.searchCD</kw></tt></dt>
+<dd>
+　Storages.searchCD returns the letter of the drive where the CD with the volume label passed in the argument is inserted.<r/>
+　For example, if you want to add an automatic search path to the folder named image on the CD-ROM with the volume label FOO_BAR_DISC in combination with Storages.addAutoPath above,<r/>
+<r/>
+<tt>[eval exp="Storages.addAutoPath(Storages.searchCD('FOO_BAR_DISC') + ':image/')"]</tt><r/>
+<r/>
+　Can be written as<r/>
+<r/>
+　Stotages.searchCD returns an empty string if it cannot find a drive with a CD with the specified volume label, so to make sure, for example, that the specified CD-ROM is in the drive,<r/>
+<r/>
+<tt>[if exp="Storages.searchCD('FOO_BAR_DISC') == ''"]No CD inserted[endif]</tt><r/>
+<r/>
+　Can be written as
+</dd>
+
+<dt><tt><kw>System.readRegValue</kw></tt></dt>
+<dd>
+　System.readRegValue allows you to read the value written to the registry. For example, to load HKEY_LOCAL_MACHINE\SOFTWARE\Dee\kirikiri\installpath into f.installpath,<r/>
+<r/>
+<tt>[eval exp="f.installpath = System.readRegValue('HKEY_LOCAL_MACHINE\\SOFTWARE\\Dee\\kirikiri\\installpath')"]</tt>
+<r/>
+　will do. Note that \ must be written as \\ in ''.<r/>
+　Only string and numeric values can be read. If there is no value in the registry, it will be void, so use <tt>===</tt> (identification operator)<r/>
+<r/>
+<tt>[if exp="f.installpath === void"]Not installed[endif]</tt><r/>
+<r/>
+　You can write something like
+</dd>
+
+<dt><tt><kw>kag.clickCount</kw></tt></dt>
+<dd>
+　Each time the mouse is clicked on the screen, 1 is added. You can assign a value to this variable, so if you set it to 0, you can know that the mouse has been clicked by checking that this variable is a non-zero number.
+</dd>
+
+<dt><tt><kw>kag.lastMouseDownX</kw> and <kw>kag.lastMouseDownY</kw></tt></dt>
+<dd>
+　These represent the coordinates where the mouse was last clicked. kag.lastMouseDownX is the last clicked X coordinate, and kag.lastMouseDownY is the last clicked Y coordinate.
+</dd>
+
+<dt><tt><kw>kag.lastWaitTime</kw></tt></dt>
+<dd>
+　When the wait tag is used with mode=until, the time that the wait tag actually wraps is set. If the time that you have already worn has passed, it will be 0, so you can determine whether the process is catching up by determining whether this variable is not 0 immediately after the wait tag.<r/>
+　By the way, if the wait is interrupted due to a click or the like, this variable does not indicate the exact waiting time (it indicates the time when there was no interruption).
+</dd>
+
+<dt><tt><kw>kag.skipMode</kw></tt></dt>
+<dd>
+　Contains a value that indicates the current skip mode. 0 = no skip, 1 = up to the click waiting sign, 2 = up to the page break waiting sign, 3 = until the next stop.<r/>
+　For example, if you don't want to play voices or sound effects while skipping,<r/>
+<r/>
+<tt>@playse cond="kag.skipMode&lt;=1" storage="hogehoeg.wav"</tt><r/>
+<r/>
+　Can be written as
+</dd>
+
+<dt><tt><kw>kag.autoMode</kw></tt></dt>
+<dd>
+　True during the process of automatic reading, false otherwise.<r/>
+　For example, if you want to process voices and sound effects at the end of automatic reading,<r/>
+<r/>
+<tt>@ws cond="kag.autoMode"</tt><r/>
+<r/>
+　Can be written as
+</dd>
+
+<dt><tt><kw>kag.getBookMarkPageName</kw></tt></dt>
+<dd>
+　<tt>kag.getBookMarkPageName</tt> can get the name of the bookmark location indicated by the number (0-) specified in the argument in non-free save mode.<r/>
+　This can be used to show the bookmark on the screen instead of from the KAG menu and let the user select the bookmark to follow.<r/>
+　Used in combination with <tt>kag.restoreBookMark</tt>.
+<r/>
+<example>
+[locate x=10 y=100][link exp="kag.restoreBookMark(0)"][emb exp="kag.getBookMarkPageName(0)"][endlink]<r/>
+[locate x=10 y=130][link exp="kag.restoreBookMark(1)"][emb exp="kag.getBookMarkPageName(1)"][endlink]<r/>
+(The same applies hereinafter)<r/>
+</example>
+</dd>
+
+<dt><tt><kw>mp</kw></tt></dt>
+<dd>
+　<tt>mp</tt> represents a dictionary array in the macro where the attributes passed to the macro are recorded.<r/>
+<example>
+@macro name=fimg<r/>
+@image *<r/>
+@eval exp="sf[mp.storage]=1"<r/>
+@endmacro<r/>
+</example>
+　In the above example, for example, if <tt>@fimg layer=base page=fore storage="bg_03"</tt> is written, <tt>mp.layer</tt> is <tt>'base'</tt>, <tt>mp.page</tt> is <tt>'fore'</tt>, and <tt>'mp.storage'</tt> is <tt>'bg_03'</tt> while this macro is executed. That is, you can get the value of an attribute passed to the macro by specifying the attribute after <tt>mp.</tt>.<r/>
+　If this macro is used as <tt>@fimg layer=base page=fore storage="bg_03"</tt>, the <tt>sf['bg_03']</tt> will be 1 because the <tt>sf[mp.storage]=1</tt> is executed on the exp tag.<r/>
+　By using this macro instead of the image / img tag, it can be used as a macro that automatically records the displayed image in a system variable.
+</dd>
+
+<dt><tt><kw>System.getKeyState</kw></tt></dt>
+<dd>
+　<tt>System.getKeyState</tt> can determine if the specified key is currently pressed at that time.<r/>
+<example>
+@jump target=*shift_key_pressed cond="System.getKeyState(VK_SHIFT)"<r/>
+; Jump to *shift_key_pressed if shift key is pressed<r/>
+</example>
+For details, please refer to Kirikiri 2 SDK Help.<r/>
+<r/>
+　KAG3 accepts input from the gamepad (joystick), but if there is something on the gamepad or if the joystick axis is not properly adjusted, you may not be able to operate the work properly.<r/>
+　A warning can be given to the user if the gamepad button is pressed at the start of the work (usually the gamepad button is not pressed at the start of the work, but should be pressed If it is, it is likely that it has been pressed for a reason not intended by the user.)<r/>
+　In the following example, it may not be possible to detect "pressed" on a USB-connected game pad, so we recommend supplementing it with documentation as appropriate.<r/>
+<example>
+@if exp="System.getKeyState(VK_PADANY)"<r/>
+@wait time=500<r/>
+@if exp="System.getKeyState(VK_PADANY)"<r/>
+; VK_PADANY returns true when any button on the gamepad is pressed<r/>
+; Display a message if it is still pressed after 500ms (0.5 seconds)<r/>
+The button on the gamepad (joystick) is being pressed.<r/>
+Check that nothing is on the gamepad or that the joystick axis is adjusted.<r/>
+If the situation does not improve, remove the gamepad (joystick).<r/>
+If the situation still does not improve, quit the game, start "Engine Settings", and set "Input-Pad Availability" to "Not Use".<r/>
+[s]<r/>
+@endif<r/>
+@endif<r/>
+</example>
+
+</dd>
+
+
+
+</dl>
+
+
+
+</para>
+
+<para>
+<ptitle>What is specified in the exp attribute of the link or button</ptitle>
+<dl>
+<dt><tt><kw>System.shellExecute</kw></tt></dt>
+<dd>
+　System.shellExecute opens the file specified in the argument. When you specify the URL, the browser opens, so if you execute this formula using a link tag, you can create a link to a web page.<r/>
+<r/>
+<example>[link exp="System.shellExecute('http://www.yahoo.co.jp/')"]http://www.yahoo.co.jp/[endlink]</example>
+</dd>
+
+<dt><tt><kw>kag.close</kw></tt> and <tt><kw>kag.shutdown</kw></tt></dt>
+<dd>
+　kag.close terminates KAG. If you have set to confirm the end, there is an end confirmation.<r/>
+　kag.shutdown also terminates KAG, but there is no confirmation.<r/>
+　If you use System.exit() to exit, <b>do not use it</b> because system variables may be exited without saving. Also, do not specify them in the exp attribute of the eval tag (use the close tag instead).<r/>
+<r/>
+<example>
+[link exp="kag.close()"]Close[endlink]<r/>
+[link exp="kag.shutdown()"]Close[endlink]<r/>
+</example>
+</dd>
+
+<dt><tt><kw>kag.restoreBookMark</kw></tt> and <tt><kw>kag.storeBookMark</kw></tt></dt>
+<dd>
+　kag.restoreBookMark follows the bookmark indicated by the number specified in the argument in non-free save mode.<r/>
+　Similarly, kag.storeBookMark sandwiches the bookmark indicated by the number specified in the argument.<r/>
+　However, if this is called directly, the bookmark can be operated even if the use of the bookmark is prohibited by the [store] tag.<r/>
+　These return true on success and false on failure.<r/>
+　See kag.getBookMarkPageName for an example.
+</dd>
+
+<dt><tt><kw>kag.loadBookMarkFromFileWithAsk</kw></tt> and <tt><kw>kag.saveBookMarkToFileWithAsk</kw></tt></dt>
+<dd>
+　kag.loadBookMarkFromFileWithAsk displays a file selection dialog box in free save mode and allows the user to select bookmark data. When the user presses the OK button, it resumes from that bookmark.<r/>
+　Similarly, kag.saveBookMarkToFileWithAsk displays a file selection dialog box and saves the bookmark.<r/>
+　These return true on success and false if the user cancels or fails.<r/>
+<example>
+[link exp="kag.loadBookMarkFromFileWithAsk()"]Follow the bookmark[endlink]<r/>
+[link exp="kag.saveBookMarkToFileWithAsk()"]Insert a bookmark[endlink]<r/>
+</example>
+</dd>
+
+<dt><tt><kw>kag.callExtraConductor</kw></tt></dt>
+<dd>
+　kag.callExtraConductor is used to call a KAG scenario as a subroutine under the control of TJS. When calling a scenario with this method, the scenario must be stopped by a click wait or s tag (you can know by kag.inStable or onStableStateChanged of the KAG plugin).<r/>
+　kag.callExtraConductor has three arguments.<r/>
+　The first argument is the scenario file to call. The next argument is the label to call.<r/>
+　The third argument is optional, but specifies the function / method to execute when returning from the KAG scenario. If you do not need it, you do not need to specify it.<r/>
+<r/>
+<example>[button graphic="showhist" exp="kag.callExtraConductor('rclick.ks', '*showhist')"]</example>
+<r/>
+　The method of writing the subroutine to be called in this way conforms to the method of writing the right-click subroutine.<r/>
+　This function cannot be used during a right-click subroutine or while already using this function to call a KAG scenario.
+</dd>
+
+<dt><tt><kw>kag.se[n].play</kw></tt></dt>
+<dd>
+　The sound effect buffer's play method starts playing the sound effect.<r/>
+　Specify in the following format.<r/>
+<r/>
+　<bq>kag.se[Sound effect buffer number].play(%[storage: File name of sound effect to play, loop: Loop]);</bq>
+<r/>
+　For example, if you specify this in the onenter attribute of the link tag as in the following example, you can play a sound effect when the mouse cursor hovers over the choice.<r/>
+<r/>
+<example>[link target=*foo onenter="kag.se[0].play(%[storage:'select.wav', loop: false])"]Choices ~[endlink]</example>
+<r/>
+　In this example, select.wav is played without loop in sound effect buffer 0. This is also useful when you want to play sound effects under the control of TJS.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Array</ptitle>
+　In Kirikiri 2 / KAG3, arrays can be used easily.<r/>
+　If you use an array, you must first declare the array using <tt><kw>[ ]</kw></tt>.<r/>
+<r/>
+<example>[eval exp="f.hairetsu = []"]</example>
+<r/>
+　In the above example, we declare that <tt>f.hairetsu</tt> is used as an array. Note that if <tt>f.hairetsu</tt> is already an array or any other number or string, the contents of <tt>f.hairetsu</tt> will be erased.<r/>
+　If you want to use an array as a system variable, take advantage of the fact that initially all variables are assumed to be assigned void,<r/>
+<r/>
+<example>[eval exp="sf.hairetsu = [] if sf.hairetsu === void"]</example>
+<r/>
+　, you can declare an array only at the first startup. The sequence will not be deleted even after the second time.<r/>
+<r/>
+　Use <tt>[ ]</tt> to assign values to an array. Write a subscript (element number) in <tt>[ ]</tt>. Subscripts start at 0.<r/>
+<r/>
+<example>[eval exp="f.hairetsu[0] = 'zero', f.hairetsu[1] = 'one'"]</example>
+<r/>
+　In the above example, 'zero' is assigned to <tt>f.hairetsu[0]</tt> and 'one' is assigned to <tt>f.hairetsu[1]</tt>.<r/>
+　You do not need to declare the number of elements in the array. It will automatically expand to the required size. To get or set the number of elements in the array, use the <tt><kw>count</kw></tt> property, such as <tt>f.hairetsu.count</tt>.<r/>
+<r/>
+　The display can be performed in the same way.<r/>
+<r/>
+<example>0 : [emb exp="f.hairetsu[0]"]    1 : [emb exp="f.hairetsu[1]"]</example>
+<r/>
+　It is a little difficult to use a two-dimensional array, but I will just give an example.<r/>
+<bq>
+@iscript<r/>
+// Create a two-dimensional array with 5 elements in the first dimension<r/>
+f.twodim = [] if f.twodim === void; // Create first dimension array in twodim<r/>
+for(var i = 0; i &lt; 5; i++) f.twodim[i] = [] if f.twodim[i] === void;<r/>
+// In this state, f.twodim[0] to f.twodim[4] are arrays, respectively.<r/>
+// Can be specified as f.twodim[0][3] or f.twodim [4][2]<r/>
+@endscript<r/>
+<r/>
+// Or, for example, to create an array with 5 elements in the first dimension<r/>
+f.twodim = [ [], [], [], [], [] ];<r/>
+// (When creating an array with [], you can specify initial elements in it by separating them with commas, but at that time, nest the array as the initial element)<r/>
+</bq>
+</para>
+
+<para>
+<ptitle>Dictionary array</ptitle>
+　Kirikiri 2 / KAG3 can also use dictionary arrays.<r/>
+　A dictionary array (also called an associative array) is an array that can remember pairs of names and their corresponding values.<r/>
+　If you use a dictionary array, you must first declare the array using <tt><kw>%[ ]</kw></tt>, just like arrays.<r/>
+<r/>
+<example>[eval exp="f.dict = %[]"]</example>
+<r/>
+　The above example declares that f.dict will be used as a dictionary array. If f.hairetsu is already a dictionary array, the precautions are the same as for arrays.<r/>
+<r/>
+　Also use <tt>[ ]</tt> to assign values to the dictionary array (not <tt>%[ ]</tt>). In <tt>[ ]</tt>, write the "name".<r/>
+<r/>
+<example>[eval exp="f.dict['zero'] = 0, f.dict['one'] = 1"]</example>
+<r/>
+　In the above example, <tt>0</tt> is assigned to <tt>f.dict['zero']</tt> and <tt>1</tt> is assigned to <tt>f.dict['one']</tt>. The difference from a normal array is that a string is specified in <tt>[ ]</tt>.<r/>
+<r/>
+　The display can be performed in the same way.<r/>
+<r/>
+<example>zero : [emb exp="f.dict['zero']"]    one : [emb exp="f.dict['one']"]</example>
+<r/>
+　By the way, you can use <tt>.</tt> instead of <tt>[ ]</tt>. <tt>f.dict['zero']</tt> can be described as <tt>f.dict.zero</tt>, and <tt>f.dict['one']</tt> as <tt>f.dict.one</tt> (but . cannot be followed by "reserved words" or "names that cannot be used as variable names").<r/>
+<r/>
+　In fact, KAG's <tt>f</tt> and <tt>sf</tt> themselves are also dictionary arrays, and if <tt>f.dict</tt> is used, it would have accessed the value named <tt>'dict'</tt> in the dictionary array (of course, <tt>f['dict']</tt> can also access it).<r/>
+</para>
+
+
+<para>
+<ptitle>Get date / time</ptitle>
+　To get the current date and time:<r/>
+<bq>
+[iscript]<r/>
+{<r/>
+	// ↑ Surrounding the endscript with { } is to make the variable declared in this local variable (otherwise it will be a global variable)<r/>
+	var d = new Date(); // Create Date class object<r/>
+	// Date class object retains the current time at the time of creation if nothing is specified in the argument at the time of creation<r/>
+	f.year = d.getYear();  // f.year to year<r/>
+	f.month = d.getMonth() + 1; // f.month to month<r/>
+	f.date = d.getDate(); // f.date to day<r/>
+	f.hours = d.getHours(); // f.hours to hour<r/>
+	f.minutes = d.getMinutes(); // f.minutes to minutes<r/>
+	f.seconds = d.getSeconds(); // f.seconds to seconds<r/>
+}<r/>
+[endscript]<r/>
+</bq>
+</para>
+
+<para>
+<ptitle>process</ptitle>
+　<tt>kag.process</tt> runs the scenario from the specified location.<r/>
+　The first argument is the name of the scenario file to load. If you specify an empty string, the current scenario file will be used.<r/>
+　The second argument is the label at which to start execution. If you specify an empty string, it will be executed from the beginning of the scenario file.<r/>
+<r/>
+<example>
+kag.process('', '*label2')<r/>
+kag.process('scenario4.ks', '*label5')<r/>
+</example>
+<r/>
+　Note that even if the scenario is running, it will jump to that label.<r/>
+</para>
+
+
+<para>
+<ptitle>leftClickHook, rightClickHook, keyDownHook</ptitle>
+　KAG has a function to call the registered function when left-clicking, right-clicking, and when a key is pressed, and is called a hook.<r/>
+　Hooks are arrayed so that multiple functions can be registered. These are accessible via <tt>kag.leftClickHook</tt>, <tt>kag.rightClickHook</tt>, and <tt>kag.keyDownHook</tt> respectively.<r/>
+　If any of these functions returns true, KAG will not execute the function originally assigned to that function. For example, if the function registered in keyDownHook returns true when the R key is pressed, the original function "display message history" will not be executed.<r/>
+<r/>
+　leftClickHook and rightClickHook have no arguments in the function being called.<r/>
+　leftClickHook is also generated by the Enter key and the Space key. Also, it does not occur when you click an option with the mouse.<r/>
+<r/>
+<example>
+@iscript<r/>
+function myLeftClickHook()<r/>
+{<r/>
+	kag.process('', '*label');<r/>
+	return true;<r/>
+}<r/>
+@endscript<r/>
+@eval exp="kag.leftClickHook.add(myLeftClickHook)"<r/>
+@s<r/>
+<r/>
+*label<r/>
+@eval exp="kag.leftClickHook.remove(myLeftClickHook)"<r/>
+Hi.<r/>
+@s<r/>
+</example>
+<r/>
+　In the above example, *label is executed when clicked.<r/>
+　Note that execution is forcibly moved to * label. If a transition or automatic move is in progress, it is safer to stop it with the stoptrans or stopmove tag.<r/>
+<r/>
+　keyDownHook when the function being called was passed two arguments, the first is the virtual key code of the pressed key, and the second is the state of the shift key that was pressed at the same time. For more information, see Kirikiri 2 SDK Help.<r/>
+<r/>
+<example>
+@iscript<r/>
+function myKeyDownHook(key, shift)<r/>
+{<r/>
+	if(key == #'R')<r/>
+	{<r/>
+		// When the R key is pressed<r/>
+		kag.process('', '*label');<r/>
+		return true;<r/>
+	}<r/>
+}<r/>
+@endscript<r/>
+@eval exp="kag.keyDownHook.add(myKeyDownHook)"<r/>
+@s<r/>
+<r/>
+*label<r/>
+@eval exp="kag.keyDownHook.remove(myKeyDownHook)"<r/>
+Hi.<r/>
+@s<r/>
+</example>
+</para>
+
+<para>
+<ptitle>touchImages</ptitle>
+　<tt>System.touchImages</tt> loads images into the cache.<r/>
+　For more information, see System.touchImages in the Kirikiri 2 document. This method can be used to pre-read an image, for example, when there is some weight and time is available.<r/>
+　When used in KAG, it is effective for foreground and background images (however, those without specifying the key attribute). Specify the same thing as the one specified in the storage attribute of the image or img tag as an array in the storages argument.<r/>
+　It seems good to specify around -2 * 1024 * 1024 for the second argument.<r/>
+　It seems good to specify the waiting time-around 200ms in the third argument.<r/>
+<r/>
+<example>
+@resetwait<r/>
+@eval exp="System.touchImages(['24_5', '24_4', 'uni', '24'], -2*1024*1024, 800)"<r/>
+@wait mode=until time=1000<r/>
+</example>
+<r/>
+　However, this method is indeterminate, as it does not guarantee that the image will be cached. Therefore, it should never be used for applications where the image must be read first. For such purposes, it is better to use the method described in the section on assignImages below.<r/>
+</para>
+
+<para>
+<ptitle>assignImages</ptitle>
+　<tt>assignImages</tt> copies the image of a layer to another layer.<r/>
+　For example,<r/>
+<r/>
+<tt>@eval exp="kag.fore.base.assignImages(kag.fore.layers[0])"</tt><r/>
+<r/>
+　Allows you to copy the image loaded on the foreground layer 0 to the foreground layer.<r/>
+　assignImages is fast because they don't actually copy the data in the image and mark it as "the image from which it was copied is the same." In a demo scene, when the time loss when importing an image in the middle of a scene becomes a problem, it can be used for the purpose of loading the image into a hidden foreground layer in advance and then copying it to a background layer when needed.<r/>
+</para>
+
+
+<para>
+<ptitle>Application of hact tag</ptitle>
+　The hact tag allows you to execute any TJS expression when you click on the message history, and the audio history (so that you can play the audio corresponding to the message when you click the message history, such as in a voiced game) can be implemented.<r/>
+　The following is an example to achieve this, and defines a macro pv for playing audio and a macro sv for stopping audio.<r/>
+<example>
+@iscript<r/>
+function stopAllVoices()<r/>
+{<r/>
+	// Stop all sound effects 2 to 6<r/>
+	for(var i = 2; i &lt;= 6; i++) kag.se[i].stop();<r/>
+}<r/>
+function playVoice(buf, storage)<r/>
+{<r/>
+	// Do not process if the KAG playing the storage with the sound effect buffer buf is skipping<r/>
+	if(!kag.skipMode)<r/>
+	{<r/>
+		stopAllVoices();<r/>
+		kag.se[buf].play(%[ storage : storage ]);<r/>
+	}<r/>
+}<r/>
+function createHistoryActionExp(buf, storage)<r/>
+{<r/>
+	// Generate a TJS expression to execute when clicking on the message history<r/>
+	return "stopAllVoices(), kag.se[" + buf  +"].play(%[ storage : '" + storage + "' ])";<r/>
+}<r/>
+@endscript<r/>
+@macro name=pv<r/>
+@hact exp="&amp;createHistoryActionExp(mp.b, mp.s)"<r/>
+@eval exp="playVoice(mp.b, mp.s)"<r/>
+@endmacro<r/>
+@macro name=waitvoices<r/>
+@ws buf=2<r/>
+@ws buf=3<r/>
+@ws buf=4<r/>
+@ws buf=5<r/>
+@ws buf=6<r/>
+@endmacro<r/>
+@macro name=sv<r/>
+@endhact<r/>
+@waitvoices cond="kag.autoMode"<r/>
+@eval exp="stopAllVoices()"<r/>
+@endmacro<r/>
+</example>
+<r/>
+　The createHistoryActionExp function generates a TJS expression to pass to the hact tag's exp attribute. The TJS expression generated here will be executed.<r/>
+<r/>
+　An example using this macro looks like this:<r/>
+<r/>
+<example>
+[pv b=2 s=hoge.ogg]Hoge[l][sv][r]<r/>
+[pv b=3 s=hogera.ogg]Hogera[l][sv][r]<r/>
+[pv b=4 s=hogemoge.ogg]Hogemoge[p][sv]<r/>
+</example>
+</para>
+
+
+
+<para>
+<ptitle>Script executed at initialization</ptitle>
+　KAG has the ability to execute arbitrary TJS scripts at several stages of initialization to customize the system. In the current version, the following methods are available.<r/>
+<r/>
+<dl>
+<dt><kw>Override.tjs</kw></dt>
+<dd>
+　This file is executed after MainWindow.tjs is loaded, if it exists. This file does not exist in the initial state, so create a new one.
+</dd>
+
+<dt><kw>AfterInit.tjs</kw></dt>
+<dd>
+　All initialization is done, just before first.ks is executed. This file does not exist in the initial state, so create a new one.
+</dd>
+
+<dt>"<kw>Additional settings</kw>"</dt>
+<dd>
+　There are some places in Config.tjs where you can describe "additional settings" such as "◆ additional settings for windows and behaviors". The contents described there are executed at each stage of Config.tjs execution.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Menu customization</ptitle>
+　To add a simple on / off setting item to a menu item, write the following in AfterInit.tjs.<r/>
+<r/>
+<example>
+kag.menu.insert(kag.optionsMenu =<r/>
+	new KAGMenuItem(this, "Effects(&amp;G)", 0, void, false), 2);<r/>
+kag.optionsMenu.stopRecur = true;<r/>
+<r/>
+kag.optionsMenu.add(<r/>
+	kag.doTransMenuItem = new KAGMenuItem(<r/>
+		this,<r/>
+		"Switch screens(&amp;T)",<r/>
+		0,<r/>
+		function(sender) { sf.dotrans = sender.checked = !sf.dotrans; },<r/>
+		false));<r/>
+<r/>
+if(sf.dotrans === void) sf.dotrans = true;<r/>
+kag.doTransMenuItem.checked = sf.dotrans;<r/>
+<r/>
+kag.optionsMenu.add(<r/>
+	kag.playSEItem = new KAGMenuItem(<r/>
+		this,<r/>
+		"Play sound effects(&amp;S)",<r/>
+		0,<r/>
+		function(sender) { sf.playse = sender.checked = !sf.playse; },<r/>
+		false));<r/>
+<r/>
+if(sf.playse === void) sf.playse = true;<r/>
+kag.playSEItem.checked = sf.playse;<r/>
+</example>
+<r/>
+　<tt>kag.menu.insert(kag.optionsMenu = new KAGMenuItem(this, "Effects(&amp;G)", 0, void, false), 2);</tt> inserts an "Effects" menu into the KAG menu bar. kag.optionMenu is the object of the "Effects" menu. The second argument of the insert method is the position to insert the menu item.<r/>
+　The next line sets stopRecur to true for that object so that kag.internalSetMenuAccessibleAll does not search for unnecessary menu items.<r/>
+<r/>
+　In the kag.optionsMenu, the child menu item is created by the add method.<r/>
+<r/>
+　The fourth argument of KAGMenuItem specifies an expression to execute when the menu item is clicked.<r/>
+<r/>
+　In <tt>if(sf.dotrans === void) sf.dotrans = true;</tt>, when sf.dotrans is void (that is, there is no value), the initial value is entered. <tt>kag.doTransMenuItem.checked = sf.dotrans;</tt> sets the initial state of menu item check. Since the settings are recorded in system variables, the settings will be retained the next time the program ends.<r/>
+<r/>
+　After that, the current menu status is recorded in sf.dotrans and sf.playse,<r/>
+<r/>
+<tt>@playse storage="kon.wav" cond="sf.playse"</tt>
+<r/>
+　It can be used as such.<r/>
+<r/>
+　I think you can do various things by applying.<r/>
+</para>
+
+
+<para>
+<ptitle>Write a plugin for KAG</ptitle>
+　By creating a subclass of <kw>KAGPlugin class</kw> and registering with KAG, you can create a plugin that extends the functionality of KAG.<r/>
+　I think the samples are distributed with the KAG distribution files, so check them out.<r/>
+</para>
+
+</doc>
+

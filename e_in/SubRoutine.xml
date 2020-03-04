@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>Use subroutines</title>
+
+
+<para>
+<ptitle>What is a subroutine</ptitle>
+　A subroutine is a collection of several processes that can be "called" and used from other places. When the subroutine is finished, control returns to the place where it was called.<r/>
+<r/>
+　Macros are similar to <comlink href="Macro"/>, except that subroutines perform more serious processing, whereas macros are used for simpler processing.<r/>
+</para>
+
+<para>
+<ptitle>Basic usage of subroutines</ptitle>
+　Subroutines are distinguished by labels, so define a label. Use the <kw>return</kw> tag to return to the caller from the subroutine, and use the <kw>call</kw> tag to call the subroutine.<r/>
+　See the example below.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Call a subroutine.[l][r]<r/>
+<b>[call target=*subroutine]</b><r/>
+Subroutine called.<r/>
+[s]<r/>
+<r/>
+<b>*subroutine</b><r/>
+This is a subroutine.[l][r]<r/>
+Click to return to the caller.[l][r]<r/>
+<b>[return]</b><r/>
+</bq>
+<r/>
+　Now, if you run this example, you'll see the message "Call a subroutine.", "This is a subroutine.", and "Click to return to the caller.". Once clicked, you should see "Subroutine called.".<r/>
+　In other words, it jumps to the label specified by the call tag, at which point the call location is automatically recorded, and the return tag automatically returns to this recorded caller (this automatically What is recorded is called "<kw>callstack</kw>").<r/>
+　In this example, <tt>*subroutine</tt> through <tt>[return]</tt> are "subroutines".<r/>
+<r/>
+　You can call other subroutines from within a subroutine. There is no limit on the depth of the call (how many calls can be made without returning).<r/>
+<r/>
+　By the way, in "Let's use alternatives", I wrote that [cm] was written after the label, but I wrote [cm] unless it was next to a label (with |) that would be a save location It's OK without it.<r/>
+<r/>
+<r/>
+　The call stack records only the scenario file name, the label immediately before in the scenario and the number of lines from that line to the line with the call tag, the contents of the line with the call tag, and the position in that line. Note that if the configuration in the return scenario file is changed, such as during scenario debugging, it may return to an unexpected position.<r/>
+　Basically, it is good idea not to use / create labels for subroutines and labels that are saved (labels with |) in subroutines.<r/>
+</para>
+
+<para>
+<ptitle>Notes on subroutines</ptitle>
+　If you call yourself with call, you will be in an infinite loop.<r/>
+　Note that if the correspondence between call and return is not taken, the call stack may increase rapidly, or it may not return to the caller at the return tag, causing an error.<r/>
+<r/>
+　And like the following example<r/>
+<r/>
+<bq>
+*subroutine<r/>
+...<r/>
+[if exp="f.flag1"]<b>[jump target=*otherplaces1]</b>[endif]<r/>
+[if exp="f.flag2"]<b>[jump target=*otherplaces2]</b>[endif]<r/>
+...<r/>
+[return]<r/>
+<r/>
+*otherplaces1<r/>
+...<r/>
+[return]<r/>
+<r/>
+*otherplaces2<r/>
+;There is no return tag beyond this ...<r/>
+</bq>
+<r/>
+　Be careful when jumping to other places in the subroutine. When jumping to otherplaces1, there is a return at the jump destination, so the balance between call and return will not be lost. However, when jumping to otherplaces2, since no return appears at the jump destination, the subroutine "does not return". In other words, the balance between call and return is lost.<r/>
+<r/>
+　If you want to return to an arbitrary location instead of returning to the caller, you can use the storage and target attributes of the return tag to return to any location.<r/>
+</para>
+</doc>

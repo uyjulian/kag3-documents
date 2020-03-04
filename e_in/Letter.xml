@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Let's display characters</title>
+
+<para>
+<ptitle>What style</ptitle>
+　Approximately, character-based adventure games in the world are divided into a type that displays a message frame and displays characters there, and a type that displays characters on the entire screen (Visual Novel type). KAG can be used with either method, as it seems that there is not much difference just in the display location.<r/>
+<descimg>
+<dititle>Two methods</dititle>
+<img src="UsingVN.jpg"/><img src="UsingFrame.jpg"/>
+</descimg>
+　You can also write vertically.<r/>
+<descimg>
+<dititle>Vertical display</dititle>
+<img src="Vertical.jpg"/>
+</descimg>
+　By default, the so-called visual novel type of horizontal writing is displayed. See Config.tjs for details. This tutorial assumes that the default visual novel type is displayed.<r/>
+</para>
+
+<para>
+<ptitle>Show something anyway</ptitle>
+　Now, let's display something for trial. In the scenario folder you will find a file called <kw> first.ks </ kw>. This is the scenario file that is read first.<r/>
+　In the standard state, the following contents are written.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello.<r/>
+</bq>
+　I think trouble with each other suddenly wrote messy, but please note only line that says "Hello.". Instead of this "Hello.", Please try to write the character you want to there anything displayed in the editor. For example, "Good evening."<r/>
+　Then, start Kirikiri and when the [Select Folder / Archive] dialog box opens, specify the project folder you created and click the [OK] button. <b>Specify the project folder. not first.ks.</b><r/>
+<r/>
+<descimg>
+<dititle>"Good evening."</dititle>
+<img src="kon-banwa.png"/>
+</descimg>
+　Then, "Good evening" was displayed on the black screen. Specifying the background will be described later in <comlink href="DispBase"/>.<r/>
+　Anyway, be written this "Hello." Characters that you want to display instead of, you can be in this way display.<r/>
+</para>
+
+<para>
+<ptitle>Let's use click waiting and line feed</ptitle>
+　Now, wait for the click at the end of the line. To wait for a click, write <kw>l</kw> where you want the click to wait. ([l] is halfwidth; l is lowercase L)<r/>
+　And [<kw>r</kw>] after the line break.<r/>
+<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello.[l][r]<r/>
+Good luck.[l][r]<r/>
+</bq>
+　Quit Kirikiri, start it again, and try running the project folder.<r/>
+<r/>
+<descimg>
+<dititle>Wait for click</dititle>
+<img src="gokigen.png"/>
+</descimg>
+<r/>
+　Become a click waiting for after the "Hello.", Is a new line if a click, you should have been labeled "Good luck.".<r/>
+</para>
+
+<para>
+<ptitle>Let's use page break waiting</ptitle>
+　To erase all characters and start displaying characters from the top left, write [<kw>cm</kw>] on a new line. ([cm] is half-width)<r/>
+　However, if you do not wait for the click before that, the screen will be erased without permission. [cm] is usually preceded by [<kw>p</kw>]. See the example below.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello.[l][r]<r/>
+Good luck.[l][r]<r/>
+I will do a page break.[p]<r/>
+[cm]<r/>
+Page break.<r/>
+</bq>
+　Now, try to do this. At the position of [p], a symbol indicating a page break appears and waits for a click. When you click, all the characters are erased, and you should see "Page break" again displayed from the upper left.<r/>
+<r/>
+<note>
+　There are three tags to delete the message: er ct cm. Each operation is slightly different, so I explain <comlink href="SaveLoad"/> in the explanation of save and load. If you don't do anything special, you may want to unify it to cm.<r/>
+</note>
+<r/>
+<note>
+　In tutorials below KAG 3, ct was used here. cm clears all message layers like ct, but does not return the target message layer to message0 on the front screen like ct. I think it is more convenient than ct.<r/>
+　However, it must be noted that a cm or ct tag must be written immediately after the saveable label described below.
+</note>
+<r/>
+　In KAG, all characters are drawn on a layer called "<kw>message layer</kw>". KAG has another message layer as standard, and if two are used, it can express a scene where two people are talking. See <kw>current</kw> tag and more.<r/>
+</para>
+
+<para>
+<ptitle>What is a tag</ptitle>
+　So, what is the half-width guy surrounded by square brackets [ ]?<r/>
+　The items surrounded by [ ] are called <b>tags</b>, which are used to control various aspects of KAG.<r/>
+　For example, in the very first line, there is a <tt>[wait time=200]</tt>, which is a <b><kw>tag name</kw> of <tt>wait</tt></b> with <b><kw>attribute</kw></b> <tt>time=200</tt>. <tt>time</tt> is <b>attribute name</b>, and <tt>200</tt> is <b>attribute value</b>.<r/>
+　With such a feeling, first write "[" followed by "tag name", and with a space, write "attribute name = attribute value". "Attribute name = attribute value" may continue multiple times. Finally, the tag ends.<r/>
+　Various tags will come out from now on, but I think that you will be able to get a feel for it at first even if you write by imitation.<r/>
+　Tags are important in many ways. All instructions other than character display to KAG are done with this tag. There are various tags, please see <link href="Tags"/>.<r/>
+<r/>
+　You can use the <kw>macro</kw><comlink href="Macro"/> to combine existing tags to define new tags. This is convenient because it allows you to convert your regular tags into a single tag. It is convenient to define a set of tags in advance according to the game system.<r/>
+<r/>
+<note>
+　Before KAG 3, line breaks occurred at the end of the line unless \ (backslash) was written at the end of the line. In KAG 3 and later, line breaks will not occur unless [r] is written. If you want to be the same as the handling of line breaks below KAG 3, specify global.ignoreCR in Config.tjs to false.<r/>
+</note>
+<r/>
+</para>
+
+<para>
+<ptitle>Command line</ptitle>
+　Lines preceded by @ (one-byte ＠) are recognized as "command lines".<r/>
+　After the @, write the portion of the tag between [and], the tag name, followed by the attributes (if any). Only one command can be written per line.<r/>
+　Just like writing, it works in the same way as a real tag.<r/>
+<r/>
+　For example, the following two lines are equivalent:<r/>
+<r/>
+<bq>
+[wc time=20]<r/>
+@wc time=20<r/>
+</bq>
+<r/>
+　Also, the example of "Let's use page break waiting" can be rewritten as follows.<r/>
+<r/>
+<bq>
+@wait time=200<r/>
+*start|start<r/>
+@cm<r/>
+Hello.[l][r]<r/>
+Good luck.[l][r]<r/>
+I will do a page break.[p]<r/>
+@cm<r/>
+Page break.<r/>
+</bq>
+</para>
+
+<para>
+<ptitle>Special symbols and special lines in the scenario</ptitle>
+　Scenarios are ordinary text files, you can write anything freely, but the following symbols are used for special purposes, so be careful when you want to use them.<r/>
+<r/>
+<dl>
+<dt>　　<kw>[</kw>　　(Half-width square brackets)</dt>
+<dd>
+	　Symbol indicating the start of a tag (^^ ;;<r/>
+	　If you really want to use the start of a square bracket instead of the start of a tag, write <tt><b>[[</b></tt> followed by two (the square The closing parenthesis of the parenthesis is OK if it is written normally).
+</dd>
+
+<dt>　　<kw>;</kw>　　(Half-width semicolon)</dt>
+<dd>
+	　Any line written with this semicolon <b>at the beginning</b> will be ignored regardless of what you write. This means that comments can be placed here.
+</dd>
+
+<dt>　　<kw>*</kw>　　(Half-width asterisk)</dt>
+<dd>
+	　<b>Only if it's at the beginning</b>, define a label. In addition to being a target when linking, it also serves as a marker for saving and loading (I will talk elsewhere).
+</dd>
+<dt>　　<kw>@</kw>　　(Half-width at mark)</dt>
+<dd>
+	　<b>Only at the beginning</b> indicates a command line.
+</dd>
+<dt>　　<kw>tab</kw></dt>
+<dd>
+	　Tabs at the beginning of a line are treated (ignored) as if they were absent. This can be used to indent the scenario file (indent it to make the scenario easier to read). Note that only tabs are ignored, not whitespace.
+</dd>
+</dl>
+</para>
+
+</doc>

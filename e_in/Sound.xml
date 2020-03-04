@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Use sound effects</title>
+
+<para>
+<ptitle>To play sound effects</ptitle>
+　The sound effect must be Wave (PCM) type. In other words, WAV or a format that can be played by plug-in.<r/>
+<r/>
+　Playing sound effects is not particularly difficult, and basically uses three tags: playse, stopse, and ws (other tags have functions such as sound effect fade).<r/>
+　For example, if you want to play se1.wav, write as follows.<r/>
+<r/>
+
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Plays a sound effect.[l]<r/>
+<b>[playse storage=se1.wav][ws]</b><r/>
+</bq>
+　The playe tag plays the sound effect, but the playse tag does not wait for the sound effect to finish, so use the ws tag to wait for the sound effect to finish.<r/>
+　You can play a loop by setting <tt>loop=true</tt> in the playse tag. In this case, you cannot wait with the ws tag.<r/>
+　The stopse tag also ends the sound effect playback.<r/>
+</para>
+
+</doc>

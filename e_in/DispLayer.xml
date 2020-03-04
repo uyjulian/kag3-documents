@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Show foreground</title>
+
+<para>
+<ptitle>What is the foreground</ptitle>
+　The foreground is what is displayed between the background and the message, such as the standing pose of a person. In KAG, up to three overlays can be displayed by default (more can be displayed by customizing).<r/>
+<r/>
+　The foreground uses a technique called a mask or color key to cut out and display the image in the shape of a person or the like. In KAG, both the method of displaying the foreground using a mask and the method of displaying an image using a color key, the image itself can include an alpha channel and transparency information such as PNG, ERI, and TLG5 / TLG6 images. If possible, you can use the image-specific method to make it transparent.<r/>
+</para>
+
+<para>
+<ptitle>Foreground using color keys</ptitle>
+　The color key is to fill the area that should be transparent with a specific color, and then make that color part transparent.<r/>
+　This is handled slightly differently when the image is full color than when it is 256 or 16 colors.<r/>
+<r/>
+　In the case of full color, in other words, the color of "Kawasanasaso" is used as "<kw>Peak color</kw>" (color key), and the part to be made transparent is painted with it. It seems that true magenta (r, g, b) = (255,0,255) and true green (r, g, b) = (0,255,0) are often used.<r/>
+　But what if you want to express magenta and green? If you use the color (r, g, b) = (254,0,255) or (r, g, b) = (0,254,0), KAG will process it as another color, so is.<r/>
+<r/>
+　For 256-color images and 16-color images, one <kw>palette index</kw> is used as "transparent color". The area filled with this palette index becomes transparent.<r/>
+<r/>
+<note>
+　For image formats such as PNG, there is software that allows you to specify <kw>transparent color</kw> (color key) when saving, but you can also handle PNG images output with such software.
+</note>
+<r/>
+<descimg>
+<dititle>Examples of color extraction</dititle>
+<img src="ButtonGlyphImageList.png"/>
+</descimg>
+</para>
+
+<para>
+<ptitle>Foreground with mask</ptitle>
+　In KAG, you can prepare a so-called mask image separately from the normal foreground image, and display it by cropping the foreground image according to the mask image.<r/>
+<r/>
+　The <kw>mask image</kw> is a 256-level grayscale image of the same size as the foreground image, and its luminance directly indicates "opacity". In other words, a part with a luminance of 0 is "completely transparent" and a part with a luminance of 255 is "completely opaque". About 128 places are about half transparent. The part that should be displayed is white and the transparent part is black.<r/>
+　Be sure to save the mask image in 256-level grayscale (256-color image). If you save in full color or 16 colors, it will not be displayed properly.<r/>
+　A mask image is an image that retains opacity, while a foreground image is an image that retains color information. The foreground image in this case is called <kw>main image</kw>.<r/>
+<note>
+　For PNG, ERI, and TLG5 / TLG6 images, you can include <kw>alpha channel</kw> (mask image at the end) in one PNG / ERI / TLG5 file.<r/>
+　If you have software that can output such images (such as GIMP for PNG), you do not need to prepare a separate mask file if you use it. In addition, you can easily convert these image formats by using the image format converter included with the Kirikiri SDK.</note>
+<r/>
+　Save the mask image with the file name of the main image with _m appended. For example, if the main image is hogehoge.png, the mask image will be hogehoge_m.png. This format in which the main image and the mask image are separated is called the main / mask separation format.<r/>
+<r/>
+　The advantage of using a mask image is that you can freely specify the opacity when overlaying the foreground, and if you use a properly processed mask image and main image, the edges are beautifully anti-aliased when overlapping Is to be able to overlap.<r/>
+<descimg>
+<dititle>Example mask (left is main, right is mask)</dititle>
+<img src="ayari.png"/>
+<img src="ayari_m.png"/>
+</descimg>
+</para>
+
+<para>
+<ptitle>Show foreground</ptitle>
+　Then, prepare an appropriate image according to this (Please prepare the image yourself...). First, how to display the foreground using color keys.<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[image layer=0 page=fore storage="as" visible=true key=0xff00ff left=340 top=100]</b><r/>
+Hello.<r/>
+</bq>
+　The part shown in bold is the part displaying the foreground image. The <kw>image</kw> tag also appeared in <link href="DispBase"/>. Tag for reading images. Layer 0 is specified as 0 for the foreground layer.<r/>
+　Here, there is a key attribute. The key attribute is an attribute for specifying the extraction color. In this way, if you specify the extraction color in hexadecimal number in the format 0xRRGGBB, the part painted with RR (red) GG (green) BB (blue) will be transparent as the extraction color. For example, key = 0xff00ff specifies (r, g, b) = (255,0,255), which means that the true magenta part is to be transparent as a cutout color. If you specify key = 255, key will be the palette index indicated by 255 as the color key. See <link href="Tags"/> for more information.<r/>
+<r/>
+　There is storage="as", but this is a command to load an image named as. You do not need to specify the extension. In this case, a readable image is automatically searched for and read from the file named as.<r/>
+<r/>
+　The reason why visible=true is that the foreground layer of KAG is not displayed by default, so it will not be displayed unless you set it to be displayed here.<r/>
+<r/>
+　left=340 top=100 specifies the left edge and top edge of the foreground layer. The foreground layer can specify the display position when loading with the image tag.<r/>
+<note>
+　The display offset specification in PNG images is ignored.
+</note>
+<r/>
+　Also, when using a mask image, the specification method is as follows.<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[image layer=0 page=fore storage="asm" visible=true left=340 top=100]</b><r/>
+Hello.<r/>
+</bq>
+　However, there is no key attribute.<r/>
+　In this example, the image to be loaded is the image named asm_m as the mask image, and the image named asm is loaded as the main image.<r/>
+<r/>
+　If you use an image format that can have alpha channel information and color key in the image like PNG, you do not need to specify the key attribute as in the above example.<r/>
+<descimg>
+<dititle>Execution result</dititle>
+<img src="LayerDisplayed.jpg"/>
+</descimg>
+</para>
+</doc>

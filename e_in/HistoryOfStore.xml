@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>About passing records</title>
+
+<para>
+<ptitle>Pass record</ptitle>
+　The passage record is a function that performs auto save at several points so that the user can return to the previous scene by selecting "system-go back".<r/>
+<r/>
+　To record the passage, you need to use the record tag or set <tt>recordHistoryOfStore</tt> in Config.tjs.<r/>
+<r/>
+　The "System-Back" menu is hidden by default, so it can be displayed by setting <tt>goBackMenuItem.visible</tt> to true in Config.tjs.<r/>
+<r/>
+　You can also go back and forth by selecting "System-Back", but the limit can be specified in <tt>maxHistoryOfStore</tt> in Config.tjs. Please note that saving too much will make your save data huge. Pass records are stored separately for each bookmark.<r/>
+<r/>
+　By the way, please note that it is a different function from "Label Record" which has settings in Config.tjs.<r/>
+</para>
+
+<para>
+<ptitle>Timing of passage recording</ptitle>
+　By writing a record tag, you can record the current state of the passage. Also, depending on the setting of <tt>recordHistoryOfStore</tt> in Config.tjs, it is possible to automatically record passage.<r/>
+　However, it is not recorded immediately when the record tag is written or at the timing specified in <tt> recordHistoryOfStore </ tt>. It will be recorded when you pass the next "label that can save bookmarks" (at this point you can go back with "System-Back"). However, what is recorded is the state at the time when it passed the previous "label that can save bookmarks", and if you select "system-back", you will return to that position.<r/>
+</para>
+
+<para>
+<ptitle>position to write record tag</ptitle>
+　It may be easier to set <tt>recordHistoryOfStore</tt> for small-scale scenarios and automatically record passages, but for large-scale scenarios, automatically record passages. I think that it is better to write the record tag manually and specify the position where the passage is recorded.<r/>
+<r/>
+　If you record a passage, for example, when an option is displayed, the user can select "System-Back" to return to the position of the previous option.<r/>
+<r/>
+　In this case, it is OK to write a record tag before the [s] tag to stop at the option. It may be easier to play manually, especially when there are multiple options.<r/>
+<r/>
+　If the user selects System-Go Back, he does not return to the position where he wrote the record tag. It returns to the position of "label that can save bookmarks" just before the record tag.<r/>
+<r/>
+　By the way, if there is no l, p, s tag between the "label that can save bookmarks" and the next "label that can save bookmarks", the passing record is It will not be. "System-Back" can be selected only when stopped with l, p, s tags, so if you record a passage where there is no l, p, s tag, you can not go back earlier than that Because<r/>
+</para>
+
+</doc>
+
+

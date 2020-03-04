@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Use transitions</title>
+
+<para>
+<ptitle>before that</ptitle>
+　The effect of switching the screen over time, such as fade-in, fade-out, and blind, is called <kw>transition</kw> (change).<r/>
+　Kirikiri / KAG allows you to use three types of transitions: crossfade transitions, universal transitions, and scroll transitions.<r/>
+　You can also use some transitions by using the extended transition plug-in (extrans.dll) (see "About Transitions" in the Kirikiri SDK Help).<r/>
+</para>
+
+<para>
+<ptitle>Crossfade transition</ptitle>
+　Crossfade transitions are simple screen transition effects.<r/>
+　Because it is a transition (transition), you need an image before the transition and an image after the transition. In the case of KAG, the image before the transition is the layer on the front page, and the image after the transition is the layer on the back page. In other words, the image of the layer on the back page comes to the front page.<r/>
+　At the beginning of the transition, the image on the front page is replaced with the image on the back page over time, and the image on the back page eventually becomes the image on the front page.<r/>
+<r/>
+<note>
+　KAG does not have the concept of <kw>fade out</kw> and <kw>fade in</kw>. If you want to fade out to black, make the back page black and then apply a crossfade transition.
+</note>
+</para>
+
+<para>
+<ptitle>Universal transition</ptitle>
+　A universal transition is a universal (general-purpose) transition that allows you to freely create a so-called "screen transition effect".<r/>
+<r/>
+　Also, universal transitions require a grayscale image, called a <kw>rule image</kw>. If the rule image size is smaller than the layer you want to transition, it will be automatically tiled and used. Use this image as a "rule" to advance the transition.<r/>
+　The required attributes for the universal transition, <kw>time</kw> (time during the transition) and <kw>vague</kw> (<kw>fuzzy region value</kw>) Become.<r/>
+<r/>
+　For example.<r/>
+<r/>
+　Look at the image below.<r/>
+<descimg>
+<dititle>Before transition, after transition, rule image</dititle>
+<img src="univtrans_A.png"/><img src="univtrans_B.png"/><img src="univtrans_R.png"/>
+</descimg>
+<r/>
+　Thus, suppose that the image labeled A transitions to the image labeled B. Also suppose that the rule image is a simple but gradient image from top to bottom, black to white.<r/>
+<r/>
+　By the way, if you set <kw>vague</kw> (fuzzy area value) to 1, the transition will proceed as follows. Progressing from left to right. For convenience, the transitions are shown side-by-side, but they are actually displayed consecutively in the same place.<r/>
+<descimg>
+<dititle>When vague=1</dititle>
+<img src="univtrans_V1.png"/>
+</descimg>
+<r/>
+　In other words, from the black part of the rule image to the white part, the image of B is gradually being replaced.<r/>
+<r/>
+　Let's set vague=64 here.<r/>
+<descimg>
+<dititle>When vague=64</dititle>
+<img src="univtrans_V64.png"/>
+</descimg>
+　Now, the boundary between the image of A and the image of B is blurred, right? As you can see, increasing the vague value can increase the ambiguity in the transition that is neither A nor B. vague can be a number greater than zero.<r/>
+<r/>
+　By specifying various patterns in the rule image as well as simple gradations as described above, you can freely make transitions accordingly.<r/>
+<r/>
+　In the Kirikiri download page <at target="_top" href="http://kikyou.info/tvp/">http://kikyou.info/tvp/</at>, more than 20 types of universal transition rule images are available as "<kw>Transition Library</kw>". <!-- In addition, a script that allows you to actually see what the Universal Transition Transition is like is included, so please deepen your understanding of Universal Transition.--><r/>
+</para>
+
+<para>
+<ptitle>Scroll transition</ptitle>
+　The scroll transition is different from the universal transition in that the image of the switching source (back screen) scrolls into the area of the image of the switching destination (front screen).<r/>
+　The direction from which the image of the switching source (back screen) enters can be selected from four directions: left, top, right, and bottom.<r/>
+　There are three types of scrolling.<r/>
+<r/>
+　First, the scroll transition when "stayfore" is specified in the <kw>stay</kw> attribute is as follows (when entering from the bottom).<r/>
+<descimg>
+<dititle>When stay=stayfore</dititle>
+<img src="univtrans_Sstay.png"/>
+</descimg>
+　In this way, if you specify "stayfore" in the stay attribute, the back page will move from the outside and come in, with the image of the front page staying in place.<r/>
+<r/>
+　The scroll transition when "stayback" is specified in the stay attribute is as follows.<r/>
+<descimg>
+<dititle>When stay=stayback</dititle>
+<img src="univtrans_Sstaysrc.png"/>
+</descimg>
+　In this case, the back page layer appears to be visible from behind the front page layer moving out.<r/>
+<r/>
+　When "nostay" is specified in the stay attribute, the result is as follows.<r/>
+<descimg>
+<dititle>stay=nostay</dititle>
+<img src="univtrans_Snostay.png"/>
+</descimg>
+　In this way, the scrolling source image comes out as if pressed by the incoming switching source image. If you make the image of A and the image of B continuous horizontally or vertically, you can get the effect of scrolling a large screen. But it's not very suitable for the foreground layer transition effect.<tt>(^^;;</tt><r/>
+</para>
+
+<para>
+<ptitle>Front page and back page</ptitle>
+　A very important part of the transition is the concept of <kw>front page</kw> and <kw>back page</kw>.<r/>
+　As mentioned in <link href="DispBase"/>, KAG has a front page that is normally visible and a back page that is not visible, except that both are visible or invisible. It has exactly the same configuration.<r/>
+　KAG transitions always take place in such a way that the contents of the back page are gradually displayed instead of the contents of the currently displayed front page. After the transition, the contents of the front page will be exactly the same as the contents of the back page.<r/>
+　So you have to manipulate the back page before the transition.<r/>
+<r/>
+　For example. Suppose that only the background layer is replaced.<r/>
+　First, before the transition, if the state of the layer is as follows (left is front, right is back)<r/>
+<r/>
+<descimg>
+<dititle>Before transition</dititle>
+<img src="trans0f.jpg"/>
+<img src="trans0b.jpg"/>
+</descimg>
+　At this point, the front page shows the panorama layer and the message layer on the background layer. The back page can be in any state.<r/>
+　Here, the back page is made the same as the front page with the [backlay] tag.<r/>
+<descimg>
+<dititle>After executing the backlay tag</dititle>
+<img src="trans0f.jpg"/>
+<img src="trans0f.jpg"/>
+</descimg>
+　Transitions transfer the contents of the back page to the front page, so you need to tweak the back page before performing the transition.<r/>
+　Here we want to replace only the background layer, so load the image into the background layer on the back page.<r/>
+<descimg>
+<dititle>After loading an image in the background layer of the back page</dititle>
+<img src="trans0f.jpg"/>
+<img src="trans2b.jpg"/>
+</descimg>
+　Here you can finally make the transition with the trans tag. Apparently, the transition brings the back page image to the front page.<r/>
+　During a transition, the result is as follows (example of transition).<r/>
+<descimg>
+<dititle>In transition</dititle>
+<img src="trans3f.jpg"/>
+<img src="trans2b.jpg"/>
+</descimg>
+　Transitions wait at the [wt] tag.<r/>
+　When the transition is over, the back and front pages will be the same, as shown below.<r/>
+<descimg>
+<dititle>After the transition</dititle>
+<img src="trans2b.jpg"/>
+<img src="trans2b.jpg"/>
+</descimg>
+</para>
+
+<para>
+<ptitle>Let's switch the background layer</ptitle>
+　Use the <kw>trans</kw> tag to make the transition.<r/>
+　Basically, for the transition, copy the layer information of all the front pages to the back page with the [<kw>backlay</kw>] tag on the back page, and mess with the image tag etc. on the part you want to change on the back page And execute the transition with the trans tag. Then, the change applied to the back page is applied to the front page so that it replaces the current front page.<r/>
+<r/>
+　First, let's switch the background layer with a crossfade transition.<r/>
+<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello. Switch the background layer.[l][r]<r/>
+<b>[backlay]</b><r/>
+[image storage="bg1" layer=base <b>page=back</b>]<r/>
+<b>[trans method=crossfade time=1500]</b><r/>
+<b>[wt]</b><r/>
+Did it switch?<r/>
+</bq>
+　First, the information of the layer on the front page is copied to the back page using the [backlay] tag.<r/>
+　Then, the image to be displayed next is loaded in the background layer of the back page.<r/>
+　At this point, the only difference between the back page and the front page is the background image.<r/>
+　Next, the transition is executed with the trans tag. Thus, if you specify <tt>method=crossfade</tt> in the trans attribute, it will be a universal transition. In this example, the time is specified as 1.5 seconds. The time is specified in milliseconds, so specify <tt>time=1500</tt>.<r/>
+<note>
+　It is specified in milliseconds, but the accuracy is not as accurate as in milliseconds.
+</note>
+<r/>
+　After that, the <kw>wt</kw> tag waits for the end of the transition. <b>If you do not write the wt tag, KAG will go next without waiting for the transition</b>, so please do not forget the wt tag.<r/>
+<note>
+　Not only transitions, but most of the tags in KAG's "Time-consuming things" have a separate tag to wait for completion instead of waiting for it to finish. This allows you to fade out the background music while transitioning.<r/>
+　Also <b>be sure to include the corresponding waiting tag.</b> Even when trying to wear different types of things (such as waiting for the end of a transition with a wait tag), it is necessary to write a corresponding "wait" tag.<r/>
+</note>
+<r/>
+<r/>
+　Also, when using Universal Transition, it looks like the following.<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello. Switch the background layer.[l][r]<r/>
+<b>[backlay]</b><r/>
+[image storage="bg1" layer=base <b>page=back</b>]<r/>
+<b>[trans method=universal rule="rule1" vague=1 time=1500]</b><r/>
+<b>[wt]</b><r/>
+Did it switch?<r/>
+</bq>
+<r/>
+　In this example, the transition is executed using the trans tag. Thus, if you specify <tt>method=universal</tt> in the trans attribute, it will be a universal transition (even if you omit the method tag, it will be considered universal). In this example, the rule image is set to "rule1", the time is 1.5 seconds, and the fuzzy region value is 1.<r/>
+<r/>
+　Also, let's say that this is a scroll transition, a transition from the right without sitting down...<r/>
+<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello. Switch the background layer.[l][r]<r/>
+[backlay]<r/>
+[image storage="bg1" layer=base <b>page=back</b>]<r/>
+[trans <b>method=scroll from=right stay=nostay children=false</b> time=1500]<r/>
+[wt]<r/>
+Did it switch?<r/>
+</bq>
+　It becomes. Here, <tt>children=false</tt> is specified because otherwise the <kw>child layer</kw> will move with it. In KAG, the background layer is the parent and the foreground and message layers are children of the background layer.<r/>
+　You can also set <tt>children=true</tt> if you want the child layers to scroll along.<r/>
+</para>
+
+<para>
+<ptitle>Let's switch the foreground layer</ptitle>
+　Use the trans tag to switch the foreground layer as well.<r/>
+<r/>
+<bq>
+[image storage="bg0" page=fore layer=base]<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello. Display the foreground layer using transitions.[l][r]<r/>
+[backlay]<r/>
+[image layer=0 page=back storage="fg0" visible=true]<r/>
+; At this point, the foreground layer 0 on the front page is invisible (since it is the default),<r/>
+; At this point, the foreground layer 0 on the back page is visible and holds the image,<r/>
+; All other back page layers are the same as the front page due to the effect of the backlay tag.<r/>
+[trans method=crossfade time=1500][wt]<r/>
+Next, swap the foreground layers.[l][r]<r/>
+[backlay]<r/>
+[image layer=0 page=back storage="fg1" visible=true]<r/>
+; At this point, the foreground layer 0 on the back page has an image named fg1,<r/>
+; All other back page layers are the same as the front page due to the effect of the backlay tag.<r/>
+[trans method=crossfade time=1500][wt]<r/>
+Then remove the foreground layer.[l][r]<r/>
+[backlay]<r/>
+[layopt layer=0 page=back visible=false]<r/>
+; At this point, the foreground layer 0 on the back page is invisible,<r/>
+; All other back page layers are the same as the front page due to the effect of the backlay tag.<r/>
+[trans method=crossfade time=1500][wt]<r/>
+</bq>
+　The above example shows the foreground layer, replaces it with another image, and then erases it.<r/>
+　First of all, to display it, first, all the information on the front page is copied to the back page using the backlay tag. After that, I want to display the foreground in the part I want to change, here the foreground layer, so I load the image in the foreground layer on the back page.<r/>
+　After that, we use the trans tag.<r/>
+<r/>
+　Next, the foreground layer is replaced, but after copying it to the back page with backlay, operate the part you want to change and make the transition with the trans tag.<r/>
+<r/>
+　Finally, the foreground layer is deleted, but after copying to the back page with backlay, the corresponding foreground layer is hidden. Hidden means that it is not visible (obviously) and disappears when you make the transition.<r/>
+<r/>
+　In this case, since visible=true is set for the layer on the back page, you may be worried that it will be displayed, but the back page (background layer and its child layer) is originally only hidden. There is no need to worry about it being displayed even if you specify visible = true.<r/>
+<r/>
+<note>
+　As in the above example, if the layer attribute of the trans tag is omitted, it is assumed that base (background layer) is specified, and if the child attribute is omitted, true is specified (transition together with child layers). Makes sense.<r/>
+　When you want to display the foreground layer using transitions, when you want to swap, when you want to erase, and so on, the other transitions are to make transitions together with the background layer, including child layers. You can also apply individual transitions to the foreground and message layers, for example, layer=0, but this is not usually used.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Let's switch message layers</ptitle>
+　The message layer can be switched in the same way.<r/>
+　In the case of message layer, display / hide can be operated by layopt tag, so the same operation can be performed.<r/>
+<r/>
+　For example, if you want to draw the message layer hidden, and then display it on the screen after the drawing is completed, use the following. After that, the message layer is hidden using transitions.<r/>
+<r/>
+<bq>
+[layopt layer=message page=fore visible=false]<r/>
+; ↑ Initially hide the front page message layer<r/>
+[layopt layer=message page=back visible=true]<r/>
+; ↑ Display the message layer on the back page<r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+[current page=back]<r/>
+; ↑ The message layer to be operated is on the back page<r/>
+[delay speed=nowait]<r/>
+; ↑ No-weight character drawing speed<r/>
+In this way, you can display the message layer using transitions.[r]<r/>
+[delay speed=user]<r/>
+; ↑ Restore character drawing speed<r/>
+[trans method=universal rule="trans1" vague=1 time=1500][wt]<r/>
+; ↑ Universal transition<r/>
+[current page=fore]<r/>
+; ↑ Make the message layer of the operation target the thing of the front page just in case<r/>
+[l]<r/>
+; ↑ Wait for click<r/>
+[layopt layer=message page=back visible=false]<r/>
+; ↑ Hide the message layer on the back page<r/>
+[trans method=universal rule="trans1" vague=1 time=1500][wt]<r/>
+; ↑ Transition<r/>
+</bq>
+</para>
+</doc>

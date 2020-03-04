@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Let's show the background</title>
+
+<para>
+<ptitle>Let's show the background</ptitle>
+　The <kw>background</kw> is essentially a character and the guy behind the foreground. KAG loads (by default) a 640x480 image as background.<r/>
+<r/>
+　For example, try a 640x480 image you want to display in the bgimage folder. Suppose this image is bg0.jpg. This image is not included in the KAG LZH file, so please bring it from somewhere (^^)<r/>
+　Then, change the scenario used in <link href="Letter"/> as follows.<r/>
+<bq>
+<b>[image storage="bg0" page=fore layer=base]</b><r/>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+Hello.<r/>
+</bq>
+　Here we use the tag <kw>image</kw> to load bg0.jpg into the background layer of the table page.<r/>
+　The file specified by the storage attribute of the image tag is read, but the extension can be omitted. KAG will search without permission (^^)<r/>
+<r/>
+　Try running it for now.<r/>
+<descimg>
+<dititle>Displayed background</dititle>
+<img src="BG_Displayed.jpg"/>
+</descimg>
+　So, what are "front page" and "background layer"? That means...<r/>
+<r/>
+<note>
+　If you specify a screen size other than 640x480 for the screen size in scWidth and scHeight of Config.tjs, of course, specify the background image that matches the image size.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>KAG layer structure</ptitle>
+　In KAG, or Kirikiri, the screen is composed entirely of layers called "layers" (similar to layers in Photoshop, etc .; a layer is called a habit by the author).<r/>
+<r/>
+<r/>
+　For example, if the display is as follows...<r/>
+<r/>
+<descimg>
+<dititle>Display example</dititle>
+<img src="Layers.jpg"/>
+</descimg>
+<r/>
+　The layer configuration is as follows.<r/>
+<r/>
+<descimg>
+<dititle>Layer configuration</dititle>
+<img src="LayersDesc.jpg"/>
+</descimg>
+<r/>
+　In KAG, there is one <kw>background layer</kw> base and it is displayed at the back (bottom). There are three <kw>foreground layers</kw> 0 1 2 in front (above). In front (upper), there are two <kw>message layers</kw>. All foreground layers and message layer 1 are initially hidden (hidden layers can be displayed by setting visible = true in the layopt tag. Foreground layers must also be displayed in the image tag) I can ).<r/>
+　KAG has two sets of the same layer structure, called <kw>front page</kw> fore and <kw>back page</kw> back. The front page is displayed on the screen, but the back page cannot be displayed on the screen. The back page is used to temporarily store images, mainly for transitions (screen switching).<r/>
+<r/>
+　The page and layer attributes of the image tag specified the front page as the back page (fore / back) and the background layer or the foreground layer (base / 0/1/2), respectively. is.<r/>
+<r/>
+<note>
+　The three foreground layers and two message layers are the default settings in Config.tjs.<r/>
+　The initial number of message layers and foreground layers can be specified with numCharacterLayers and numMessageLayers in Config.tjs, and can be changed during execution with the laycount tag.<r/>
+</note>
+<note>
+　"Background", "foreground", "front", and "back" are each likely to cause confusion, but fore specified in the page attribute indicates "front screen", not "foreground layer".<r/>
+　The front page or back page is specified by fore and back in the page attribute, respectively. For the foreground layer, specify 0 1 2... in the layer attribute, and for the background layer, specify base.<r/>
+</note>
+</para>
+</doc>

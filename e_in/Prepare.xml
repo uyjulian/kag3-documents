@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>Get ready</title>
+
+<para>
+<ptitle>Get ready</ptitle>
+　First, let's create a folder with the project name under the folder of Kirikiri SDK (where <tt>krkr.eXe</tt> is). The project name can be anything. However, avoid the folder name "<tt>data</tt>" (the folder name <tt>data</tt> will be used when distributing if necessary). This folder is called <kw>project folder</kw>.<r/>
+<r/>
+　Then copy the KAG system under that folder. There should be a folder called <tt>template</tt> after extracting the downloaded KAG LZH file. Copy its <b>contents</b> (instead of <tt>template</tt> folders) to this project folder.<r/>
+<r/>
+　The arrangement is as follows.<r/>
+<descimg>
+<dititle>Copied file</dititle>
+<img src="Folders.png"/>
+</descimg>
+　Then, there is a file called <tt>Config.~new</tt> in the <tt>system</tt> folder. Please rename to <tt><kw>Config.tjs</kw></tt>. Then open <tt>Config.tjs</tt> in a text editor.<r/>
+<r/>
+<r/>
+　<tt>Config.tjs</tt> has many other places to configure, so I think you'll be tweaking it later. Please refer to <tt>Config.tjs</tt> for detailed explanation.<r/>
+<r/>
+<r/>
+　In addition, there may be a file "~ You can delete this file ~" in the copied folder, but this is placed because archive expansion software may not expand empty folders This is a dummy file. You can delete it (you can leave it as is).<r/>
+<note>
+　Updating the KAG is basically just overwriting the contents of the new KAG's <tt>system</tt> folder with the existing <tt>system</tt> folder. Follow the instructions on the screen as the old <tt>Config.tjs</tt> will be inherited automatically on the first run after the new one.<r/>
+</note>
+
+</para>
+
+<para>
+<ptitle>Folder description</ptitle>
+　When copying, some folders are copied together. I will explain each folder.<r/>
+　It is really good not to follow these folders, but if you change the folder arrangement, you may also need to change the contents of <tt><kw>Initialise.tjs</kw></tt> . See <tt>Initialise.tjs</tt> for details. (The .tjs file is a text file, so open it with a text editor.)<r/>
+　No matter where you put these folders, you do not need to specify the folder name in the KAG file specification. You can put MIDI files in <tt>bgimage</tt> folder. However, for convenience, only folders are created in advance <tt>(^^)</tt><r/>
+<r/>
+　There is no problem leaving these folders empty. It is OK to delete unnecessary folders.<r/>
+<r/>
+<dl>
+<dt><img src="folder.png"/> <kw>system folder</kw></dt>
+<dd>
+　The <tt>system</tt> folder contains the systems required for KAG to operate.
+</dd>
+
+<dt><img src="folder.png"/> <kw>scenario folder</kw></dt>
+<dd>
+　Put scenario files in <tt>scenario</tt> folder. The scenario file is a file with a .ks extension that specifies the text to be displayed on the screen in KAG and embeds instructions such as which image to display using tags.<r/>
+　By the way, when you launch Kirikiri, you specify the project folder, not the individual scenario files.
+</dd>
+
+<dt><img src="folder.png"/> <kw>bgimage folder</kw></dt>
+<dd>
+　This is the folder that contains the background image to be displayed.
+</dd>
+
+<dt><img src="folder.png"/> <kw>fgimage folder</kw></dt>
+<dd>
+　This folder contains the foreground image (character standing pose, etc.) to be displayed.
+</dd>
+
+<dt><img src="folder.png"/> <kw>image folder</kw></dt>
+<dd>
+　A folder for storing other images (for example, a single picture).
+</dd>
+
+<dt><img src="folder.png"/> <kw>bgm folder</kw></dt>
+<dd>
+　This folder stores background music (BGM) data.
+</dd>
+
+<dt><img src="folder.png"/> <kw>sound folder</kw></dt>
+<dd>
+　This folder stores sound effect data.
+</dd>
+
+<dt><img src="folder.png"/> <kw>rule folder</kw></dt>
+<dd>
+　This is the folder for storing the universal transition rule images.
+</dd>
+
+<dt><img src="folder.png"/> <kw>others folder</kw></dt>
+<dd>
+　Other.
+</dd>
+
+<dt><img src="folder.png"/> <kw>video folder</kw></dt>
+<dd>
+　Leave the movie file.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Image formats that can be handled</ptitle>
+　The image formats that can be handled by KAG (or rather Kirikiri) are as follows.<r/>
+　See also <link href="GraphicFormats"/>.<r/>
+<r/>
+<dl>
+<dt><kw>BMP image</kw></dt>
+<dd>
+　The extension is .bmp or .dib. Kirikiri supports only uncompressed BMP.<r/>
+　A 32bit (32bpp) BMP is considered as a bitmap with an alpha channel.
+</dd>
+<dt><kw>JPEG image</kw></dt>
+<dd>
+　The extension is .jpeg or .jpg. JPEG images output by various graphic tools can be handled.
+</dd>
+
+<dt><kw>Portable Network Graphic image</kw> (<kw>PNG image</kw>)</dt>
+<dd>
+　The extension is .png. Can be output with various graphic tools. It also supports alpha channel and transparent color specification.
+</dd>
+
+<dt><kw>Entis Rasterized Image format image</kw> ( <kw>ERI image</kw> ) </dt>
+<dd>
+　The extension is .eri. A reversible image compression technology and format developed and devised by Leshade Entis. It is commonly called "Eri-chan".<r/>
+　Utilities such as image converters can be obtained from "Eri-chan club": <at target="_top"  href="http://www.entis.jp/eri/">http://www.entis.gr.jp/eri/</at>.<r/>
+<r/>
+　When using this image compression format, special attention must be paid to <b>copyrights</b>. For more information, please refer to "Terms of Use" and "Eri-chan club" in Kirikiri SDK Help.
+</dd>
+
+<dt><kw>TLG5 image</kw></dt>
+<dd>
+　The extension is .tlg (not .tlg5). This is a unique lossless image compression format that can be expanded at high speed. It supports full-color images and full-color images with an alpha channel.
+</dd>
+
+<dt><kw>TLG6 image</kw></dt>
+<dd>
+　The extension is .tlg (not .tlg6). Kirikiri is a unique lossless image compression format that features a high compression rate and relatively high-speed expansion. It supports full-color images and full-color images with an alpha channel.
+</dd>
+
+<dt>Other images</dt>
+<dd>
+　If you use <kw>Susie Plug-in</kw>, you can also support other image formats. The Susie Plug-in should be placed in the same folder as the Kirikiri executable file krkr.eXe, in the <tt>plugin</tt> folder under it, or in the project folder. (See also "About Plugins" below)
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Audio formats that can be handled</ptitle>
+<r/>
+　The audio formats that can be handled by KAG (or rather Kirikiri) are as follows.<r/>
+　Only PCM can be used for sound effects.<r/>
+　Depending on which format you use for BGM, you will need to modify KAG's Config.tjs. See the contents of Config.tjs for details.<r/>
+<r/>
+<dl>
+<dt><kw>PCM</kw></dt>
+<dd>
+　By default, uncompressed RIFF-WAVE (extension .wav) can be played.<r/>
+<r/>
+　In addition to uncompressed RIFF-WAVE, you can play Ogg Vorbis (*.ogg), TCWF (*.tcw), Microsoft ADPCM (*.wav), etc., but a plug-in is required.<r/>
+　The plug-in comes with Kirikiri 2 distribution files for Ogg Vorbis (wuvorbis.dll), TCWF (wutcwf.dll), and Microsoft ADPCM (wumsadp.dll).<r/>
+<r/>
+　Ogg Vorbis is a patented and royalty-free compressed music format that can be used in the same way as MP3. Encoders are available from <at target="_top"  href="http://www.vorbis.com/">http://www.vorbis.com/</at>.<r/>
+<r/>
+　Other plug-ins (if any) can be used to increase playable formats. For plug-ins, please refer to the "Plug-ins" section below, in addition to the manual for each plug-in.<r/>
+<r/>
+　Uncompressed Wave, Ogg Vorbis, TCWF, and Microsoft ADPCM formats allow you to specify loop positions in detail by creating loop information using Loop Tuner (available from the support page). This makes it possible to perform loops without feeling loop joints.
+</dd>
+
+<dt><kw>MIDI sequence data</kw></dt>
+<dd>
+　You can play the Standard MIDI Format (extension: .smf or .mid). If you want to crossfade, you need to be careful. For more details, please refer to "About MIDI Sound Buffer" in Kirikiri SDK Help.
+</dd>
+
+<dt><kw>CD-DA</kw></dt>
+<dd>
+　You can play the CD-DA portion of <kw>CD-XA</kw>. CD-XA is a CD that contains computer data as a CD-ROM and audio data as a CD-DA. Kirikiri can search for usable CD-ROM drives based on the volume label as data for CD-ROM computers, so it can only be used with CD-XA format CDs. (However, you can play if you specify the drive name as you do in this tutorial...)
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Movie formats that can be handled</ptitle>
+<dl>
+<dt><kw>MPEG I</kw></dt>
+<dd>
+　Compatible with general MPEG I.<r/>
+　However, when distributing, <kw>krmovie.dll</kw> must be placed in the same location as the Kirikiri executable file. For movie playback, DirectX 8 is required on the playback environment side.<r/>
+<note>
+　The extension of a video-only MPEG I stream without audio and multiplexing should be .mpv instead of .mpeg / .mpg. Kirikiri determines the video format by extension.<r/>
+</note>
+</dd>
+<dt><kw>WMV</kw></dt>
+<dd>
+　Compatible with WMV.<r/>
+　The version of WMV that can be played depends on Media Player and DirectX installed on the system, but we recommend that you have DirectX 9 or later installed.
+</dd>
+</dl>
+<note>
+　Kiriri can play movies directly from the archive (without going through temporary files), even if the video is stored in an archive or executable created with the releaser. However, in Release, movie files must be categorized as "uncompressed" (the default categorization automatically sets them to uncompressed).<r/>
+</note>
+<note>
+　AVI format movies are not supported.
+</note>
+</para>
+
+<para>
+<ptitle>Flash</ptitle>
+<dl>
+<dt><kw>SWF</kw></dt>
+<dd>
+　Supports Macromedia Flash playback.<r/>
+　However, at the time of distribution, <kw>krflash.dll</kw> must be placed in the same location as the Kirikiri executable file. To play SWF, Flash Player must be installed.<r/>
+　Flash playback is the same as video.
+</dd>
+</dl>
+<note>
+　Flash support is not complete. Flash content that requires keyboard input may not work properly. Also, if SWF files are stored in an archive such as XP3, it is better to avoid storing large SWF files (those exceeding 3-5 MB) in the archive because they are temporarily written and used.<r/>
+</note>
+<note>
+　The author has not tested because he does not have a Flash production environment, but he can jump to any label in the KAG scenario by controlling the Flash content. For Action Get URL (URL display action), specify <tt><b>FSCommand:Go</b></tt> as the URL and a character string in the format of "scenario file / label" as the window to display (E.g. <tt><b>first.ks/label2</b></tt>)<r/>
+　<tt><b>FSCommand:Eval</b></tt> allows you to specify a TJS expression as the destination window to execute any TJS expression when an action occurs (value And substituting).<r/>
+　In the openvideo or playvideo tag, you can write? after the file name in the storage attribute, followed by the parameters to pass to Flash (e.g. <tt>hoge.swf?name=value&amp;param=content</tt> ).<r/>
+</note>
+</para>
+
+
+
+<para>
+<ptitle>Archive formats that can be handled</ptitle>
+<dl>
+<dt><kw>XP3</kw> and <kw>PEXP3</kw></dt>
+<dd>
+　It can handle XP3 format, which is a unique archive format of Kirikiri.<r/>
+　PEXP3 is a combination of the "Kirikiri executable file" and the XP3 format, and allows you to put your work in a single executable file.<r/>
+　Both formats can be created with the Releaser included with the Kirikiri SDK.
+</dd>
+<dt>Other archive formats</dt>
+<dd>
+　If you use <kw>Susie Plug-in</kw>, you can support other archive formats. (See "About Plug-ins" below)
+</dd>
+</dl>
+</para>
+
+
+
+<para>
+<ptitle>Rendered font</ptitle>
+　Rendered fonts are font data created by the creator. By using this, you can always display in the font intended by the creator side, regardless of the OS or environment. Also, external characters can be used freely.<r/>
+　The rendered font is created with <kw>krkrfont.exe</kw>. When creating, the font used for vertical writing should be the font that arrives at the beginning of @.<r/>
+<r/>
+　Rendered font files have a .tft extension. If you use it, place it in the others folder and assign it to any font with the mappfont tag.<r/>
+<r/>
+<note>
+　Refer to the Kirikiri SDK Help for how to use the rendered font creation tool.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>About plugins</ptitle>
+　Susie-Plugin or a plug-in to extend the playable format of PCM or other plug-ins will not be available unless specified in the <kw>loadplugin</kw> tag.<r/>
+<r/>
+　For example, if you want to use wuvorbis.dll,<r/>
+<r/>
+<bq>
+@loadplugin module=wuvorbis.dll<r/>
+</bq>
+<r/>
+　is written.<r/>
+<r/>
+　Also, the plugin must be placed in one of the following:
+<ul>
+<li>Same location as Kirikiri executable file (krkr.eXe)</li>
+<li><kw>Plugin folder</kw> under the folder containing the executable file</li>
+<li>Project folder</li>
+</ul>
+　If you put it in the project folder, it will be included in the archive or executable file with Releaser, but <b>not recommended</b>. If possible, it is better not to include it in the archive, but to distribute it in the same folder as the main unit (if you include it in the archive, an error will occur when executing directly from the CD-ROM).<r/>
+<r/>
+　Since krmovie.dll and krflash.dll are not plugins, there is no need to specify them in the loadplugin tag.<r/>
+<r/>
+　See also "About Plug-ins" in the Kirikiri SDK Help.<r/>
+<note>
+　In the case of Kirikiri 1, it can be used just by placing it in the same location as the executable file, but in Kirikiri 2, it is necessary to explicitly specify the plug-in.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Support for UNICODE</ptitle>
+　A text editor is required to edit scenario files and TJS scripts.<r/>
+　Usually, it is not a problem in your text editor, but the console log files and KAG save data output by Kirikiri are output in UNICODE, so if you want to edit UNICODE text, you will need a text editor that supports UNICODE.<r/>
+　In addition, if you want to write characters other than Japanese characters (the Japanese characters here are characters that can be normally used in Japanese version Windows) in the scenario file or TJS script, you need to write them in UNICODE text.<r/>
+<r/>
+　There are some conditions for displaying languages other than Japanese characters.<r/>
+<r/>
+<ul>
+<li>The corresponding scenario file or TJS script file must be written in UNICODE (text files written in UNICODE and text files that are not) may be mixed.</li>
+<li>If you do not use a rendered font file, the OS on the game playing side is Windows NT (Windows 2000, Windows XP, Vista or later). It does not matter )</li>
+<li>Specify a font that contains characters in the language you want to display</li>
+<li>The language to be displayed is a left-to-right (horizontal) language or a top-to-bottom (vertical) language</li>
+</ul>
+<r/>
+　In all cases, non-Japanese characters can only be displayed in the game screen, and only Japanese characters can be displayed in parts that use the standard Windows user interface, such as window title bars and menu items. Also, only Japanese characters can be entered in edits generated by the edit tag.<r/>
+<r/>
+<note>
+　Although it was written as Japanese characters above, Kirikiri basically follows the language locale of the OS on which it is running (Japanese characters on Japanese Windows, Chinese characters on Chinese Windows, etc.). However, the author does not check.<r/>
+</note>
+<note>
+　Currently, Kirikiri / KAG only works on Windows, so for the time being, UNICODE means little endian UTF-16 (but surrogate pairs cannot be used).<r/>
+　Also, Kirikiri says that UNICODE text is little endian UTF-16, and character code cannot be identified properly unless BOM (Byte Order Mark) is at the beginning. Can not be read even if is attached).<r/>
+</note>
+</para>
+
+</doc>

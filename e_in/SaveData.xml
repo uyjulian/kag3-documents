@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Regarding bookmark data</title>
+
+<para>
+<ptitle>Bookmark storage location</ptitle>
+　The storage location of KAG bookmarks is set in "Kirikiri Settings" (krkrconf.exe). Of the options that can be set in Kirikiri, the -datapath option is the bookmark storage location. For the values that can be set, please refer to "Command Line Options" in the Kirikiri 2 SDK Help.<r/>
+</para>
+
+<para>
+<ptitle>Free save mode</ptitle>
+　There are two ways KAG manages bookmarks.<r/>
+<r/>
+<ul>
+<li>A mode that can be saved only at the bookmark location prepared in advance</li>
+<li>A mode in which bookmarks can be saved anywhere (free save mode)</li>
+</ul>
+<r/>
+　These are set in <tt>freeSaveDataMode</tt> in Config.tjs.<r/>
+<r/>
+　In the "mode that can be saved only at the bookmark location prepared in advance", a submenu item indicating each location where bookmarks can be saved is created under "follow bookmark" and "insert bookmark" in the menu bar, and the user can You can save or load bookmarks by selecting them.<r/>
+<r/>
+　On the other hand, "Free save mode" is a mode that became available from KAG3 3.09 beta 5, and when you select "Follow bookmark" or "Hold bookmark", a file selection dialog box opens and you can freely bookmark files You can save the bookmark file to any name or any place you like.<r/>
+<r/>
+　In the "mode that can be saved only in a bookmark location prepared in advance", the maximum number of bookmarks can be limited by the creator.<r/>
+<r/>
+　There is no limit on the maximum number of bookmarks in "Free Save Mode". Since each bookmark can be managed as a single file, it can be sorted and saved for each folder, and comments can be entered as file names. You can move between folders with Explorer, and you can avoid overwriting important data by attaching a "read-only attribute" to a file.<r/>
+　The default file name in "free save mode" is the "heading" of the label that can be saved.<r/>
+<r/>
+　It is important to note that in "free save mode", especially in the case of works where the relationship between system variables and normal variables is closely related, for example, when the work is reinstalled and system variables are cleared, This means that if you try to read the bookmarker data, the data may be inconsistent (depending on how you created the work).<r/>
+　Even in the free save mode, the file that saves system variables and system status is saved in the location described in "Saving location of bookmarks" above.<r/>
+<r/>
+　In addition, we recommend that you set saveDataID in Config.tjs so that the data of other Kirikiri / KAG works will not be read by mistake (it will work even if it is the default, but it is not recommended) .<r/>
+　saveDataID specifies the ID to be embedded in the bookmark data, and must be different for each work so that it does not overlap with other Kirikiri / KAG works (even if it is a work of another person etc.) There is. The ID specified here is embedded in the bookmarker data and is used only to distinguish it from other bookmarker data, so it does not need to be descriptive. 30 characters can be used to hit the keyboard, but if you have trouble figuring out the ID here, you can also get the ID with <at target="_top"  href="http://kikyou.info/uuidgen/uuidgen.php">http://kikyou.info/uuidgen/uuidgen.php</at>. Can be considered non-overlapping).
+</para>
+
+
+<para>
+<ptitle>Saving thumbnail images</ptitle>
+　By setting <tt>saveThumbnail</tt> in Config.tjs to true, the extension of bookmark data becomes .BMP, and a valid file can be output as both an image and bookmark data. In this case, the image will be a reduced image (thumbnail image) of the screen snapshot when the bookmark was saved. Since it is not a snapshot at the saveable label position, when restarting from the bookmark, it will start from the previous saveable label, not from the position of the scene itself (restart with the thumbnail image The actual position may be slightly different).<r/>
+　This makes it easier to manage the bookmarker data, especially in the free save mode, using the "reduced display", "reduced version", and "thumbnail" of Explorer and image management software. You can also select a bookmark from the thumbnail by selecting "Reduced display (reduced version)" in the file display format of the file selection dialog in free save mode.<r/>
+<r/>
+　The bookmark data with the thumbnail image is a BMP, so it can be opened by other applications. So be careful.<r/>
+<r/>
+　Be careful when saving bookmarks with the right-click subroutine (see locksnapshot and unlocksnapshot tags).<r/>
+</para>
+
+
+<para>
+<ptitle>Update and bookmark data compatibility</ptitle>
+　In KAG, save / load is always performed using the label as a mark, so even if the scenario file is changed to some extent, compatibility of bookmark data can be maintained.<r/>
+　There are several examples of incompatibilities, but typically<r/>
+<r/>
+<ul>
+<li>The saveable label has changed or disappeared in the scenario file (because you cannot start from that label)</li>
+<li>The structure of the return destination from the subroutine has changed (because it cannot return to the subroutine caller correctly)</li>
+</ul>
+<r/>
+And so on.<r/>
+<r/>
+　Please note this when you distribute patches and update later.<r/>
+</para>
+
+</doc>

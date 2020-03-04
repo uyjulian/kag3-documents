@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>About unread / read processing</title>
+
+<para>
+<ptitle>Unread / read processing</ptitle>
+　Unread means that the user has not read the scenario yet, and read means that the user has read it.<r/>
+　KAG can change the display speed of messages between unread and read parts, and can disable [l] tags for read parts.<r/>
+<r/>
+　Unread / read records are recorded in system variables starting with <tt>trail_</tt>. <tt>AutoRecordPageShowing</tt> in <tt>Config.tjs</tt> must be set to true to record unread / read.<r/>
+</para>
+
+<para>
+<ptitle>Unread and read parts</ptitle>
+　In KAG, unread / read parts are separated by labels.<r/>
+　It is recorded in the system variable <tt>trail_scenario file name_label</tt>. For example, the label *start in first.ks would be the variable name <tt>sf.trail_first_start</tt>.<r/>
+　If this variable is void (ie undefined; it will be considered 0 when comparing to a number), it is unread if it is 1 or greater. In the case of 1 or more, it is the number of times that part was read.<r/>
+<r/>
+　Basically, from one label to the next label or [s] tag is treated as one "part".<r/>
+　For example, if you have the following scenario, each part is a scenario that is color-coded with each color.<r/>
+<r/>
+<include file="desc0._html"/>
+<r/>
+　Unread and read are processed in units of this "part".<r/>
+<r/>
+　By default, all parts are unread.<r/>
+</para>
+
+<para>
+<ptitle>Read judgment</ptitle>
+　There are conditions for these "parts" to be considered read. As a general rule, when "the next label is reached or the [s] tag is reached," the "part" is considered to be read and recorded in a system variable.<r/>
+　In other words, if the user quits the program in the middle of the "part" or stops reading, it will not be considered as read. You have to read that "part" until the end.<r/>
+</para>
+
+<para>
+<ptitle>Scenario control and read determination</ptitle>
+　If there is a link or jump tag in the middle and the scenario branches, the processing changes slightly.<r/>
+<r/>
+<dl>
+<dt>When jumping by link type (link or button tag)</dt>
+<dd>
+　If these tags allow the user to make a choice and jump to another part of the scenario, they will be automatically read.<r/>
+　For example, in the following example:<r/>
+<bq>
+*select<r/>
+This part will be read when the user selects an option.[r]<r/>
+[link target=*t1]Option 1[endlink][r]<r/>
+[link target=*t2]Option 2[endlink][r]<r/>
+@wait time=3000<r/>
+@jump target=*timeout<r/>
+</bq>
+　If an option is selected before the timeout in the @wait tag, it will be read at that point. By the way, in the usual way of using alternatives, when you finish displaying the selection with the link tag, I think that the [s] tag will come, so it will be read at that point.<r/>
+　The link tag and button tag have an attribute called contpage. If this is set to false, jumping at that point will not be read.<r/>
+</dd>
+<dt>jump tag</dt>
+<dd>
+　If you jump using the jump tag, it will be read at that point. In this case, there is also an attribute called coutpage, and if it is set to false, it will not be read.<r/>
+</dd>
+<dt>call and return</dt>
+<dd>
+　When calling a subroutine with the call tag, it will not be read. Again, there is an attribute called coutpage, which is marked as read if set to true.<r/>
+　The retrun tag is read at that point (not the caller but the part of the subroutine where the return tag is read). In this case, there is also an attribute called coutpage, and if it is set to false, it will not be read.<r/>
+</dd>
+</dl>
+</para>
+
+</doc>
+
+

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+
+<title>Let's distribute</title>
+
+<para>
+<ptitle>Automatic execution of project folder</ptitle>
+　At the start of Kirikiri, a screen for selecting the project folder appears. There is the following method to execute the project folder at the same time as starting Kirikiri without issuing this.<r/>
+<r/>
+<dl>
+<dt>Rename project folder to data</dt>
+<dd>
+　If you name the project folder "<kw>data</kw>" and put it in the same folder as the Kirikiri executable file (krkr.eXe), the project folder will be automatically executed when Kirikiri starts. Become.
+</dd>
+<dt>Create a file called data.xp3 with Releaser</dt>
+<dd>
+　If you create an xp3 archive file with the name <kw>data.xp3</kw> with Releaser described below and place it in the same folder as the Kirikiri executable file, the archive will be executed automatically when Kirikiri starts. You.
+</dd>
+<dt>Creating an executable with Releaser</dt>
+<dd>
+　Executable files can be created directly by Releaser.<r/>
+　However, in this case, it is a bit cumbersome when distributing the patch described below, or it is incompatible with some anti-virus software, so if creating a single executable is not a strong requirement, the above The recommended way is to create data.xp3.
+</dd>
+</dl>
+<r/>
+　Please refer to the Kirikiri SDK Help for how to use Releaser.<r/>
+</para>
+
+<para>
+<ptitle>Distribution files</ptitle>
+　There are some files and folders that need to be included when actually running the game at the distribution destination.<r/>
+<r/>
+<dl>
+<dt>Kirikiri executable file</dt>
+<dd>
+　If you did not output the executable in Releaser, you need to distribute the executable together. The executable (krkr.eXe) can be renamed. You can also change the icon in Kirikiri settings (krkrconf.exe).
+</dd>
+<dt>Files with the extension cf</dt>
+<dd>
+　If you make settings with Kirikiri Settings (krkrconf.exe), a file with the same name as the Kirikiri executable file but with the extension .cf will be output. Important options, such as the -datapath option, are listed here and must be distributed with it.<r/>
+　If you do not have this file, you do not need to distribute it.<r/>
+</dd>
+<dt><kw>krmovie.dll</kw></dt>
+<dd>
+　If you play a movie in MPEG in a game, you must distribute it together. This file must be placed in the same folder as the Kirikiri executable file (including the executable file output by Releaser).
+</dd>
+<dt><kw>krflash.dll</kw></dt>
+<dd>
+　If you want to play Flash content in the game, you must distribute it together. This file must be placed in the same folder as the Kirikiri executable file (including the executable file output by Releaser).
+</dd>
+<dt>Other plugins</dt>
+<dd>
+　It must be placed in the same folder as the Kirikiri executable file or in the plugin folder in the Kirikiri executable file folder.<r/>
+　You can place plugins in the project folder, but <b>not recommended</b>. If possible, it is better to distribute it in the same folder as the Kirikiri executable file, or in the plugin folder in the Kirikiri executable file folder. (Plug-ins should be placed in the project folder and included in the archive, CD-ROM An error will occur when executing directly from above.)
+</dd>
+<dt><kw>Save data folder</kw></dt>
+<dd>
+　Unless the save data is created in the same folder as the Kirikiri executable file, the folder that stores the save data must also be distributed. Especially when compressing with lzh etc., empty folders may not be expanded, so when distributing in such an archive format, it is better to put a dummy file in the save data folder.
+</dd>
+</dl>
+<r/>
+In addition, please refer to the Kirikiri SDK Help "File / Folder List".<r/>
+</para>
+
+<para>
+<ptitle>Distribution of configuration tools for end users</ptitle>
+　To make it easier for end users to set up Kirikiri, you can distribute the <kw>Engine Settings.exe</kw> end-user configuration tool with the game or separately from the game.<r/>
+　Please refer to the Kirikiri SDK Help for how to use them.<r/>
+<r/>
+　It is strongly recommended that you distribute this tool with your game, if you have enough space.<r/>
+</para>
+
+<para>
+<ptitle>Distribution of file corruption check tool</ptitle>
+　"File Corruption Check Tool", a tool for detecting files damaged during and after installation You can distribute the file corruption check tool .exe with or separately from the game.<r/>
+　Please refer to the Kirikiri SDK Help for how to use them.<r/>
+<r/>
+</para>
+
+<para>
+<ptitle>Patch distribution</ptitle>
+　If you need to make changes after distributing the game, you can distribute only the files that have been modified in the form of patches.<r/>
+<r/>
+<dl>
+<dt>Kiri Kiri execution core patch</dt>
+<dd>
+　It is necessary to modify the Kirikiri execution core.<r/>
+　If Releaser outputs an xp3 format archive instead of an executable, you just need to overwrite the new Kirikiri executable over the old executable.<r/>
+　It is troublesome to output executable files with Releaser. You need to do the following:<r/>
+<ol>
+<li>Rename the old executable to data.xp3</li>
+<li>Copy the new executable (which can be renamed) to the same folder as the file</li>
+<li>Run the new executable</li>
+</ol>
+</dd>
+<dt>Patch in project folder</dt>
+<dd>
+　KAG has a function that when there is a file called patch.xp3 in the same folder as the Kirikiri executable file, the contents of this file will be checked first.<r/>
+　To create patch.xp3, collect only the files that have been modified or added files into one folder, and specify the folder with Releaser to create the patch.xp3 file.<r/>
+　Also, if there are any files after patch2.xp3, such as patch2.xp3, patch3.xp3, patch4.xp3, etc., they will also be read. If any of these files, or the originally distributed (non-patch) files, have the same name, the one in the higher numbered patch file will be used. Note that if there is a missing patch2.xp3, patch3.xp3, patch4.xp3, etc., it will stop searching the patch archive there.
+</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>trouble shooting</ptitle>
+　If you distribute a configuration tool for end users, you can do some troubleshooting yourself.<r/>
+　Also, if you output the console log in the Kirikiri setting, it will be very useful analysis data in case of trouble. The console log exists as krkr.console.log in the directory where bookmarks are saved.<r/>
+</para>
+
+<para>
+<ptitle>Copyrights, etc.</ptitle>
+　Be sure to read <kw>license.txt</kw> included with the SDK.<r/>
+</para>
+
+</doc>

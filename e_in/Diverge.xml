@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doc>
+<title>Use choices</title>
+
+<para>
+<ptitle>Define labels</ptitle>
+　Now, before using the alternatives, you have to explain the <kw> label </ kw>.<r/>
+　After selecting an option, control of the scenario must be transferred to the destination. A label is a sign of control movement at that time.<r/>
+<r/>
+　Labels are lines with * at the beginning of the line. You've come up with some samples so far. For example ...<r/>
+<bq>
+[wait time=200]<r/>
+<b>*start|Start</b><r/>
+[cm]<r/>
+Hello.<r/>
+</bq>
+　It was In this case, we have defined a label named *start here. Then, what is "|Start" after | (vertical bar), but that is explained in another place <comlink href="SaveLoad"/>. | You do not need to write the rest.<r/>
+<r/>
+　You can specify anything for the label name, but it would be safer to use only half-width alphanumeric characters. Also, do not use spaces in label names.<r/>
+<r/>
+　The label function has an important function that it is also a save / load position, in addition to being a guidepost for control transfer. This is also discussed elsewhere with the | (vertical bar) meaning.<r/>
+</para>
+
+<para>
+<ptitle>Try using alternatives</ptitle>
+　KAG implements options with a concept closer to a hyperlink rather than an option.<r/>
+　Use the <kw>link</kw> and <kw>endlink</kw> tags to use alternatives. If you put a text that is an option between these two tags, you can select it with the mouse or keyboard. When the mouse is clicked or the Enter key is pressed on the keyboard, it jumps to the label of the target attribute written in the corresponding link tag.<r/>
+　If you want to stop the operation, such as waiting for a choice or ending the scenario, write a <tt>[<kw>s</kw>]</tt> tag. If you select "Go to next choice" from the menu, the scenario will be executed non-stop until this <tt>[s]</tt> tag comes.<r/>
+　Using these, you can write as follows. Remember that the * (asterisk) after target= is required. Also, after | (vertical bar), it is not necessary when specifying after target.<r/>
+<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[link target=*select1]Option 1[endlink][r]<r/>
+[link target=*select2]Option 2[endlink][r]<r/>
+[link target=*select3]Option 3[endlink][r]<r/>
+[s]</b><r/>
+<r/>
+*select1<r/>
+Option 1 has been selected.[l]<r/>
+[s]<r/>
+<r/>
+*select2<r/>
+Option 2 has been selected.[l]<r/>
+[s]<r/>
+<r/>
+*select3<r/>
+Option 3 has been selected.[l]<r/>
+[s]<r/>
+</bq>
+　If you do this as it is, the choices will not disappear even if you select them.<r/>
+　To erase, usually write [cm] after the label.<r/>
+<bq>
+[wait time=200]<r/>
+*start|Start<r/>
+[cm]<r/>
+<b>[link target=*select1]Option 1[endlink][r]<r/>
+[link target=*select2]Option 2[endlink][r]<r/>
+[link target=*select3]Option 3[endlink][r]<r/>
+[s]</b><r/>
+<r/>
+*select1<r/>
+[cm]<r/>
+Option 1 has been selected.[l]<r/>
+[s]<r/>
+<r/>
+*select2<r/>
+[cm]<r/>
+Option 2 has been selected.[l]<r/>
+[s]<r/>
+<r/>
+*select3<r/>
+[cm]<r/>
+Option 3 has been selected.[l]<r/>
+[s]<r/>
+</bq>
+<r/>
+<descimg>
+<dititle>Examples of choices</dititle>
+<img src="Diverge.png"/>
+</descimg>
+
+<note>
+	　Once a choice is selected, it cannot be selected until a new choice appears or the <kw>unlocklink</kw> tag fires.<r/>
+	　There is also a <kw>locklink</kw> tag to make the choices already displayed on the screen unselectable.<r/>
+	　You don't need to worry about this in normal writing.<r/>
+</note>
+</para>
+
+<para>
+<ptitle>Two or more scenario files</ptitle>
+　For management purposes, you may want to split the scenario file into two or more.<r/>
+　The answer is simple: just add a storage attribute to the link tag. For example, to prepare a scenario called scn2.ks and jump to the * scn2start label there...<r/>
+<bq>
+[link storage="scn2.ks" target=*scn2start]scn2start in scn2.ks[endlink]<r/>
+</bq>
+<r/>
+Is written. When this choice is clicked, it loads scn2.ks and jumps to the label * scn2start.<r/>
+</para>
+
+<para>
+<ptitle>For other scenario branches</ptitle>
+　There is a jump tag just when you want to jump to a specified label.<r/>
+　The link tag also has the ability to execute TJS (scripts that Kirikiri can understand directly) expressions when clicked.
+　Also, the <kw>button</kw> tag does not make text as an option, but an image prepared as a button as an option. Used to implement graphical choices.<r/>
+　<link href="Tags"/> Please see. <r/>
+</para>
+
+</doc>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Use a clickable map</title>
+
+<para>
+<ptitle>What is a clickable map?</ptitle>
+　A clickable map is a "map" that can be "clicked" when translated directly. It defines several "regions" in one image and allows them to be selected by clicking with a mouse or the like.<r/>
+<r/>
+　Kirikiri / KAG realizes this by using two files, "<kw>area image</kw>" and "<kw>area action definition file</kw>", in addition to the main body image.<r/>
+
+</para>
+
+<para>
+<ptitle>What is an area image?</ptitle>
+　The area image is a 256-color image that is the same size as the main image. It must not be a full color image. JPEG is not suitable for this purpose, so use an image format that allows 256 colors, such as PNG or BMP.<r/>
+<r/>
+　The area image is the one where each area is filled with an arbitrary <kw>palette index</kw> corresponding to each area of the main body image. For example,<r/>
+<descimg>
+<dititle>Body image (left) and area image (right)</dititle>
+<img src="map1.png"/><img src="map1_p.png"/>
+</descimg>
+　The image on the left is the image of the main body. In this example, it is a map of the Kanto region. On the right is an "area image" that fills each area corresponding to each prefecture.<r/>
+　An area image is an area in which each area is filled with an arbitrary (different) palette index. The number written in each area in the above example is the palette index (it is not necessary because it is included for explanation). The area filled with palette index 0 (the sea in the figure) is not used as an area.<r/>
+<r/>
+　Some graphics editing software can handle "palette index" with 256-color images, but it is necessary to edit using such software (such as palette number, color index, index color, color number May be different). The important thing is the palette index (color number), not the color. When looking at an area image, Kirikiri sees only its palette index, not colors. Colors can be appropriately randomized so that they can be easily distinguished from other areas when editing.<r/>
+<r/>
+　The file name of the area image is usually the file name of the main unit image (excluding the extension) followed by _p. For example, if the name of the image of the main body is map.png, the file name of the area image (when saving as PNG) is map_p.png.<r/>
+</para>
+
+<para>
+<ptitle>What is an area action definition file</ptitle>
+　The area action definition file is a file that defines the behavior of each area of the clickable map.<r/>
+　The extension is .ma and usually has the same file name as the image file of the main unit. For example, if the name of the main body image is map.png, the file name of the area action definition file is map.ma.<r/>
+<r/>
+　The area action definition file is a text file, so edit it with a text editor.<r/>
+<r/>
+　The area action definition file is a file in which "area number: action" is written for each line, one line at a time.<r/>
+　For example, in the map example above,<r/>
+<bq>
+11: hint="Saitama"; storage="maptest2.ks"; target="*m11";<r/>
+8: hint="Gunma"; storage="maptest2.ks"; target="*m8";<r/>
+7: hint="Tochigi"; storage="maptest2.ks"; target="*m7";<r/>
+9: hint="Ibaraki"; storage="maptest2.ks"; target="*m9";<r/>
+10: hint="Chiba"; storage="maptest2.ks"; target="*m10";<r/>
+12: hint="Tokyo"; storage="maptest2.ks"; target="*m12";<r/>
+2: hint="Kanagawa"; storage="maptest2.ks"; target="*m2";<r/>
+3: hint="Yamanashi"; storage="maptest2.ks"; target="*m3";<r/>
+1: hint="Shizuoka"; storage="maptest2.ks"; target="*m1";<r/>
+4: hint="Nagano"; storage="maptest2.ks"; target="*m4";<r/>
+5: hint="Niigata"; storage="maptest2.ks"; target="*m5";<r/>
+6: hint="Fukushima"; storage="maptest2.ks"; target="*m6";<r/>
+</bq>
+　It will be described as follows. The area number matches the palette index of the area image in the example above.<r/>
+　The "<kw>action</kw>" (the part after the colon) departs from the KAG grammar and is written in TJS grammar, but is not difficult.<r/>
+　It is written as needed in the format of "name=value;". Remember the semicolon.<r/>
+<r/>
+　The names you can use include:<r/>
+<dl>
+<dt>storage, target, onenter, onleave, hint, exp, countpage </dt>
+<dd>
+	　These all have the same function as the link tag, but all require that you specify the value of the attribute in " " (double quotes) (as in the example above). If you do not enclose it in " ", an error will occur or it will not work properly.
+</dd>
+<dt>cursor</dt>
+<dd>
+	　Specify the mouse cursor shape when the mouse cursor is over the area. Similar to the cursor tag specification, but if you use a mouse cursor constant that starts with cr, write it as is without adding &amp; (for example, cursor = crSizeAll;). To specify a file for the mouse cursor, enclose it in " " (double quotes) (for example, cursor = "wagtail.ani";).
+</dd>
+</dl>
+<r/>
+　In the area action definition file, area number 0 is used for special designation. In the current version, autodisable is available. For example,
+<bq>
+0 : autodisable=false;
+</bq>
+　Then, clicking the clickable map does not invalidate the clickable map (it cannot be operated as a clickable map). Normally, you do not need to specify this.<r/>
+　If this is not specified, or if the area number 0 is not specified in the area action definition file, when clicking the clickable map, the <kw>image</kw> tag or <kw>mapaction</kw> tag will be used again. Until the area action definition file is read, the clickable map becomes invalid (cannot be operated as a clickable map).<r/>
+<r/>
+<note>
+　If no action is defined, the area is ignored. For example, if you want to enable or disable a region based on a condition, use the following TJS if statement:<r/>
+11: if(f.flag == 1) { hint="埼玉"; storage="maptest2.ks"; target="*m11"; }<r/>
+　Can be written as In this case, it means that the action 'hint="Saitama"; storage="maptest2.ks"; target="*m11";' is defined only when f.flag is 1.
+</note>
+</para>
+
+
+<para>
+<ptitle>Try using a clickable map</ptitle>
+　Try using a clickable map.<r/>
+　In the above example, the image of the main unit is map1.png, the area image is map1_p.png, and the area action definition file is map1.ma.<r/>
+　The image tag searches for a file with _p in the file name and a file with the extension ma based on the main file name to be read, and reads them as the area image and area action definition file, respectively.<r/>
+　So, you usually only use the image tag to enable clickable maps.<r/>
+<note>
+	　There are <kw>mapimage</kw> tag and mapaction tag respectively when you want to read area image and area action definition file individually.
+</note>
+　For example, if you wrote the following in maptest.ks:<r/>
+<bq>
+*start<r/>
+@image layer=0 page=fore visible=true storage=map1<r/>
+@position left=400 width=220<r/>
+@wt<r/>
+Clickable map test.<r/>
+@s<r/>
+</bq>
+　This alone stops at the s tag with the clickable map available.<r/>
+<r/>
+<descimg>
+<dititle>The screen I tried to execute</dititle>
+<img src="clickable.png"/>
+</descimg>
+<r/>
+　You must also write a scenario that jumps when the clickable map is clicked. For example, write the following contents in maptest2.ks.<r/>
+<bq>
+*m11<r/>
+@cm<r/>
+That is Saitama.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m8<r/>
+@cm<r/>
+That is Gunma.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m7<r/>
+@cm<r/>
+That is Tochigi.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m9<r/>
+@cm<r/>
+That is Ibaraki.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m10<r/>
+@cm<r/>
+There is Chiba.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m12<r/>
+@cm<r/>
+It is Tokyo.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m2<r/>
+@cm<r/>
+That is Kanagawa.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m3<r/>
+@cm<r/>
+That's Yamanashi.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m1<r/>
+@cm<r/>
+That is Shizuoka.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m4<r/>
+@cm<r/>
+That is Nagano.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m5<r/>
+@cm<r/>
+That is Niigata.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+<r/>
+*m6<r/>
+@cm<r/>
+That is Fukushima.[l]<r/>
+@jump storage="maptest.ks" target="*start"<r/>
+</bq>
+<r/>
+<note>
+　If there is an image using a clickable map in the KAG (not only hidden or front and back), the mode switches to emulating mouse movement with the cursor keys on the keyboard. As a result, other features that use the keyboard, such as the edit tag, will not work properly.<r/>
+　When you're done, disable it with the mapdisable tag, or load a different image into the layer or use the freeimage tag to discard the clickable map and return to normal keyboard operation mode.
+</note>
+</para>
+
+</doc>
+

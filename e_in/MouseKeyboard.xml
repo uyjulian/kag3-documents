@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doc>
+<title>Method of operation</title>
+
+<para>
+<ptitle>Method of operation</ptitle>
+　The following describes how to operate KAG.<r/>
+<note>　This is generally written. Some functions may not be used depending on the game, etc., so I wonder if you can copy and paste this as it is and write it in the manual of the game etc. (sweat)</note><r/>
+</para>
+
+<para>
+<ptitle>Basic operation</ptitle>
+<dl>
+<dt>"Left click" or "Rotate wheel forward" or "Return key" or "Space key"</dt>
+<dd>Actions such as reading or deciding an option, pressing a button, checking a check box, etc.</dd>
+
+<dt>"Right click" or "ESC key"</dt>
+<dd>Display message history or call right-click subroutine</dd>
+
+<dt>"↑" "↓" or "←" "→" or "TAB" "SHIFT + TAB"</dt>
+<dd>Move between choices, buttons, single line edits and checkboxes</dd>
+
+<dt>"Rotate wheel backward" or "R key" or "SHIFT + ↑"</dt>
+<dd>View message history</dd>
+
+<dt>"F key"</dt>
+<dd>Go to next choice / unread</dd>
+
+<dt>"A key"</dt>
+<dd>Read automatically</dd>
+
+<dt>"B key"</dt>
+<dd>Go back</dd>
+
+<dt>"S key"</dt>
+<dd>Sandwich a bookmark (in free-save mode)</dd>
+
+<dt>"L key"</dt>
+<dd>Follow the bookmark (in free save mode)</dd>
+</dl>
+</para>
+
+<para>
+<ptitle>Operations while displaying message history</ptitle>
+<dl>
+<dt>"Return key" or "Space key" or "ESC key"</dt>
+<dd>Close message history</dd>
+
+<dt>"Wheel rotation" or "↑" "↓" or "←" "→"</dt>
+<dd>scroll</dd>
+</dl>
+</para>
+
+
+<para>
+<ptitle>Dialog asking "Yes" or "No"</ptitle>
+<dl>
+<dt>"click"</dt>
+<dd>Select "Yes" or "No"</dd>
+
+<dt>"←" "→"</dt>
+<dd>Button selection</dd>
+
+<dt>"Return key" or "Space key"</dt>
+<dd>Press the selected button</dd>
+</dl>
+</para>
+
+
+</doc>
+
