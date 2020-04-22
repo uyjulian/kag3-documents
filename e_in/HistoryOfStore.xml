@@ -19,7 +19,7 @@
 <para>
 <ptitle>Timing of passage recording</ptitle>
 　By writing a record tag, you can record the current state of the passage. Also, depending on the setting of <tt>recordHistoryOfStore</tt> in Config.tjs, it is possible to automatically record passage.<r/>
-　However, it is not recorded immediately when the record tag is written or at the timing specified in <tt> recordHistoryOfStore </ tt>. It will be recorded when you pass the next "label that can save bookmarks" (at this point you can go back with "System-Back"). However, what is recorded is the state at the time when it passed the previous "label that can save bookmarks", and if you select "system-back", you will return to that position.<r/>
+　However, it is not recorded immediately when the record tag is written or at the timing specified in <tt>recordHistoryOfStore</tt>. It will be recorded when you pass the next "label that can save bookmarks" (at this point you can go back with "System-Back"). However, what is recorded is the state at the time when it passed the previous "label that can save bookmarks", and if you select "system-back", you will return to that position.<r/>
 </para>
 
 <para>

@@ -5,7 +5,7 @@
 
 <para>
 <ptitle>Define labels</ptitle>
-　Now, before using the alternatives, you have to explain the <kw> label </ kw>.<r/>
+　Now, before using the alternatives, you have to explain the <kw>label</kw>.<r/>
 　After selecting an option, control of the scenario must be transferred to the destination. A label is a sign of control movement at that time.<r/>
 <r/>
 　Labels are lines with * at the beginning of the line. You've come up with some samples so far. For example ...<r/>

@@ -20,7 +20,7 @@
 
 <para>
 <ptitle>Show something anyway</ptitle>
-　Now, let's display something for trial. In the scenario folder you will find a file called <kw> first.ks </ kw>. This is the scenario file that is read first.<r/>
+　Now, let's display something for trial. In the scenario folder you will find a file called <kw>first.ks</kw>. This is the scenario file that is read first.<r/>
 　In the standard state, the following contents are written.<r/>
 <bq>
 [wait time=200]<r/>
