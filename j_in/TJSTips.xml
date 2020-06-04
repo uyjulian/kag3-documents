@@ -219,7 +219,7 @@ AfterInit.tjs を作成してそこに変更点を記述すると楽です。
 <example>
 @emb exp="kansuuji(f.num)"<r/>
 </example>
-　上記の例では、f.num を漢数字表記にして表示しています。<r/>
+　上記の例では、f.num を漢数字表記にして表示しています。
 </dd>
 
 <dt><tt><kw>number_format</kw></tt></dt>
@@ -228,7 +228,7 @@ AfterInit.tjs を作成してそこに変更点を記述すると楽です。
 <example>
 @emb exp="number_format(f.num)"<r/>
 </example>
-　上記の例では、f.num を 3桁ごとにカンマで区切って表示しています。<r/>
+　上記の例では、f.num を 3桁ごとにカンマで区切って表示しています。
 </dd>
 
 
@@ -251,7 +251,7 @@ System.exePath は、吉里吉里実行可能ファイルのあるフォルダ�
 <tt>[eval exp="Storages.addAutoPath(System.exePath + 'cgdata.xp3&gt;')"]</tt><r/>
 <r/>
 　とします。cgdata.xp3 の後の記号は '&gt;' です。アーカイブ内に検索パスを指定する場合は &gt; で、フォルダ内に検索パスを指定する場合は / です。<r/>
-　アーカイブの後の記号は 吉里吉里２ 2.19 beta 14 で '#' から '&gt;' に変更となりました。<r/>
+　アーカイブの後の記号は 吉里吉里２ 2.19 beta 14 で '#' から '&gt;' に変更となりました。
 </dd>
 
 <dt><tt><kw>Storages.searchCD</kw></tt></dt>
