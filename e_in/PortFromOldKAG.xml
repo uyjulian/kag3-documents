@@ -28,7 +28,7 @@
 <dl>
 <dt>KAG's scenario analysis unit is built into Kirikiri 2</dt>
 <dd>
-　A function for analyzing KAG scenarios has been incorporated into the Kirikiri 2 main body. In KAG 2.x, processing was performed using a TJS script, but by incorporating it in the main body, the speed of scenario analysis has been dramatically increased.
+　A function for analyzing KAG scenarios has been incorporated into the Kirikiri 2 core. In KAG 2.x, processing was performed using a TJS script, but by incorporating it in the core, the speed of scenario analysis has been dramatically increased.
 </dd>
 
 <dt>Most tags can use the cond attribute</dt>
