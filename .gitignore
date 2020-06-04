@@ -1,0 +1,10 @@
+*_in/*.html
+*_in/classes/*.html
+*_in/tag/Tags.html
+*_in/tag/keys.txt
+*_in/tag/ksedit.tdb
+*_in/tag/tags.xml
+*_in/keys.txt
+*_in/tagdb_xml
+*/contents/*.html
+!*/contents/index.html
