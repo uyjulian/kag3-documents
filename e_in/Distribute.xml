@@ -82,7 +82,7 @@ In addition, please refer to the Kirikiri SDK Help "File / Folder List".<r/>
 　If you need to make changes after distributing the game, you can distribute only the files that have been modified in the form of patches.<r/>
 <r/>
 <dl>
-<dt>Kiri Kiri execution core patch</dt>
+<dt>Kirikiri execution core patch</dt>
 <dd>
 　It is necessary to modify the Kirikiri execution core.<r/>
 　If Releaser outputs an xp3 format archive instead of an executable, you just need to overwrite the new Kirikiri executable over the old executable.<r/>
