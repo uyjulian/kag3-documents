@@ -11,11 +11,11 @@
 　It is possible to use a tag prepared as standard, but KAG itself is written in TJS script. If you work on the main unit, you can extend other operations and functions. This is one of the key features of Kirikiri / KAG.<r/>
 <r/>
 <note>
-　The Kirikiri body corresponding to KAG 3 or later is Kirikiri 2. Kirikiri 2 is Kirikiri, which was recreated from almost 1 to resemble Kirikiri 1, and KAG 3 was newly rewritten accordingly. Although KAG 3 is compatible with KAGs below KAG 3 at the scenario level, there are some caveats when porting projects below KAG 3. See <link href="PortFromOldKAG"/>.<r/>
+　The Kirikiri core corresponding to KAG 3 or later is Kirikiri 2. Kirikiri 2 is Kirikiri, which was recreated from almost 1 to resemble Kirikiri 1, and KAG 3 was newly rewritten accordingly. Although KAG 3 is compatible with KAGs below KAG 3 at the scenario level, there are some caveats when porting projects below KAG 3. See <link href="PortFromOldKAG"/>.<r/>
 </note>
 <r/>
 <note>
-　Kirikiri can interpret TJS scripting language. KAG written in the script language TJS has a structure that can interpret scenario files written for KAG. For this reason, here, "KAG" is used to describe things specifically for KAG, "Kirikiri" is used only for Kirikiri body, and "Kiriri/KAG" is used for both.<r/>
+　Kirikiri can interpret TJS scripting language. KAG written in the script language TJS has a structure that can interpret scenario files written for KAG. For this reason, here, "KAG" is used to describe things specifically for KAG, "Kirikiri" is used only for Kirikiri core, and "Kiriri/KAG" is used for both.<r/>
 　To distinguish between TJS scripts and KAG scenarios, the TJS script is described as "script" or "script file", and the KAG scenario is described as "scenario" or "scenario file".
 </note>
 </para>
