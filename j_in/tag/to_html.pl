@@ -339,10 +339,10 @@ EOF
 
 print "</body></html>\n";
 
-push keywords, "タグの概要\ttag_overview\tTags.html\tタグリファレンス";
-push keywords, "コマンド行\ttag_command\tTags.html\tタグリファレンス";
-push keywords, "cond 属性\ttag_cond_attrib\tTags.html\tタグリファレンス";
-push keywords, "タグリファレンス\ttags\tTags.html\tタグリファレンス";
+push @keywords, "タグの概要\ttag_overview\tTags.html\tタグリファレンス";
+push @keywords, "コマンド行\ttag_command\tTags.html\tタグリファレンス";
+push @keywords, "cond 属性\ttag_cond_attrib\tTags.html\tタグリファレンス";
+push @keywords, "タグリファレンス\ttags\tTags.html\tタグリファレンス";
 
 open OH, ">keys.txt";
 print OH join("\n", @keywords);
