@@ -187,7 +187,7 @@
 </dd>
 </dl>
 <note>
-　Kiriri can play movies directly from the archive (without going through temporary files), even if the video is stored in an archive or executable created with the releaser. However, in Release, movie files must be categorized as "uncompressed" (the default categorization automatically sets them to uncompressed).<r/>
+　Kirikiri can play movies directly from the archive (without going through temporary files), even if the video is stored in an archive or executable created with the releaser. However, in Release, movie files must be categorized as "uncompressed" (the default categorization automatically sets them to uncompressed).<r/>
 </note>
 <note>
 　AVI format movies are not supported.

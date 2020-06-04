@@ -15,7 +15,7 @@
 </note>
 <r/>
 <note>
-　Kirikiri can interpret TJS scripting language. KAG written in the script language TJS has a structure that can interpret scenario files written for KAG. For this reason, here, "KAG" is used to describe things specifically for KAG, "Kirikiri" is used only for Kirikiri core, and "Kiriri/KAG" is used for both.<r/>
+　Kirikiri can interpret TJS scripting language. KAG written in the script language TJS has a structure that can interpret scenario files written for KAG. For this reason, here, "KAG" is used to describe things specifically for KAG, "Kirikiri" is used only for Kirikiri core, and "Kirikiri/KAG" is used for both.<r/>
 　To distinguish between TJS scripts and KAG scenarios, the TJS script is described as "script" or "script file", and the KAG scenario is described as "scenario" or "scenario file".
 </note>
 </para>
