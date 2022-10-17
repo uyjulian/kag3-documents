@@ -37,12 +37,12 @@
 <dl>
 <dt>You can use half-width alphanumeric and full-width characters and _ (under bar) in variable names</dt>
 <dd>
-　<b>Variable names such as <tt>abc&amp;def</tt></b> or <b><tt>a-z</tt></b> are not allowed.<r/>
-　<b>You can include underscores like <b><tt>final_count</tt></b> or use double-byte characters like <b><tt>主人公の名前</tt></b> (All double-byte symbols can be used.)
+　Variable names such as <b><tt>abc&amp;def</tt></b> or <b><tt>a-z</tt></b> are not allowed.<r/>
+　You can include underscores like <b><tt>final_count</tt></b> or use double-byte characters like <b><tt>主人公の名前</tt></b> (All double-byte symbols can be used.)
 </dd>
 <dt>However, a single-byte number cannot come at the beginning of the variable name</dt>
 <dd>
-　<b>Variable names such as <b><tt>2friends</tt></b> and <b><tt>3com</tt></b> cannot be used.
+　Variable names such as <b><tt>2friends</tt></b> and <b><tt>3com</tt></b> cannot be used. (It is OK if the double-byte number comes at the beginning.)
 </dd>
 </dl>
 <r/>
