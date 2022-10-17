@@ -1,0 +1,41 @@
+name: Deploy Github Pages
+on:
+  push:
+    branches:
+      - uyjworking
+permissions:
+  contents: write
+jobs:
+  build-and-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libxml-dom-perl libimage-size-perl
+
+      - name: Clone tjs2-documents
+        run: |
+          git clone -b uyjworking https://github.com/uyjulian/tjs2-documents.git
+
+      - name: Build Japanese documentation
+        run: |
+          cd j_in && bash ../tjs2-documents/j_in/to_html.sh
+
+      - name: Build English documentation
+        run: |
+          cd e_in && bash ../tjs2-documents/e_in/to_html.sh
+
+      - name: Move to build
+        run: |
+          mkdir -p build
+          mv j build/j
+          mv e build/e
+
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
